@@ -1,0 +1,274 @@
+m255
+K4
+z2
+!s11f vlog 2020.1 2020.02, Feb 28 2020
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+Z0 d/eecs/home/kanwarp/EECS-4201-project/project/pd0/verif/scripts
+valu
+Z1 DXx6 sv_std 3 std 0 22 VYECXdT12H8WgbUP_5Y6:3
+Z2 DXx4 work 13 constants_pkg 0 22 ::DCO7L@VkYcaH9ZnfL[S2
+DXx4 work 11 alu_sv_unit 0 22 KNPXD8oF;<HUE4Ez^3mmS3
+Z3 !s110 1757709872
+Z4 VDg1SIo80bB@j0V0VzS_@n1
+r1
+!s85 0
+!i10b 1
+!s100 D]IO<=Y6J6B]SQUG`o9QE3
+I3HSfo4cd:Zn;60]bz4jMT1
+!s105 alu_sv_unit
+S1
+R0
+Z5 w1757709825
+Z6 8/eecs/home/kanwarp/EECS-4201-project/project/pd0/design/code/alu.sv
+Z7 F/eecs/home/kanwarp/EECS-4201-project/project/pd0/design/code/alu.sv
+!i122 31
+L0 23 28
+Z8 OV;L;2020.1;71
+31
+Z9 !s108 1757709872.000000
+!s107 /eecs/home/kanwarp/EECS-4201-project/project/pd0/design//probes.svh|/eecs/home/kanwarp/EECS-4201-project/project/pd0/design/code/../probes.svh|/eecs/home/kanwarp/EECS-4201-project/project/pd0/verif/tests/test_pd.sv|/eecs/home/kanwarp/EECS-4201-project/project/pd0/design/design_wrapper.sv|/eecs/home/kanwarp/EECS-4201-project/project/pd0/verif/tests/clockgen.sv|/eecs/home/kanwarp/EECS-4201-project/project/pd0/design/code/pd0.sv|/eecs/home/kanwarp/EECS-4201-project/project/pd0/design/code/three_stage_pipeline.sv|/eecs/home/kanwarp/EECS-4201-project/project/pd0/design/code/reg_rst.sv|/eecs/home/kanwarp/EECS-4201-project/project/pd0/design/code/assign_xor.sv|/eecs/home/kanwarp/EECS-4201-project/project/pd0/design/code/alu.sv|/eecs/home/kanwarp/EECS-4201-project/project/pd0/design/code/constants_pkg.sv|
+Z10 !s90 -work|/eecs/home/kanwarp/EECS-4201-project/project/pd0/work|-sv|+incdir+/eecs/home/kanwarp/EECS-4201-project/project/pd0/design/code|+incdir+/eecs/home/kanwarp/EECS-4201-project/project/pd0/design/|-stats=none|/eecs/home/kanwarp/EECS-4201-project/project/pd0/design/code/constants_pkg.sv|/eecs/home/kanwarp/EECS-4201-project/project/pd0/design/code/alu.sv|/eecs/home/kanwarp/EECS-4201-project/project/pd0/design/code/assign_xor.sv|/eecs/home/kanwarp/EECS-4201-project/project/pd0/design/code/reg_rst.sv|/eecs/home/kanwarp/EECS-4201-project/project/pd0/design/code/three_stage_pipeline.sv|/eecs/home/kanwarp/EECS-4201-project/project/pd0/design/code/pd0.sv|/eecs/home/kanwarp/EECS-4201-project/project/pd0/verif/tests/clockgen.sv|/eecs/home/kanwarp/EECS-4201-project/project/pd0/design/design_wrapper.sv|/eecs/home/kanwarp/EECS-4201-project/project/pd0/verif/tests/test_pd.sv|
+!i113 1
+Z11 o-work /eecs/home/kanwarp/EECS-4201-project/project/pd0/work -sv
+Z12 !s92 -work /eecs/home/kanwarp/EECS-4201-project/project/pd0/work -sv +incdir+/eecs/home/kanwarp/EECS-4201-project/project/pd0/design/code +incdir+/eecs/home/kanwarp/EECS-4201-project/project/pd0/design/
+Z13 tCvgOpt 0
+Xalu_sv_unit
+R1
+R2
+R3
+VKNPXD8oF;<HUE4Ez^3mmS3
+r1
+!s85 0
+!i10b 1
+!s100 6fzi71OLULO[aBo_jnECE3
+IKNPXD8oF;<HUE4Ez^3mmS3
+!i103 1
+S1
+R0
+R5
+R6
+R7
+!i122 31
+L0 21 0
+R8
+31
+R9
+Z14 !s107 /eecs/home/kanwarp/EECS-4201-project/project/pd0/design//probes.svh|/eecs/home/kanwarp/EECS-4201-project/project/pd0/design/code/../probes.svh|/eecs/home/kanwarp/EECS-4201-project/project/pd0/verif/tests/test_pd.sv|/eecs/home/kanwarp/EECS-4201-project/project/pd0/design/design_wrapper.sv|/eecs/home/kanwarp/EECS-4201-project/project/pd0/verif/tests/clockgen.sv|/eecs/home/kanwarp/EECS-4201-project/project/pd0/design/code/pd0.sv|/eecs/home/kanwarp/EECS-4201-project/project/pd0/design/code/three_stage_pipeline.sv|/eecs/home/kanwarp/EECS-4201-project/project/pd0/design/code/reg_rst.sv|/eecs/home/kanwarp/EECS-4201-project/project/pd0/design/code/assign_xor.sv|/eecs/home/kanwarp/EECS-4201-project/project/pd0/design/code/alu.sv|/eecs/home/kanwarp/EECS-4201-project/project/pd0/design/code/constants_pkg.sv|
+R10
+!i113 1
+R11
+R12
+R13
+vassign_xor
+R1
+R3
+!i10b 1
+!s100 gbf;NBLhTCLVKXBJ>1dUa3
+Z15 !s11b Dg1SIo80bB@j0V0VzS_@n1
+I7dObDD0c@5n1KVdKNObDV1
+R4
+S1
+R0
+w1757709826
+8/eecs/home/kanwarp/EECS-4201-project/project/pd0/design/code/assign_xor.sv
+F/eecs/home/kanwarp/EECS-4201-project/project/pd0/design/code/assign_xor.sv
+!i122 31
+L0 15 9
+R8
+r1
+!s85 0
+31
+R9
+R14
+R10
+!i113 1
+R11
+R12
+R13
+vclockgen
+R1
+R3
+!i10b 1
+!s100 i_g1F:Gie2`UO[bTV1_X33
+R15
+Im0GB0QNkJXMWk1Y=SacW:0
+R4
+S1
+R0
+Z16 w1757449005
+8/eecs/home/kanwarp/EECS-4201-project/project/pd0/verif/tests/clockgen.sv
+F/eecs/home/kanwarp/EECS-4201-project/project/pd0/verif/tests/clockgen.sv
+!i122 31
+L0 11 39
+R8
+r1
+!s85 0
+31
+R9
+R14
+R10
+!i113 1
+R11
+R12
+R13
+Xconstants_pkg
+R1
+R3
+!i10b 1
+!s100 l^C5bQ9g_L6;;bJz^BdQk0
+R15
+I::DCO7L@VkYcaH9ZnfL[S2
+V::DCO7L@VkYcaH9ZnfL[S2
+S1
+R0
+w1757709827
+8/eecs/home/kanwarp/EECS-4201-project/project/pd0/design/code/constants_pkg.sv
+F/eecs/home/kanwarp/EECS-4201-project/project/pd0/design/code/constants_pkg.sv
+!i122 31
+L0 1 0
+R8
+r1
+!s85 0
+31
+R9
+R14
+R10
+!i113 1
+R11
+R12
+R13
+vdesign_wrapper
+R1
+R3
+!i10b 1
+!s100 9]22?Semn3Bam5hm1JFzD0
+R15
+I_IK9N1XVD3Ng0?LnNi[H`3
+R4
+S1
+R0
+R16
+8/eecs/home/kanwarp/EECS-4201-project/project/pd0/design/design_wrapper.sv
+F/eecs/home/kanwarp/EECS-4201-project/project/pd0/design/design_wrapper.sv
+!i122 31
+L0 6 10
+R8
+r1
+!s85 0
+31
+R9
+R14
+R10
+!i113 1
+R11
+R12
+R13
+vpd0
+R1
+R3
+!i10b 1
+!s100 2eZL<gW2F]fRm?8lYlEU<3
+R15
+ImI7?Y40YPm66fYI=dgkn]1
+R4
+S1
+R0
+w1757709818
+8/eecs/home/kanwarp/EECS-4201-project/project/pd0/design/code/pd0.sv
+F/eecs/home/kanwarp/EECS-4201-project/project/pd0/design/code/pd0.sv
+!i122 31
+L0 18 78
+R8
+r1
+!s85 0
+31
+R9
+R14
+R10
+!i113 1
+R11
+R12
+R13
+vreg_rst
+R1
+R3
+!i10b 1
+!s100 KBaXIW3giVY@I^9a8DcEh2
+R15
+IM[?^i1ghZi`0ed^R:6M^_3
+R4
+S1
+R0
+w1757709820
+8/eecs/home/kanwarp/EECS-4201-project/project/pd0/design/code/reg_rst.sv
+F/eecs/home/kanwarp/EECS-4201-project/project/pd0/design/code/reg_rst.sv
+!i122 31
+L0 17 16
+R8
+r1
+!s85 0
+31
+R9
+R14
+R10
+!i113 1
+R11
+R12
+R13
+vthree_stage_pipeline
+R1
+R3
+!i10b 1
+!s100 Q`PTnc9clKC[IaOdQ190F2
+R15
+IVL8[Dh;]7_L3dk6=VZC6=0
+R4
+S1
+R0
+w1757709822
+8/eecs/home/kanwarp/EECS-4201-project/project/pd0/design/code/three_stage_pipeline.sv
+F/eecs/home/kanwarp/EECS-4201-project/project/pd0/design/code/three_stage_pipeline.sv
+!i122 31
+L0 29 62
+R8
+r1
+!s85 0
+31
+R9
+R14
+R10
+!i113 1
+R11
+R12
+R13
+vtop
+R1
+R3
+!i10b 1
+!s100 dVbO2J0G;JjAOh6ZYVPL23
+R15
+IBjOl:U^?omc55RBM^Vz=Z2
+R4
+S1
+R0
+w1757709356
+8/eecs/home/kanwarp/EECS-4201-project/project/pd0/verif/tests/test_pd.sv
+F/eecs/home/kanwarp/EECS-4201-project/project/pd0/verif/tests/test_pd.sv
+!i122 31
+L0 8 157
+R8
+r1
+!s85 0
+31
+R9
+R14
+R10
+!i113 1
+R11
+R12
+R13

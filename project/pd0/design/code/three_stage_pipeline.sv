@@ -35,12 +35,56 @@ parameter int DWIDTH = 8)(
         output logic [DWIDTH-1:0] res_o
     );
 
-    /*
-     * Process definitions to be filled by
-     * student below...
-     * [HINT] Instantiate the alu and reg_rst modules
-     * and set up the necessary connections
-     *
-     */
+     // local constant for submodule parameter
+    localparam int STAGE_DWIDTH = DWIDTH;
+
+    // Stage 1
+    logic [DWIDTH-1:0] stage1_res;
+
+    alu #(.DWIDTH(STAGE_DWIDTH)) alu_stage1 (
+        .sel_i(2'b00),        // ADD operation
+        .op1_i(op1_i),
+        .op2_i(op2_i),
+        .res_o(stage1_res),
+        .zero_o(),
+        .neg_o()
+    );
+
+    logic [DWIDTH-1:0] stage1_reg_out;
+
+    reg_rst #(.DWIDTH(STAGE_DWIDTH)) reg_stage1 (
+        .clk(clk),
+        .rst(rst),
+        .in_i(stage1_res),
+        .out_o(stage1_reg_out)
+    );
+
+    // Stage 2
+    alu #(.DWIDTH(STAGE_DWIDTH)) alu_stage2 (
+        .sel_i(2'b01),       // SUB operation
+        .op1_i(stage1_reg_out),
+        .op2_i(op1_i),
+        .res_o(stage1_res),  // reuse stage1_res as temporary
+        .zero_o(),
+        .neg_o()
+    );
+
+    logic [DWIDTH-1:0] stage2_reg_out;
+
+    reg_rst #(.DWIDTH(STAGE_DWIDTH)) reg_stage2 (
+        .clk(clk),
+        .rst(rst),
+        .in_i(stage1_res),
+        .out_o(stage2_reg_out)
+    );
+
+    // Stage 3
+    reg_rst #(.DWIDTH(STAGE_DWIDTH)) reg_stage3 (
+        .clk(clk),
+        .rst(rst),
+        .in_i(stage2_reg_out),
+        .out_o(res_o)
+    );
+
 
 endmodule: three_stage_pipeline

@@ -30,9 +30,21 @@ module alu #(
         output logic neg_o
     );
 
-    /*
-     * Process definitions to be filled by
-     * student below...
-     */
+ // Combinational ALU logic
+    always_comb begin
+        case (sel_i)
+            ADD: res_o = op1_i + op2_i;
+            SUB: res_o = op1_i - op2_i;
+            OR : res_o = op1_i | op2_i;
+            AND: res_o = op1_i & op2_i;
+            default: res_o = '0;
+        endcase
+
+        // Zero flag
+        zero_o = (res_o == '0);
+
+        // Negative flag (MSB = 1 means negative in 2's complement)
+        neg_o = res_o[DWIDTH-1];
+    end
 
 endmodule: alu
