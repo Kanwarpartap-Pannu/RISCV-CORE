@@ -1,0 +1,18 @@
+# vsim -suppress 3839 -c -do "/eecs/home/kanwarp/EECS-4201-project/project/pd1/verif/scripts/run.macro" /eecs/home/kanwarp/EECS-4201-project/project/pd1/work.top 
+# Start time: 15:20:47 on Sep 25,2025
+# Loading sv_std.std
+# Loading /eecs/home/kanwarp/EECS-4201-project/project/pd1/work.top
+# Loading /eecs/home/kanwarp/EECS-4201-project/project/pd1/work.clockgen
+# Loading /eecs/home/kanwarp/EECS-4201-project/project/pd1/work.design_wrapper
+# Loading /eecs/home/kanwarp/EECS-4201-project/project/pd1/work.pd1
+# Loading /eecs/home/kanwarp/EECS-4201-project/project/pd1/work.fetch
+# Loading /eecs/home/kanwarp/EECS-4201-project/project/pd1/work.memory
+# do /eecs/home/kanwarp/EECS-4201-project/project/pd1/verif/scripts/run.macro
+# IMEMORY: Loaded 127 32-bit words from /eecs/home/kanwarp/EECS-4201-project/project/pd1/verif/data/test1.x
+# [MEM READ 1] stage mismatch: expected ADDR=01000000, DATA=fd010113, got ADDR=01000000, DATA=00000000
+# ** Fatal: Assertion error.
+#    Time: 12 ps  Scope: top.genblk3.tick_check File: /eecs/home/kanwarp/EECS-4201-project/project/pd1/verif/tests/pattern_check.h Line: 35
+# ** Note: $finish    : /eecs/home/kanwarp/EECS-4201-project/project/pd1/verif/tests/pattern_check.h(35)
+#    Time: 12 ps  Iteration: 1  Region: /top/genblk3
+# End time: 15:20:48 on Sep 25,2025, Elapsed time: 0:00:01
+# Errors: 1, Warnings: 0

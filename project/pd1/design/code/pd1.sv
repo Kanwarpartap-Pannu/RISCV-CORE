@@ -10,49 +10,79 @@
 
 module pd1 #(
     parameter int AWIDTH = 32,
-    parameter int DWIDTH = 32)(
-    input logic clk,
-    input logic reset
+    parameter int DWIDTH = 32
+)(
+    input  logic clk,
+    input  logic reset
 );
 
- 
-    //Internal signals
+    // ---------------------------------------------------
+    // Internal signals
+    // ---------------------------------------------------
 
-    logic [AWIDTH-1:0] pc;      // program counter
-    logic [DWIDTH-1:0] insn;    // fetched instruction
-
-
-    //Memory interface
-
+    logic [AWIDTH-1:0] pc;        // program counter
+    logic [DWIDTH-1:0] insn;      // fetched instruction
     logic [DWIDTH-1:0] mem_data_out;
 
-    //Instantiate FETCH stage
-  
+    // ---------------------------------------------------
+    // Probe signals (driven by testbench)
+    // ---------------------------------------------------
+    logic [AWIDTH-1:0] probe_addr;
+    logic [DWIDTH-1:0] probe_data_in;
+    logic              probe_read_en;
+    logic              probe_write_en;
+
+    // ---------------------------------------------------
+    // Muxed signals into memory
+    // ---------------------------------------------------
+    logic [AWIDTH-1:0] addr_sel;
+    logic [DWIDTH-1:0] data_in_sel;
+    logic              read_en_sel;
+    logic              write_en_sel;
+
+    // Testbench takes priority if it asserts read/write
+    assign addr_sel     = (probe_read_en || probe_write_en) ? probe_addr     : pc;
+    assign data_in_sel  = (probe_write_en)                  ? probe_data_in  : '0;
+    assign read_en_sel  = (probe_read_en || probe_write_en) ? probe_read_en  : 1'b1;
+    assign write_en_sel = (probe_read_en || probe_write_en) ? probe_write_en : 1'b0;
+
+    // ---------------------------------------------------
+    // FETCH stage
+    // ---------------------------------------------------
     fetch #(
         .DWIDTH(DWIDTH),
         .AWIDTH(AWIDTH)
     ) u_fetch (
         .clk   (clk),
         .rst   (reset),
-        .data_i(mem_data_out),  // instruction from memory
+        .data_i(mem_data_out),   // instruction from memory
         .pc_o  (pc),
         .insn_o(insn)
     );
 
-    // Instantiate MEMORY
+    // ---------------------------------------------------
+    // MEMORY
+    // ---------------------------------------------------
     memory #(
         .AWIDTH(AWIDTH),
         .DWIDTH(DWIDTH)
     ) u_memory (
         .clk       (clk),
         .rst       (reset),
-        .addr_i    (pc),         // fetch provides PC as address
-        .data_i    ('0),         // no writes in PD1
-        .read_en_i (1'b1),       // always reading instructions
-        .write_en_i(1'b0),       // no writes in fetch
+        .addr_i    (addr_sel),
+        .data_i    (data_in_sel),
+        .read_en_i (read_en_sel),
+        .write_en_i(write_en_sel),
         .data_o    (mem_data_out)
     );
 
-    // Add probes for testing/monitoring (link with design/probes.svh)
+    // ---------------------------------------------------
+    // Probes for testbench/macros
+    // ---------------------------------------------------
+    // pattern_check.h will use:
+    //   `PROBE_ADDR, `PROBE_DATA_IN, `PROBE_DATA_OUT,
+    //   `PROBE_READ_EN, `PROBE_WRITE_EN
+    // which we mapped in probes.svh to these signals:
+    //   probe_addr, probe_data_in, mem_data_out, probe_read_en, probe_write_en
 
 endmodule : pd1
