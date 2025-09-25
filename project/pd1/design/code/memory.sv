@@ -51,10 +51,35 @@ module memory #(
     $display("IMEMORY: Loaded %0d 32-bit words from %s", `LINE_COUNT, `MEM_PATH);
   end
 
-  /*
-   * Process definitions to be filled by
-   * student below....
-   *
-   */
+// Write: Syncronous 
+
+  always_ff @(posedge clk or posedge rst) begin
+    if (rst) begin
+      // clear memory on reset
+      for (int i = 0; i <= `MEM_DEPTH; i++) begin
+        main_memory[i] <= 8'b0;
+      end
+    end else if (write_en_i) begin
+      main_memory[address]     <= data_i[7:0];
+      main_memory[address + 1] <= data_i[15:8];
+      main_memory[address + 2] <= data_i[23:16];
+      main_memory[address + 3] <= data_i[31:24];
+    end
+  end
+
+// Read: Combinational 
+
+  always_comb begin
+    if (read_en_i) begin
+      data_o = {
+        main_memory[address + 3],
+        main_memory[address + 2],
+        main_memory[address + 1],
+        main_memory[address]
+      };
+    end else begin
+      data_o = '0;
+    end
+  end
 
 endmodule : memory

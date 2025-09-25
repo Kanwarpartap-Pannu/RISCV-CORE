@@ -20,14 +20,30 @@ module fetch #(
 	// inputs
 	input logic clk,
 	input logic rst,
+    input  logic [DWIDTH-1:0] data_i,   // instruction word from memory
 	// outputs	
-	output logic [AWIDTH - 1:0] pc_o,
-    output logic [DWIDTH - 1:0] insn_o
+	output logic [AWIDTH - 1:0] pc_o,   // program counter (address to memory)
+    output logic [DWIDTH - 1:0] insn_o  // instruction fetched
 );
-    /*
-     * Process definitions to be filled by
-     * student below...
-     */
+    
+    // Program Counter
+    always_ff @(posedge clk or posedge rst) begin
+        if (rst) begin
+            pc_o <= BASEADDR; // start address
+        end else begin
+            pc_o <= pc_o + 4; // increment PC by word (4 bytes)
+        end
+    end
+
+    // Instruction register
+    always_ff @(posedge clk or posedge rst) begin
+        if (rst) begin
+            insn_o <= '0;
+        end else begin
+            insn_o <= data_i; // latch instruction from memory
+        end
+    end
+
 
 endmodule : fetch
 				
