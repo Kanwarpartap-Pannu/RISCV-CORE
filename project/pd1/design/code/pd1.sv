@@ -1,88 +1,65 @@
-/*
- * Module: pd1
- *
- * Description: Top level module that will contain sub-module instantiations.
- *
- * Inputs:
- * 1) clk
- * 2) reset signal
- */
-
 module pd1 #(
-    parameter int AWIDTH = 32,
-    parameter int DWIDTH = 32
+    parameter int AWIDTH   = 32,
+    parameter int DWIDTH   = 32,
+    parameter int BASEADDR = 32'h01000000
 )(
     input  logic clk,
     input  logic reset
 );
 
-    // ---------------------------------------------------
-    // Internal signals
-    // ---------------------------------------------------
+    // Fetch wires
+    logic [AWIDTH-1:0] f_pc;
+    logic [DWIDTH-1:0] f_insn;
 
-    logic [AWIDTH-1:0] pc;        // program counter
-    logic [DWIDTH-1:0] insn;      // fetched instruction
+    // Memory wires
+    logic [AWIDTH-1:0] mem_addr;
+    logic [DWIDTH-1:0] mem_data_in;
     logic [DWIDTH-1:0] mem_data_out;
+    logic              mem_read_en;
+    logic              mem_write_en;
 
-    // ---------------------------------------------------
-    // Probe signals (driven by testbench)
-    // ---------------------------------------------------
-    logic [AWIDTH-1:0] probe_addr;
-    logic [DWIDTH-1:0] probe_data_in;
-    logic              probe_read_en;
-    logic              probe_write_en;
-
-    // ---------------------------------------------------
-    // Muxed signals into memory
-    // ---------------------------------------------------
-    logic [AWIDTH-1:0] addr_sel;
-    logic [DWIDTH-1:0] data_in_sel;
-    logic              read_en_sel;
-    logic              write_en_sel;
-
-    // Testbench takes priority if it asserts read/write
-    assign addr_sel     = (probe_read_en || probe_write_en) ? probe_addr     : pc;
-    assign data_in_sel  = (probe_write_en)                  ? probe_data_in  : '0;
-    assign read_en_sel  = (probe_read_en || probe_write_en) ? probe_read_en  : 1'b1;
-    assign write_en_sel = (probe_read_en || probe_write_en) ? probe_write_en : 1'b0;
-
-    // ---------------------------------------------------
-    // FETCH stage
-    // ---------------------------------------------------
+    // Fetch stage
     fetch #(
+        .AWIDTH(AWIDTH),
         .DWIDTH(DWIDTH),
-        .AWIDTH(AWIDTH)
+        .BASEADDR(BASEADDR)
     ) u_fetch (
-        .clk   (clk),
-        .rst   (reset),
-        .data_i(mem_data_out),   // instruction from memory
-        .pc_o  (pc),
-        .insn_o(insn)
+        .clk(clk),
+        .rst(rst),
+        .pc_o(f_pc),
+        .insn_o(f_insn),
+        .mem_addr_o(mem_addr),
+        .mem_read_en_o(mem_read_en),
+        .mem_data_i(mem_data_out)
     );
 
-    // ---------------------------------------------------
-    // MEMORY
-    // ---------------------------------------------------
+    // Instruction memory
     memory #(
         .AWIDTH(AWIDTH),
-        .DWIDTH(DWIDTH)
+        .DWIDTH(DWIDTH),
+        .BASE_ADDR(BASEADDR)
     ) u_memory (
-        .clk       (clk),
-        .rst       (reset),
-        .addr_i    (addr_sel),
-        .data_i    (data_in_sel),
-        .read_en_i (read_en_sel),
-        .write_en_i(write_en_sel),
-        .data_o    (mem_data_out)
+        .clk(clk),
+        .rst(rst),
+        .addr_i(mem_addr),
+        .data_i(mem_data_in),      // unused for fetch
+        .read_en_i(mem_read_en),
+        .write_en_i(mem_write_en), // tie low
+        .data_o(mem_data_out)
     );
 
-    // ---------------------------------------------------
-    // Probes for testbench/macros
-    // ---------------------------------------------------
-    // pattern_check.h will use:
-    //   `PROBE_ADDR, `PROBE_DATA_IN, `PROBE_DATA_OUT,
-    //   `PROBE_READ_EN, `PROBE_WRITE_EN
-    // which we mapped in probes.svh to these signals:
-    //   probe_addr, probe_data_in, mem_data_out, probe_read_en, probe_write_en
+    // For now, disable writes
+    assign mem_data_in  = '0;
+    assign mem_write_en = 1'b0;
+
+    `define PROBE_ADDR      mem_addr
+`define PROBE_DATA_IN   mem_data_in
+`define PROBE_DATA_OUT  mem_data_out
+`define PROBE_READ_EN   mem_read_en
+`define PROBE_WRITE_EN  mem_write_en
+
+`define PROBE_F_PC      f_pc
+`define PROBE_F_INSN    f_insn
+
 
 endmodule : pd1
