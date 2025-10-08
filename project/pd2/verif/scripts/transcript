@@ -1,0 +1,18 @@
+# vsim -suppress 3839 -c -do "/eecs/home/kanwarp/EECS-4201-project/project/pd2/verif/scripts/run.macro" /eecs/home/kanwarp/EECS-4201-project/project/pd2/work.top 
+# Start time: 17:32:05 on Oct 08,2025
+# Loading sv_std.std
+# Loading /eecs/home/kanwarp/EECS-4201-project/project/pd2/work.top
+# Loading /eecs/home/kanwarp/EECS-4201-project/project/pd2/work.clockgen
+# Loading /eecs/home/kanwarp/EECS-4201-project/project/pd2/work.design_wrapper
+# Loading /eecs/home/kanwarp/EECS-4201-project/project/pd2/work.pd2
+# Loading /eecs/home/kanwarp/EECS-4201-project/project/pd2/work.fetch
+# Loading /eecs/home/kanwarp/EECS-4201-project/project/pd2/work.decode_sv_unit
+# Loading /eecs/home/kanwarp/EECS-4201-project/project/pd2/work.decode
+# Loading /eecs/home/kanwarp/EECS-4201-project/project/pd2/work.igen
+# Loading /eecs/home/kanwarp/EECS-4201-project/project/pd2/work.control_sv_unit
+# Loading /eecs/home/kanwarp/EECS-4201-project/project/pd2/work.control
+# ** Error (suppressible): (vsim-3584) /eecs/home/kanwarp/EECS-4201-project/project/pd2/design/design_wrapper.sv(11): Module parameter 'DWIDTH' not found for override.
+#    Time: 0 ps  Iteration: 0  Instance: /top/dut File: /eecs/home/kanwarp/EECS-4201-project/project/pd2/design/design_wrapper.sv
+# Error loading design
+# End time: 17:32:06 on Oct 08,2025, Elapsed time: 0:00:01
+# Errors: 1, Warnings: 0
