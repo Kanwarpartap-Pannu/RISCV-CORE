@@ -25,10 +25,10 @@ module memory #(
   // inputs
   input logic clk,
   input logic rst,
-  input logic [AWIDTH-1:0] addr_i = BASE_ADDR,
-  input logic [DWIDTH-1:0] data_i,
-  input logic read_en_i,
-  input logic write_en_i,
+  input reg [AWIDTH-1:0] addr_i = BASE_ADDR,
+  input reg [DWIDTH-1:0] data_i,
+  input reg read_en_i,
+  input reg write_en_i,
   // outputs
   output logic [DWIDTH-1:0] data_o
 );

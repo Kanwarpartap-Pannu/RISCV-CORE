@@ -1,13 +1,11 @@
-// ----  Probes  ----
-`define PROBE_ADDR       u_memory.addr_i
-`define PROBE_DATA_IN    u_memory.data_i
-`define PROBE_DATA_OUT   u_memory.data_o
-`define PROBE_READ_EN    u_memory.read_en_i
-`define PROBE_WRITE_EN   u_memory.write_en_i
+`define PROBE_ADDR      mem_addr
+`define PROBE_DATA_IN   mem_data_in
+`define PROBE_DATA_OUT  mem_data_out
+`define PROBE_READ_EN   mem_read_en
+`define PROBE_WRITE_EN  mem_write_en
 
-`define PROBE_F_PC       u_fetch.pc_o
-`define PROBE_F_INSN     u_fetch.insn_o
-// ----  Probes  ----
+`define PROBE_F_PC      f_pc
+`define PROBE_F_INSN    f_insn
 
 // ----  Top module  ----
 `define TOP_MODULE  pd1
