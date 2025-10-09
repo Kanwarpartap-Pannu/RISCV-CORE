@@ -6,10 +6,12 @@
 module design_wrapper (
     input logic clk,
     input logic reset
- );
- // instantiate
- `TOP_MODULE #(.DWIDTH(32)) core (
-     .clk(clk),
-     .reset(reset)
-  );
+);
+    // Instantiate TOP_MODULE (pd2) as core
+    `TOP_MODULE core (
+        .clk(clk),
+        .rst(reset)
+        // Add probe connections here if required
+    );
+
 endmodule

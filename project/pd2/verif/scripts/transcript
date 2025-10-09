@@ -1,18 +1,39 @@
-# vsim -suppress 3839 -c -do "/eecs/home/kanwarp/EECS-4201-project/project/pd2/verif/scripts/run.macro" /eecs/home/kanwarp/EECS-4201-project/project/pd2/work.top 
-# Start time: 17:32:05 on Oct 08,2025
+# vsim -suppress 3839 -c -do "/eecs/home/erwinz/EECS4201/RISCV-CORE/project/pd2/verif/scripts/run.macro" /eecs/home/erwinz/EECS4201/RISCV-CORE/project/pd2/work.top 
+# Start time: 23:03:22 on Oct 08,2025
 # Loading sv_std.std
-# Loading /eecs/home/kanwarp/EECS-4201-project/project/pd2/work.top
-# Loading /eecs/home/kanwarp/EECS-4201-project/project/pd2/work.clockgen
-# Loading /eecs/home/kanwarp/EECS-4201-project/project/pd2/work.design_wrapper
-# Loading /eecs/home/kanwarp/EECS-4201-project/project/pd2/work.pd2
-# Loading /eecs/home/kanwarp/EECS-4201-project/project/pd2/work.fetch
-# Loading /eecs/home/kanwarp/EECS-4201-project/project/pd2/work.decode_sv_unit
-# Loading /eecs/home/kanwarp/EECS-4201-project/project/pd2/work.decode
-# Loading /eecs/home/kanwarp/EECS-4201-project/project/pd2/work.igen
-# Loading /eecs/home/kanwarp/EECS-4201-project/project/pd2/work.control_sv_unit
-# Loading /eecs/home/kanwarp/EECS-4201-project/project/pd2/work.control
-# ** Error (suppressible): (vsim-3584) /eecs/home/kanwarp/EECS-4201-project/project/pd2/design/design_wrapper.sv(11): Module parameter 'DWIDTH' not found for override.
-#    Time: 0 ps  Iteration: 0  Instance: /top/dut File: /eecs/home/kanwarp/EECS-4201-project/project/pd2/design/design_wrapper.sv
+# Loading /eecs/home/erwinz/EECS4201/RISCV-CORE/project/pd2/work.top
+# Loading /eecs/home/erwinz/EECS4201/RISCV-CORE/project/pd2/work.clockgen
+# Loading /eecs/home/erwinz/EECS4201/RISCV-CORE/project/pd2/work.design_wrapper
+# Loading /eecs/home/erwinz/EECS4201/RISCV-CORE/project/pd2/work.pd2
+# Loading /eecs/home/erwinz/EECS4201/RISCV-CORE/project/pd2/work.memory
+# Loading /eecs/home/erwinz/EECS4201/RISCV-CORE/project/pd2/work.fetch
+# Loading /eecs/home/erwinz/EECS4201/RISCV-CORE/project/pd2/work.decode_sv_unit
+# Loading /eecs/home/erwinz/EECS4201/RISCV-CORE/project/pd2/work.decode
+# Loading /eecs/home/erwinz/EECS4201/RISCV-CORE/project/pd2/work.igen
+# Loading /eecs/home/erwinz/EECS4201/RISCV-CORE/project/pd2/work.control_sv_unit
+# Loading /eecs/home/erwinz/EECS4201/RISCV-CORE/project/pd2/work.control
+# ** Error: (vsim-3043) Unresolved reference to 'probe_f_pc_o' in dut.core.probe_f_pc_o.
+#    Time: 0 ps  Iteration: 0  Region: /top/genblk3 File: /eecs/home/erwinz/EECS4201/RISCV-CORE/project/pd2/verif/tests/tasks.h Line: 15
+# ** Error: (vsim-3043) Unresolved reference to 'probe_f_insn_o' in dut.core.probe_f_insn_o.
+#    Time: 0 ps  Iteration: 0  Region: /top/genblk3 File: /eecs/home/erwinz/EECS4201/RISCV-CORE/project/pd2/verif/tests/tasks.h Line: 16
+# ** Error: (vsim-3043) Unresolved reference to 'probe_d_pc_o' in dut.core.probe_d_pc_o.
+#    Time: 0 ps  Iteration: 0  Region: /top/genblk3 File: /eecs/home/erwinz/EECS4201/RISCV-CORE/project/pd2/verif/tests/tasks.h Line: 57
+# ** Error: (vsim-3043) Unresolved reference to 'probe_d_opcode_o' in dut.core.probe_d_opcode_o.
+#    Time: 0 ps  Iteration: 0  Region: /top/genblk3 File: /eecs/home/erwinz/EECS4201/RISCV-CORE/project/pd2/verif/tests/tasks.h Line: 58
+# ** Error: (vsim-3043) Unresolved reference to 'probe_d_rd_o' in dut.core.probe_d_rd_o.
+#    Time: 0 ps  Iteration: 0  Region: /top/genblk3 File: /eecs/home/erwinz/EECS4201/RISCV-CORE/project/pd2/verif/tests/tasks.h Line: 59
+# ** Error: (vsim-3043) Unresolved reference to 'probe_d_rs1_o' in dut.core.probe_d_rs1_o.
+#    Time: 0 ps  Iteration: 0  Region: /top/genblk3 File: /eecs/home/erwinz/EECS4201/RISCV-CORE/project/pd2/verif/tests/tasks.h Line: 60
+# ** Error: (vsim-3043) Unresolved reference to 'probe_d_rs2_o' in dut.core.probe_d_rs2_o.
+#    Time: 0 ps  Iteration: 0  Region: /top/genblk3 File: /eecs/home/erwinz/EECS4201/RISCV-CORE/project/pd2/verif/tests/tasks.h Line: 61
+# ** Error: (vsim-3043) Unresolved reference to 'probe_d_funct3_o' in dut.core.probe_d_funct3_o.
+#    Time: 0 ps  Iteration: 0  Region: /top/genblk3 File: /eecs/home/erwinz/EECS4201/RISCV-CORE/project/pd2/verif/tests/tasks.h Line: 62
+# ** Error: (vsim-3043) Unresolved reference to 'probe_d_funct7_o' in dut.core.probe_d_funct7_o.
+#    Time: 0 ps  Iteration: 0  Region: /top/genblk3 File: /eecs/home/erwinz/EECS4201/RISCV-CORE/project/pd2/verif/tests/tasks.h Line: 63
+# ** Error: (vsim-3043) Unresolved reference to 'probe_d_imm_o' in dut.core.probe_d_imm_o.
+#    Time: 0 ps  Iteration: 0  Region: /top/genblk3 File: /eecs/home/erwinz/EECS4201/RISCV-CORE/project/pd2/verif/tests/tasks.h Line: 64
+# ** Error: (vsim-3063) Port 'instruction_o' not found in the connected module (4th connection).
+#    Time: 0 ps  Iteration: 0  Instance: /top/dut/core/FETCH_STAGE File: /eecs/home/erwinz/EECS4201/RISCV-CORE/project/pd2/design/code/pd2.sv Line: 82
 # Error loading design
-# End time: 17:32:06 on Oct 08,2025, Elapsed time: 0:00:01
-# Errors: 1, Warnings: 0
+# End time: 23:03:22 on Oct 08,2025, Elapsed time: 0:00:00
+# Errors: 11, Warnings: 0

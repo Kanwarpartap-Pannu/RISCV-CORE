@@ -51,6 +51,8 @@ module pd2 (
     // FETCH → DECODE signals
     // ----------------------------------------------------
     logic [31:0] pc_f, instruction_f;
+    logic [31:0] mem_addr_f, mem_data_f;
+    logic        mem_read_en_f;
 
     // DECODE → EXECUTE signals
     logic [4:0]  rd_d, rs1_d, rs2_d;
@@ -62,13 +64,29 @@ module pd2 (
     logic [1:0]  alu_op_d;
 
     // ----------------------------------------------------
+    // Memory stage for instruction fetch
+    // ----------------------------------------------------
+    memory MEM_STAGE (
+        .clk(clk),
+        .rst(rst),
+        .addr_i(mem_addr_f),
+        .data_i('0),
+        .read_en_i(mem_read_en_f),
+        .write_en_i(1'b0),
+        .data_o(mem_data_f)
+    );
+
+    // ----------------------------------------------------
     // FETCH STAGE
     // ----------------------------------------------------
     fetch FETCH_STAGE (
         .clk(clk),
         .rst(rst),
         .pc_o(pc_f),
-        .instruction_o(instruction_f)
+        .instruction_o(instruction_f),
+        .mem_addr_o(mem_addr_f),
+        .mem_read_en_o(mem_read_en_f),
+        .mem_data_i(mem_data_f)
     );
 
     // ----------------------------------------------------
