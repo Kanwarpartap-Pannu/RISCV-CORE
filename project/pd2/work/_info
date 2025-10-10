@@ -11,7 +11,7 @@ cModel Technology
 d/eecs/home/kanwarp/EECS-4201-project/project/pd2/verif/scripts
 vclockgen
 Z0 DXx6 sv_std 3 std 0 22 VYECXdT12H8WgbUP_5Y6:3
-Z1 !s110 1759979001
+Z1 !s110 1760065844
 !i10b 1
 !s100 XGla>YnT?aHlG7Lg@<j9J1
 Z2 !s11b Dg1SIo80bB@j0V0VzS_@n1
@@ -22,13 +22,13 @@ Z4 d/eecs/home/erwinz/EECS4201/RISCV-CORE/project/pd2/verif/scripts
 w1759976686
 8/eecs/home/erwinz/EECS4201/RISCV-CORE/project/pd2/verif/tests/clockgen.sv
 F/eecs/home/erwinz/EECS4201/RISCV-CORE/project/pd2/verif/tests/clockgen.sv
-!i122 16
+!i122 53
 L0 11 39
 Z5 OV;L;2020.1;71
 r1
 !s85 0
 31
-Z6 !s108 1759979001.000000
+Z6 !s108 1760065844.000000
 !s107 /eecs/home/erwinz/EECS4201/RISCV-CORE/project/pd2/verif/tests/tasks.h|/eecs/home/erwinz/EECS4201/RISCV-CORE/project/pd2/verif/tests/pattern_check.h|/eecs/home/erwinz/EECS4201/RISCV-CORE/project/pd2/verif/tests/pattern_dump.h|/eecs/home/erwinz/EECS4201/RISCV-CORE/project/pd2/verif/tests/trace_dump.h|/eecs/home/erwinz/EECS4201/RISCV-CORE/project/pd2/verif/tests/fields.h|/eecs/home/erwinz/EECS4201/RISCV-CORE/project/pd2/verif/tests/tracegen.v|/eecs/home/erwinz/EECS4201/RISCV-CORE/project/pd2/design//probes.svh|/eecs/home/erwinz/EECS4201/RISCV-CORE/project/pd2/design/code/constants.svh|/eecs/home/erwinz/EECS4201/RISCV-CORE/project/pd2/verif/tests/test_pd.sv|/eecs/home/erwinz/EECS4201/RISCV-CORE/project/pd2/design/design_wrapper.sv|/eecs/home/erwinz/EECS4201/RISCV-CORE/project/pd2/verif/tests/clockgen.sv|/eecs/home/erwinz/EECS4201/RISCV-CORE/project/pd2/design/code/pd2.sv|/eecs/home/erwinz/EECS4201/RISCV-CORE/project/pd2/design/code/igen.sv|/eecs/home/erwinz/EECS4201/RISCV-CORE/project/pd2/design/code/decode.sv|/eecs/home/erwinz/EECS4201/RISCV-CORE/project/pd2/design/code/control.sv|/eecs/home/erwinz/EECS4201/RISCV-CORE/project/pd2/design/code/fetch.sv|/eecs/home/erwinz/EECS4201/RISCV-CORE/project/pd2/design/code/memory.sv|
 Z7 !s90 -work|/eecs/home/erwinz/EECS4201/RISCV-CORE/project/pd2/work|-suppress|7061|-sv|+incdir+/eecs/home/erwinz/EECS4201/RISCV-CORE/project/pd2/design/code|+incdir+/eecs/home/erwinz/EECS4201/RISCV-CORE/project/pd2/design/|+incdir+/eecs/home/erwinz/EECS4201/RISCV-CORE/project/pd2/verif/tests|+define+MEM_PATH="/eecs/home/erwinz/EECS4201/RISCV-CORE/project/pd2/verif/data/test1.x"|+define+TEST_VECTOR="/eecs/home/erwinz/EECS4201/RISCV-CORE/project/pd2/verif/data/test_vector.x"|+define+MEM_DEPTH=1048576|+define+GEN_TRACE=0|+define+TRACE_FILE="test1.trace"|+define+LINE_COUNT=127|+define+PATTERN_FILE="/eecs/home/erwinz/EECS4201/RISCV-CORE/project/pd2/verif/data/test1.pattern"|+define+PATTERN_LINE_COUNT=121|+define+PATTERN_DUMP_FILE="test1.dump"|+define+PATTERN_DUMP=0|+define+PATTERN_CHECK=1|+define+VCD_FILE="test1.vcd"|+define+TIMEOUT=50000|-stats=none|/eecs/home/erwinz/EECS4201/RISCV-CORE/project/pd2/design/code/memory.sv|/eecs/home/erwinz/EECS4201/RISCV-CORE/project/pd2/design/code/fetch.sv|/eecs/home/erwinz/EECS4201/RISCV-CORE/project/pd2/design/code/control.sv|/eecs/home/erwinz/EECS4201/RISCV-CORE/project/pd2/design/code/decode.sv|/eecs/home/erwinz/EECS4201/RISCV-CORE/project/pd2/design/code/igen.sv|/eecs/home/erwinz/EECS4201/RISCV-CORE/project/pd2/design/code/pd2.sv|/eecs/home/erwinz/EECS4201/RISCV-CORE/project/pd2/verif/tests/clockgen.sv|/eecs/home/erwinz/EECS4201/RISCV-CORE/project/pd2/design/design_wrapper.sv|/eecs/home/erwinz/EECS4201/RISCV-CORE/project/pd2/verif/tests/test_pd.sv|
 !i113 1
@@ -37,7 +37,7 @@ Z9 !s92 -suppress 7061 -work /eecs/home/erwinz/EECS4201/RISCV-CORE/project/pd2/w
 Z10 tCvgOpt 0
 vcontrol
 R0
-DXx4 work 15 control_sv_unit 0 22 H_<NngPIHae4eeDg2:DDg2
+DXx4 work 15 control_sv_unit 0 22 FeV5mnY@7IeaeEF1UF9AV3
 R1
 R3
 r1
@@ -51,7 +51,7 @@ R4
 w1759978132
 Z11 8/eecs/home/erwinz/EECS4201/RISCV-CORE/project/pd2/design/code/control.sv
 Z12 F/eecs/home/erwinz/EECS4201/RISCV-CORE/project/pd2/design/code/control.sv
-!i122 16
+!i122 53
 L0 30 85
 R5
 31
@@ -65,21 +65,21 @@ R10
 Xcontrol_sv_unit
 R0
 R1
-VH_<NngPIHae4eeDg2:DDg2
+VFeV5mnY@7IeaeEF1UF9AV3
 r1
 !s85 0
 !i10b 1
-!s100 LR80jBbHJhY[RO1U^QOh>1
-IH_<NngPIHae4eeDg2:DDg2
+!s100 8jXBC@b[TikONR>cXQROB3
+IFeV5mnY@7IeaeEF1UF9AV3
 !i103 1
 S1
 R4
-Z14 w1759978133
+w1760059623
 R11
 R12
-Z15 F/eecs/home/erwinz/EECS4201/RISCV-CORE/project/pd2/design/code/constants.svh
-!i122 16
-Z16 L0 10 0
+Z14 F/eecs/home/erwinz/EECS4201/RISCV-CORE/project/pd2/design/code/constants.svh
+!i122 53
+Z15 L0 10 0
 R5
 31
 R6
@@ -91,22 +91,22 @@ R9
 R10
 vdecode
 R0
-DXx4 work 14 decode_sv_unit 0 22 ]QJnP6cQ2Y9cU<@E1j>k<3
+DXx4 work 14 decode_sv_unit 0 22 zJBRGXXcJPRngma:nbjn_0
 R1
 R3
 r1
 !s85 0
 !i10b 1
-!s100 mb8`KFzY_NU]`Cgo=mI`B2
-IRnVdeKd5eV5YoGnMdD=XK0
+!s100 j3mf`Yeg@iG_o6;fd@Jli2
+IV9>5MYSKJ1j2;lNnRnaj81
 !s105 decode_sv_unit
 S1
 R4
-w1759978131
+Z16 w1760060214
 Z17 8/eecs/home/erwinz/EECS4201/RISCV-CORE/project/pd2/design/code/decode.sv
 Z18 F/eecs/home/erwinz/EECS4201/RISCV-CORE/project/pd2/design/code/decode.sv
-!i122 16
-L0 29 53
+!i122 53
+L0 3 61
 R5
 31
 R6
@@ -119,21 +119,21 @@ R10
 Xdecode_sv_unit
 R0
 R1
-V]QJnP6cQ2Y9cU<@E1j>k<3
+VzJBRGXXcJPRngma:nbjn_0
 r1
 !s85 0
 !i10b 1
-!s100 OY_?QH0m;]H^M^NNMgXPG2
-I]QJnP6cQ2Y9cU<@E1j>k<3
+!s100 J<0dd2@no?C?jKE]9[h]70
+IzJBRGXXcJPRngma:nbjn_0
 !i103 1
 S1
 R4
-R14
+R16
 R17
 R18
+R14
+!i122 53
 R15
-!i122 16
-R16
 R5
 31
 R6
@@ -145,22 +145,50 @@ R9
 R10
 vdesign_wrapper
 R0
+DXx4 work 22 design_wrapper_sv_unit 0 22 7E8`YDSP537z1gDH8YXkl1
 R1
-!i10b 1
-!s100 :dR:d>IQb09jhfUSFMnRB0
-R2
-IL;9AdbXDLDS7W^i1aFG:73
 R3
-S1
-R4
-w1759978993
-8/eecs/home/erwinz/EECS4201/RISCV-CORE/project/pd2/design/design_wrapper.sv
-F/eecs/home/erwinz/EECS4201/RISCV-CORE/project/pd2/design/design_wrapper.sv
-!i122 16
-L0 6 12
-R5
 r1
 !s85 0
+!i10b 1
+!s100 zP=Z7zVK9;UU9?YFOF0LE3
+IlG=DLDIB`dD9dcV4DHj8C0
+!s105 design_wrapper_sv_unit
+S1
+R4
+Z19 w1760063724
+Z20 8/eecs/home/erwinz/EECS4201/RISCV-CORE/project/pd2/design/design_wrapper.sv
+Z21 F/eecs/home/erwinz/EECS4201/RISCV-CORE/project/pd2/design/design_wrapper.sv
+!i122 53
+L0 3 42
+R5
+31
+R6
+R13
+R7
+!i113 1
+R8
+R9
+R10
+Xdesign_wrapper_sv_unit
+R0
+R1
+V7E8`YDSP537z1gDH8YXkl1
+r1
+!s85 0
+!i10b 1
+!s100 IO`Y=Pf[cNk0BQ9IBS5M^0
+I7E8`YDSP537z1gDH8YXkl1
+!i103 1
+S1
+R4
+R19
+R20
+R21
+R14
+!i122 53
+R15
+R5
 31
 R6
 R13
@@ -182,7 +210,7 @@ R4
 w1759978130
 8/eecs/home/erwinz/EECS4201/RISCV-CORE/project/pd2/design/code/fetch.sv
 F/eecs/home/erwinz/EECS4201/RISCV-CORE/project/pd2/design/code/fetch.sv
-!i122 16
+!i122 53
 L0 15 34
 R5
 r1
@@ -199,17 +227,17 @@ vigen
 R0
 R1
 !i10b 1
-!s100 [IXjm=Z3oRdMTUdjCiUb70
+!s100 g^zn@OfbRG>dJfUG?ahKS2
 R2
-I9R1fGMLF9U9QYR5ej6Lm92
+Ij=PkLzJjFo9cgcQ0K[<DI1
 R3
 S1
 R4
-w1759978129
+w1760060192
 8/eecs/home/erwinz/EECS4201/RISCV-CORE/project/pd2/design/code/igen.sv
 F/eecs/home/erwinz/EECS4201/RISCV-CORE/project/pd2/design/code/igen.sv
-!i122 16
-L0 15 29
+!i122 53
+L0 6 34
 R5
 r1
 !s85 0
@@ -234,7 +262,7 @@ R4
 w1759978125
 8/eecs/home/erwinz/EECS4201/RISCV-CORE/project/pd2/design/code/memory.sv
 F/eecs/home/erwinz/EECS4201/RISCV-CORE/project/pd2/design/code/memory.sv
-!i122 16
+!i122 53
 L0 19 67
 R5
 r1
@@ -249,22 +277,50 @@ R9
 R10
 vpd2
 R0
+DXx4 work 11 pd2_sv_unit 0 22 :_Mne0Io9=EM`F2ciiRkZ1
 R1
-!i10b 1
-!s100 ^;`d9gHYRC`Ga8ImkQhnz1
-R2
-IUCn<ZgeL]2TAOBX0<STha3
 R3
-S1
-R4
-w1759978401
-8/eecs/home/erwinz/EECS4201/RISCV-CORE/project/pd2/design/code/pd2.sv
-F/eecs/home/erwinz/EECS4201/RISCV-CORE/project/pd2/design/code/pd2.sv
-!i122 16
-L0 1 162
-R5
 r1
 !s85 0
+!i10b 1
+!s100 k_7c0DhdlW=]l]?aY;_oZ0
+IH:nmGm0@CA2XdRKfZBmQH1
+!s105 pd2_sv_unit
+S1
+R4
+Z22 w1760065833
+Z23 8/eecs/home/erwinz/EECS4201/RISCV-CORE/project/pd2/design/code/pd2.sv
+Z24 F/eecs/home/erwinz/EECS4201/RISCV-CORE/project/pd2/design/code/pd2.sv
+!i122 53
+L0 3 154
+R5
+31
+R6
+R13
+R7
+!i113 1
+R8
+R9
+R10
+Xpd2_sv_unit
+R0
+R1
+V:_Mne0Io9=EM`F2ciiRkZ1
+r1
+!s85 0
+!i10b 1
+!s100 J:?M5YEUY]Hcc^WdlOR]L2
+I:_Mne0Io9=EM`F2ciiRkZ1
+!i103 1
+S1
+R4
+R22
+R23
+R24
+R14
+!i122 53
+R15
+R5
 31
 R6
 R13
@@ -292,7 +348,7 @@ F/eecs/home/erwinz/EECS4201/RISCV-CORE/project/pd2/verif/tests/trace_dump.h
 F/eecs/home/erwinz/EECS4201/RISCV-CORE/project/pd2/verif/tests/pattern_dump.h
 F/eecs/home/erwinz/EECS4201/RISCV-CORE/project/pd2/verif/tests/pattern_check.h
 F/eecs/home/erwinz/EECS4201/RISCV-CORE/project/pd2/verif/tests/tasks.h
-!i122 16
+!i122 53
 L0 4 231
 R5
 r1
