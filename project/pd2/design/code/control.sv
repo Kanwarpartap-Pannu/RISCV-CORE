@@ -24,91 +24,196 @@
  */
 
 `include "constants.svh"
-// control.sv
-// Generates control signals based on opcode, funct3, and funct7
 
-module control (
-    input  logic [6:0] opcode_i,
-    input  logic [2:0] funct3_i,
-    input  logic [6:0] funct7_i,
+module control #(
+	parameter int DWIDTH=32
+)(
+	// inputs
+    input  logic [DWIDTH-1:0] insn_i,
+    input  logic [6:0]        opcode_i,
+    input  logic [6:0]        funct7_i,
+    input  logic [2:0]        funct3_i,
 
-    output logic       reg_write_o,
-    output logic       mem_read_o,
-    output logic       mem_write_o,
-    output logic       mem_to_reg_o,
-    output logic       alu_src_o,
-    output logic       branch_o,
-    output logic       jump_o,
-    output logic [1:0] alu_op_o
+    // outputs
+    output logic              pcsel_o,
+    output logic              immsel_o,
+    output logic              regwren_o,
+    output logic              rs1sel_o,
+    output logic              rs2sel_o,
+    output logic              memren_o,
+    output logic              memwren_o,
+    output logic [1:0]        wbsel_o,
+    output logic [3:0]        alusel_o
 );
 
-    // RISC-V opcodes
-    localparam OPCODE_RTYPE = 7'b0110011;
-    localparam OPCODE_ITYPE = 7'b0010011;
-    localparam OPCODE_LOAD  = 7'b0000011;
-    localparam OPCODE_STORE = 7'b0100011;
-    localparam OPCODE_BRANCH= 7'b1100011;
-    localparam OPCODE_JAL   = 7'b1101111;
-    localparam OPCODE_JALR  = 7'b1100111;
-    localparam OPCODE_LUI   = 7'b0110111;
-    localparam OPCODE_AUIPC = 7'b0010111;
+    // ----------------------------------------------------------
+    // Opcode group definitions (RV32I base ISA)
+    // ----------------------------------------------------------
+    localparam [6:0]
+        OP_R      = 7'b0110011, // R-type
+        OP_I      = 7'b0010011, // I-type arithmetic
+        OP_LOAD   = 7'b0000011, // Load
+        OP_STORE  = 7'b0100011, // Store
+        OP_BRANCH = 7'b1100011, // Branch
+        OP_JALR   = 7'b1100111, // Jump register
+        OP_JAL    = 7'b1101111, // Jump and link
+        OP_LUI    = 7'b0110111, // Load upper immediate
+        OP_AUIPC  = 7'b0010111; // Add upper immediate to PC
 
+    // ----------------------------------------------------------
+    // ALU operation encodings (can match constants.svh if defined)
+    // ----------------------------------------------------------
+    localparam [3:0]
+        ALU_ADD = 4'd0,
+        ALU_SUB = 4'd1,
+        ALU_AND = 4'd2,
+        ALU_OR  = 4'd3,
+        ALU_XOR = 4'd4,
+        ALU_SLT = 4'd5,
+        ALU_SLL = 4'd6,
+        ALU_SRL = 4'd7,
+        ALU_SRA = 4'd8,
+        ALU_NOP = 4'd15;
+
+    // ----------------------------------------------------------
+    // Control signal generation
+    // ----------------------------------------------------------
     always_comb begin
-        // default values
-        reg_write_o  = 0;
-        mem_read_o   = 0;
-        mem_write_o  = 0;
-        mem_to_reg_o = 0;
-        alu_src_o    = 0;
-        branch_o     = 0;
-        jump_o       = 0;
-        alu_op_o     = 2'b00;
+        // Default safe values
+        pcsel_o    = 1'b0;
+        immsel_o   = 1'b0;
+        regwren_o  = 1'b0;
+        rs1sel_o   = 1'b0;
+        rs2sel_o   = 1'b0;
+        memren_o   = 1'b0;
+        memwren_o  = 1'b0;
+        wbsel_o    = 2'b00;
+        alusel_o   = ALU_NOP;
 
-        case (opcode_i)
-            OPCODE_RTYPE: begin
-                reg_write_o  = 1;
-                alu_op_o     = 2'b10; // determined by funct3/funct7
+        unique case (opcode_i)
+
+            // -------------------- R-TYPE --------------------
+            OP_R: begin
+                regwren_o  = 1'b1;   // Write to rd
+                rs1sel_o   = 1'b1;
+                rs2sel_o   = 1'b1;
+                immsel_o   = 1'b0;
+                wbsel_o    = 2'b00;  // Writeback from ALU
+                memren_o   = 1'b0;
+                memwren_o  = 1'b0;
+                pcsel_o    = 1'b0;
+                unique casez ({funct7_i, funct3_i})
+                    {7'b0000000, 3'b000}: alusel_o = ALU_ADD;
+                    {7'b0100000, 3'b000}: alusel_o = ALU_SUB;
+                    {7'b0000000, 3'b111}: alusel_o = ALU_AND;
+                    {7'b0000000, 3'b110}: alusel_o = ALU_OR;
+                    {7'b0000000, 3'b100}: alusel_o = ALU_XOR;
+                    {7'b0000000, 3'b010}: alusel_o = ALU_SLT;
+                    {7'b0000000, 3'b001}: alusel_o = ALU_SLL;
+                    {7'b0000000, 3'b101}: alusel_o = ALU_SRL;
+                    {7'b0100000, 3'b101}: alusel_o = ALU_SRA;
+                    default:              alusel_o = ALU_ADD;
+                endcase
             end
 
-            OPCODE_ITYPE: begin
-                reg_write_o  = 1;
-                alu_src_o    = 1;
-                alu_op_o     = 2'b11; // I-type ALU
+            // -------------------- I-TYPE (ALU IMM) --------------------
+            OP_I: begin
+                regwren_o = 1'b1;
+                immsel_o  = 1'b1;
+                rs1sel_o  = 1'b1;
+                rs2sel_o  = 1'b0;
+                wbsel_o   = 2'b00;
+                pcsel_o   = 1'b0;
+                unique case (funct3_i)
+                    3'b000: alusel_o = ALU_ADD; // ADDI
+                    3'b111: alusel_o = ALU_AND; // ANDI
+                    3'b110: alusel_o = ALU_OR;  // ORI
+                    3'b100: alusel_o = ALU_XOR; // XORI
+                    3'b010: alusel_o = ALU_SLT; // SLTI
+                    3'b001: alusel_o = ALU_SLL; // SLLI
+                    3'b101: alusel_o = (funct7_i == 7'b0000000) ? ALU_SRL : ALU_SRA;
+                    default: alusel_o = ALU_ADD;
+                endcase
             end
 
-            OPCODE_LOAD: begin
-                reg_write_o  = 1;
-                mem_read_o   = 1;
-                mem_to_reg_o = 1;
-                alu_src_o    = 1;
-                alu_op_o     = 2'b00;
+            // -------------------- LOAD --------------------
+            OP_LOAD: begin
+                regwren_o = 1'b1;
+                immsel_o  = 1'b1;
+                rs1sel_o  = 1'b1;
+                rs2sel_o  = 1'b0;
+                memren_o  = 1'b1;
+                wbsel_o   = 2'b01; // Writeback from memory
+                alusel_o  = ALU_ADD; // address = rs1 + imm
             end
 
-            OPCODE_STORE: begin
-                mem_write_o  = 1;
-                alu_src_o    = 1;
-                alu_op_o     = 2'b00;
+            // -------------------- STORE --------------------
+            OP_STORE: begin
+                regwren_o = 1'b0;
+                immsel_o  = 1'b1;
+                rs1sel_o  = 1'b1;
+                rs2sel_o  = 1'b1;
+                memwren_o = 1'b1;
+                alusel_o  = ALU_ADD;
             end
 
-            OPCODE_BRANCH: begin
-                branch_o     = 1;
-                alu_op_o     = 2'b01;
+            // -------------------- BRANCH --------------------
+            OP_BRANCH: begin
+                regwren_o = 1'b0;
+                immsel_o  = 1'b1;
+                rs1sel_o  = 1'b1;
+                rs2sel_o  = 1'b1;
+                pcsel_o   = 1'b1;  // use branch target PC
+                alusel_o  = ALU_SUB; // for compare
             end
 
-            OPCODE_JAL, OPCODE_JALR: begin
-                reg_write_o  = 1;
-                jump_o       = 1;
+            // -------------------- JAL --------------------
+            OP_JAL: begin
+                regwren_o = 1'b1;
+                pcsel_o   = 1'b1;
+                immsel_o  = 1'b1;
+                rs1sel_o  = 1'b0;
+                rs2sel_o  = 1'b0;
+                wbsel_o   = 2'b10; // write PC+4
+                alusel_o  = ALU_ADD;
             end
 
-            OPCODE_LUI, OPCODE_AUIPC: begin
-                reg_write_o  = 1;
-                alu_src_o    = 1;
+            // -------------------- JALR --------------------
+            OP_JALR: begin
+                regwren_o = 1'b1;
+                pcsel_o   = 1'b1;
+                immsel_o  = 1'b1;
+                rs1sel_o  = 1'b1;
+                rs2sel_o  = 1'b0;
+                wbsel_o   = 2'b10;
+                alusel_o  = ALU_ADD;
             end
 
+            // -------------------- LUI --------------------
+            OP_LUI: begin
+                regwren_o = 1'b1;
+                immsel_o  = 1'b1;
+                rs1sel_o  = 1'b0;
+                rs2sel_o  = 1'b0;
+                wbsel_o   = 2'b00;
+                alusel_o  = ALU_ADD;
+            end
+
+            // -------------------- AUIPC --------------------
+            OP_AUIPC: begin
+                regwren_o = 1'b1;
+                immsel_o  = 1'b1;
+                rs1sel_o  = 1'b0;
+                rs2sel_o  = 1'b0;
+                wbsel_o   = 2'b00;
+                alusel_o  = ALU_ADD;
+            end
+
+            // -------------------- DEFAULT --------------------
             default: begin
-                // invalid or unsupported instruction
+                // Already defaulted above
             end
         endcase
     end
 
-endmodule
+endmodule : control
