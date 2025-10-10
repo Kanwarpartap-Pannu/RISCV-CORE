@@ -12,8 +12,9 @@ module pd2 #(
     parameter int BASEADDR = 32'h01000000
 )(
     input  logic clk,
-    input  logic reset
+    input  logic reset   // external connection (wrapper expects this)
 );
+
 
     // ----------------------------------------------------
     // FETCH stage wires
@@ -58,7 +59,7 @@ module pd2 #(
     logic [3:0]        ctrl_alusel;
 
     // ----------------------------------------------------
-    // Instantiate fetch (instruction fetch from memory)
+    // Instantiate fetch
     // ----------------------------------------------------
     fetch #(
         .AWIDTH(AWIDTH),
@@ -66,7 +67,7 @@ module pd2 #(
         .BASEADDR(BASEADDR)
     ) u_fetch (
         .clk(clk),
-        .rst(reset),              // fetch expects 'rst'
+        .rst(reset),
         .pc_o(f_pc),
         .insn_o(f_insn),
         .mem_addr_o(mem_addr),
@@ -74,13 +75,16 @@ module pd2 #(
         .mem_data_i(mem_data_out)
     );
 
+    // ----------------------------------------------------
+    // Memory
+    // ----------------------------------------------------
     memory #(
         .AWIDTH(AWIDTH),
         .DWIDTH(DWIDTH),
         .BASE_ADDR(BASEADDR)
     ) u_memory (
         .clk(clk),
-        .rst(reset),              // memory expects 'rst'
+        .rst(rst),
         .addr_i(mem_addr),
         .data_i(mem_data_in),
         .read_en_i(mem_read_en),
@@ -88,25 +92,20 @@ module pd2 #(
         .data_o(mem_data_out)
     );
 
-
-    // no writes for now (fetch-only)
     assign mem_data_in  = '0;
     assign mem_write_en = 1'b0;
 
     // ----------------------------------------------------
     // Decode stage
-    // Must match decode module header exactly (14 ports)
     // ----------------------------------------------------
     decode #(
         .AWIDTH(AWIDTH),
         .DWIDTH(DWIDTH)
     ) u_decode (
-        .clk(clk),                // input
-        .rst(reset),              // input (module uses 'rst')
-        .insn_i(f_insn),          // input
-        .pc_i(f_pc),              // input
-
-        // outputs (all supplied)
+        .clk(clk),
+        .rst(rst),
+        .insn_i(f_insn),
+        .pc_i(f_pc),
         .pc_o(d_pc),
         .insn_o(d_insn),
         .opcode_o(d_opcode),
@@ -120,8 +119,7 @@ module pd2 #(
     );
 
     // ----------------------------------------------------
-    // Immediate generator (igen)
-    // Matches igen header: opcode_i, insn_i -> imm_o
+    // Immediate generator
     // ----------------------------------------------------
     igen #(
         .DWIDTH(DWIDTH)
@@ -133,7 +131,6 @@ module pd2 #(
 
     // ----------------------------------------------------
     // Control unit
-    // Matches control header exactly
     // ----------------------------------------------------
     control #(
         .DWIDTH(DWIDTH)
@@ -155,8 +152,7 @@ module pd2 #(
     );
 
     // ----------------------------------------------------
-    // Probes (same pattern as pd1)
-    // Keep macros exactly as in pd1 to pass the testbench checks
+    // Probes (required by testbench)
     // ----------------------------------------------------
     `define PROBE_ADDR      mem_addr
     `define PROBE_DATA_IN   mem_data_in

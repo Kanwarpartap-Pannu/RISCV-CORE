@@ -1,16 +1,14 @@
 `include "constants.svh"
 
 module decode #(
-    parameter int DWIDTH=32,
-    parameter int AWIDTH=32
+    parameter int DWIDTH = 32,
+    parameter int AWIDTH = 32
 )(
-	// inputs
-	input logic clk,
-	input logic rst,
-	input logic [DWIDTH - 1:0] insn_i,
-	input logic [DWIDTH - 1:0] pc_i,
+    input  logic clk,
+    input  logic rst,
+    input  logic [DWIDTH-1:0] insn_i,
+    input  logic [DWIDTH-1:0] pc_i,
 
-    // outputs
     output logic [AWIDTH-1:0] pc_o,
     output logic [DWIDTH-1:0] insn_o,
     output logic [6:0] opcode_o,
@@ -24,45 +22,32 @@ module decode #(
 );
 
     // ------------------------------------------------------------------
-    // Register PC and instruction (pipeline latch)
+    // Pipeline latch: Register PC and Instruction
     // ------------------------------------------------------------------
-    // pc_i is DWIDTH wide per template; pc_o is AWIDTH wide. Handle both
-    // truncation and zero-extension safely based on parameters.
     always_ff @(posedge clk or posedge rst) begin
         if (rst) begin
             pc_o   <= '0;
             insn_o <= '0;
         end else begin
-            // safe width conversion: if AWIDTH <= DWIDTH -> slice,
-            // else zero-extend MSBs.
-            if (AWIDTH <= DWIDTH) begin
-                pc_o <= pc_i[AWIDTH-1:0];
-            end else begin
-                pc_o <= {{(AWIDTH-DWIDTH){1'b0}}, pc_i};
-            end
-
+            pc_o   <= pc_i;
             insn_o <= insn_i;
         end
     end
 
     // ------------------------------------------------------------------
-    // Field extraction (combinational from the registered instruction)
+    // Field extraction (combinational logic)
     // ------------------------------------------------------------------
-    // We extract from insn_o (the pipeline-registered instruction).
-    // All extractions are safe when DWIDTH == 32 (default).
-    assign opcode_o = insn_o[6:0];
-    assign rd_o     = insn_o[11:7];
-    assign funct3_o = insn_o[14:12];
-    assign rs1_o    = insn_o[19:15];
-    assign rs2_o    = insn_o[24:20];
-    assign funct7_o = insn_o[31:25];
-    assign shamt_o  = insn_o[24:20]; // shift amount (5 bits)
+    assign opcode_o = insn_o[6:0];       // [6:0]   opcode
+    assign rd_o     = insn_o[11:7];      // [11:7]  destination
+    assign funct3_o = insn_o[14:12];     // [14:12] funct3
+    assign rs1_o    = insn_o[19:15];     // [19:15] source 1
+    assign rs2_o    = insn_o[24:20];     // [24:20] source 2
+    assign funct7_o = insn_o[31:25];     // [31:25] funct7
+    assign shamt_o  = insn_o[24:20];     // [24:20] shift amount (for shift ops)
 
     // ------------------------------------------------------------------
-    // Immediate generation - use existing igen module so behavior matches
+    // Immediate Generation (through the provided igen module)
     // ------------------------------------------------------------------
-    // Connect the opcode extracted above and the registered instruction.
-    // imm_o is DWIDTH bits; igen produces 32-bit imm (DWIDTH default = 32).
     igen #(
         .DWIDTH(DWIDTH)
     ) u_igen (
