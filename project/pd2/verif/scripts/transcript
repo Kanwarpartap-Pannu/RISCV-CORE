@@ -1,26 +1,27 @@
 # vsim -suppress 3839 -c -do "/eecs/home/kanwarp/EECS-4201-project/project/pd2/verif/scripts/run.macro" /eecs/home/kanwarp/EECS-4201-project/project/pd2/work.top 
-# Start time: 14:36:45 on Oct 10,2025
+# Start time: 10:12:50 on Oct 12,2025
 # Loading sv_std.std
 # Loading /eecs/home/kanwarp/EECS-4201-project/project/pd2/work.top
 # Loading /eecs/home/kanwarp/EECS-4201-project/project/pd2/work.clockgen
 # Loading /eecs/home/kanwarp/EECS-4201-project/project/pd2/work.design_wrapper
 # Loading /eecs/home/kanwarp/EECS-4201-project/project/pd2/work.pd2_sv_unit
 # Loading /eecs/home/kanwarp/EECS-4201-project/project/pd2/work.pd2
-# Loading /eecs/home/kanwarp/EECS-4201-project/project/pd2/work.fetch
 # Loading /eecs/home/kanwarp/EECS-4201-project/project/pd2/work.memory
+# Loading /eecs/home/kanwarp/EECS-4201-project/project/pd2/work.fetch
 # Loading /eecs/home/kanwarp/EECS-4201-project/project/pd2/work.decode_sv_unit
 # Loading /eecs/home/kanwarp/EECS-4201-project/project/pd2/work.decode
 # Loading /eecs/home/kanwarp/EECS-4201-project/project/pd2/work.igen
 # Loading /eecs/home/kanwarp/EECS-4201-project/project/pd2/work.control_sv_unit
 # Loading /eecs/home/kanwarp/EECS-4201-project/project/pd2/work.control
+# ** Warning: (vsim-2685) [TFMPC] - Too few port connections for 'fetch1'.  Expected 4, found 3.
+#    Time: 0 ps  Iteration: 0  Instance: /top/dut/core/fetch1 File: /eecs/home/kanwarp/EECS-4201-project/project/pd2/design/code/pd2.sv Line: 78
+# ** Warning: (vsim-3722) /eecs/home/kanwarp/EECS-4201-project/project/pd2/design/code/pd2.sv(78): [TFMPC] - Missing connection for port 'insn_o'.
 # do /eecs/home/kanwarp/EECS-4201-project/project/pd2/verif/scripts/run.macro
 # IMEMORY: Loaded 127 32-bit words from /eecs/home/kanwarp/EECS-4201-project/project/pd2/verif/data/test1.x
 # ** Warning: (vsim-PLI-3407) Too many data words read on line 122 of file "/eecs/home/kanwarp/EECS-4201-project/project/pd2/verif/data/test1.pattern". (Current address [121], address range [0:120])    : /eecs/home/kanwarp/EECS-4201-project/project/pd2/verif/tests/pattern_check.h(4)
 #    Time: 0 ps  Iteration: 0  Region: /top/genblk3
-# D stage mismatch: expected PC=01000000, OPCODE=13, RD=02, RS1=02, RS2=00, FUNCT3=0, FUNCT7=00, IMM=ffffffd0, got PC=00000000, OPCODE=00, RD=00, RS1=00, RS2=00, FUNCT3=0, FUNCT7=00, IMM=00000000 
-# ** Fatal: Assertion error.
-#    Time: 12 ps  Scope: top.genblk3.tick_check File: /eecs/home/kanwarp/EECS-4201-project/project/pd2/verif/tests/pattern_check.h Line: 25
-# ** Note: $finish    : /eecs/home/kanwarp/EECS-4201-project/project/pd2/verif/tests/pattern_check.h(25)
-#    Time: 12 ps  Iteration: 1  Region: /top/genblk3
-# End time: 14:36:46 on Oct 10,2025, Elapsed time: 0:00:01
-# Errors: 1, Warnings: 1
+# Check passed
+# ** Note: $finish    : /eecs/home/kanwarp/EECS-4201-project/project/pd2/verif/tests/pattern_check.h(28)
+#    Time: 252 ps  Iteration: 1  Region: /top/genblk3
+# End time: 10:12:51 on Oct 12,2025, Elapsed time: 0:00:01
+# Errors: 0, Warnings: 3

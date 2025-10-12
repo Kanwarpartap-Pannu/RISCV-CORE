@@ -17,21 +17,6 @@ module pd2 #(
 
 
     // ----------------------------------------------------
-    // FETCH stage wires
-    // ----------------------------------------------------
-    logic [AWIDTH-1:0] f_pc;
-    logic [DWIDTH-1:0] f_insn;
-
-    // ----------------------------------------------------
-    // MEMORY interface wires
-    // ----------------------------------------------------
-    logic [AWIDTH-1:0] mem_addr;
-    logic [DWIDTH-1:0] mem_data_in;
-    logic [DWIDTH-1:0] mem_data_out;
-    logic              mem_read_en;
-    logic              mem_write_en;
-
-    // ----------------------------------------------------
     // DECODE stage outputs
     // ----------------------------------------------------
     logic [AWIDTH-1:0] d_pc;
@@ -58,42 +43,44 @@ module pd2 #(
     logic [1:0]        ctrl_wbsel;
     logic [3:0]        ctrl_alusel;
 
-    // ----------------------------------------------------
-    // Instantiate fetch
-    // ----------------------------------------------------
-    fetch #(
-        .AWIDTH(AWIDTH),
-        .DWIDTH(DWIDTH),
-        .BASEADDR(BASEADDR)
-    ) u_fetch (
+    // imemory signals
+    logic [DWIDTH - 1:0] addr_i;
+    logic [DWIDTH - 1:0] data_i;
+    logic write_en;
+    logic read_en;
+       
+    // Fetch signals
+    logic [DWIDTH - 1:0] f_pc;
+    logic [DWIDTH - 1:0] f_insn;
+       
+    memory #(
+        .AWIDTH(32),
+        .DWIDTH(32),
+        .BASE_ADDR(32'h01000000)
+       ) memory1 (
         .clk(clk),
         .rst(reset),
-        .pc_o(f_pc),
-        .insn_o(f_insn),
-        .mem_addr_o(mem_addr),
-        .mem_read_en_o(mem_read_en),
-        .mem_data_i(mem_data_out)
-    );
+        .addr_i(f_pc),
+        .data_i(data_i),
+        .read_en_i(read_en),
+        .write_en_i(write_en),
+        .data_o(f_insn)
+   );
+ 
+    assign read_en = 1'b1;
+    assign write_en = 1'b0;
 
-    // ----------------------------------------------------
-    // Memory
-    // ----------------------------------------------------
-    memory #(
-        .AWIDTH(AWIDTH),
-        .DWIDTH(DWIDTH),
-        .BASE_ADDR(BASEADDR)
-    ) u_memory (
+    // Fetch
+    fetch #(
+        .AWIDTH(32),
+        .DWIDTH(32),
+        .BASEADDR(32'h01000000)
+    ) fetch1 (
         .clk(clk),
-        .rst(rst),
-        .addr_i(mem_addr),
-        .data_i(mem_data_in),
-        .read_en_i(mem_read_en),
-        .write_en_i(mem_write_en),
-        .data_o(mem_data_out)
+        .rst(reset),
+        .pc_o(f_pc)           
+        //.insn_o(f_insn)         
     );
-
-    assign mem_data_in  = '0;
-    assign mem_write_en = 1'b0;
 
     // ----------------------------------------------------
     // Decode stage
