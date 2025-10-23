@@ -28,9 +28,58 @@ module alu #(
     output logic brtaken_o
 );
 
-    /*
-     * Process definitions to be filled by
-     * student below...
-     */
+    // lower 5 bits used as shift amount for RV32
+    logic [4:0] shamt;
+
+    always_comb begin
+        shamt = rs2_i[4:0];
+        // defaults
+        res_o     = '0;
+        brtaken_o = 1'b0;
+
+        // ALU datapath: arithmetic / logical / shift ops selected by funct3/funct7
+        unique case (funct3_i)
+            3'b000: begin
+                // ADD / SUB (SUB indicated by funct7 == 7'b0100000)
+                if (funct7_i == 7'b0100000)
+                    res_o = rs1_i - rs2_i; // SUB
+                else
+                    res_o = rs1_i + rs2_i; // ADD (also used for load/store addr calc)
+            end
+
+            3'b001: res_o = rs1_i << shamt; // SLL
+
+            3'b010: // SLT (signed)
+                res_o = ($signed(rs1_i) < $signed(rs2_i)) ? 32'd1 : 32'd0;
+
+            3'b011: // SLTU (unsigned)
+                res_o = (rs1_i < rs2_i) ? 32'd1 : 32'd0;
+
+            3'b100: res_o = rs1_i ^ rs2_i; // XOR
+
+            3'b101: begin // SRL / SRA
+                if (funct7_i == 7'b0100000)
+                    res_o = $signed(rs1_i) >>> shamt; // SRA (arithmetic)
+                else
+                    res_o = rs1_i >> shamt;           // SRL (logical)
+            end
+
+            3'b110: res_o = rs1_i | rs2_i; // OR
+            3'b111: res_o = rs1_i & rs2_i; // AND
+
+            default: res_o = rs1_i + rs2_i;
+        endcase
+
+        // Branch comparison results (funct3 encodes branch type)
+        unique case (funct3_i)
+            3'b000: brtaken_o = (rs1_i == rs2_i);                   // BEQ
+            3'b001: brtaken_o = (rs1_i != rs2_i);                   // BNE
+            3'b100: brtaken_o = ($signed(rs1_i) < $signed(rs2_i));  // BLT
+            3'b101: brtaken_o = ($signed(rs1_i) >= $signed(rs2_i)); // BGE
+            3'b110: brtaken_o = (rs1_i < rs2_i);                    // BLTU
+            3'b111: brtaken_o = (rs1_i >= rs2_i);                   // BGEU
+            default: brtaken_o = 1'b0;
+        endcase
+    end
 
 endmodule : alu

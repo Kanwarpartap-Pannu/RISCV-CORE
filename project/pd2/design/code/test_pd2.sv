@@ -30,7 +30,6 @@ module test_pd2;
         reset = 0;
     end
 
-    // Optional: Monitor outputs
     initial begin
         $display("Time\tPC\tINSTRUCTION\tOPCODE\tRD\tRS1\tRS2\tFUNCT3\tFUNCT7\tIMM");
         $monitor("%0t\t%h\t%h\t%h\t%h\t%h\t%h\t%h\t%h\t%h",

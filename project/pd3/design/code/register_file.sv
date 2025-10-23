@@ -33,9 +33,41 @@
      output logic [DWIDTH-1:0] rs2data_o
  );
 
-    /*
-     * Process definitions to be filled by
-     * student below...
-     */
+    // 32 x DWIDTH register file. reg[0] hardwired to 0.
+    logic [DWIDTH-1:0] regs [0:31];
+    int i;
+
+    // Compute initial SP value if macros are available; provide safe default otherwise.
+`ifdef STACK_ADDR
+    localparam logic [DWIDTH-1:0] SP_INIT = `STACK_ADDR;
+`elsif LINE_COUNT
+    // If LINE_COUNT is defined (memory words), place SP at end of memory region (BASE addr + bytes).
+    // Note: BASE_ADDR may be a parameter elsewhere; fall back to 0x01000000 if not provided.
+`ifdef BASE_ADDR
+    localparam logic [DWIDTH-1:0] SP_INIT = BASE_ADDR + (`LINE_COUNT * (DWIDTH/8));
+`else
+    localparam logic [DWIDTH-1:0] SP_INIT = 32'h01000000 + (`LINE_COUNT * (DWIDTH/8));
+`endif
+`else
+    localparam logic [DWIDTH-1:0] SP_INIT = 32'h01000000;
+`endif
+
+    // Synchronous reset + write-back on rising clock.
+    always_ff @(posedge clk) begin
+        if (rst) begin
+            // clear registers, set stack pointer x2
+            for (i = 0; i < 32; i = i + 1)
+                regs[i] <= '0;
+            regs[2] <= SP_INIT; // x2 = stack pointer (stack grows down)
+        end else begin
+            if (regwren_i && (rd_i != 5'd0)) begin
+                regs[rd_i] <= datawb_i; // writeback (x0 is immutable)
+            end
+        end
+    end
+
+    // Combinational read ports (x0 reads as zero)
+    assign rs1data_o = (rs1_i == 5'd0) ? '0 : regs[rs1_i];
+    assign rs2data_o = (rs2_i == 5'd0) ? '0 : regs[rs2_i];
 
 endmodule : register_file

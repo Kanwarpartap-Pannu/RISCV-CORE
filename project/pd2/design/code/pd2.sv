@@ -12,13 +12,11 @@ module pd2 #(
     parameter int BASEADDR = 32'h01000000
 )(
     input  logic clk,
-    input  logic reset   // external connection (wrapper expects this)
+    input  logic reset   
 );
 
 
-    // ----------------------------------------------------
     // DECODE stage outputs
-    // ----------------------------------------------------
     logic [AWIDTH-1:0] d_pc;
     logic [DWIDTH-1:0] d_insn;
     logic [6:0]        d_opcode;
@@ -30,9 +28,7 @@ module pd2 #(
     logic [4:0]        d_shamt;
     logic [DWIDTH-1:0] d_imm;
 
-    // ----------------------------------------------------
     // CONTROL outputs
-    // ----------------------------------------------------
     logic              ctrl_pcsel;
     logic              ctrl_immsel;
     logic              ctrl_regwren;
@@ -82,9 +78,7 @@ module pd2 #(
         .insn_o(f_insn)         
     );
 
-    // ----------------------------------------------------
     // Decode stage
-    // ----------------------------------------------------
     decode #(
         .AWIDTH(AWIDTH),
         .DWIDTH(DWIDTH)
@@ -105,9 +99,7 @@ module pd2 #(
         .imm_o(d_imm)
     );
 
-    // ----------------------------------------------------
     // Immediate generator
-    // ----------------------------------------------------
     igen #(
         .DWIDTH(DWIDTH)
     ) u_igen (
@@ -116,9 +108,7 @@ module pd2 #(
         .imm_o(d_imm)
     );
 
-    // ----------------------------------------------------
     // Control unit
-    // ----------------------------------------------------
     control #(
         .DWIDTH(DWIDTH)
     ) u_control (
@@ -138,9 +128,7 @@ module pd2 #(
         .alusel_o(ctrl_alusel)
     );
 
-    // ----------------------------------------------------
     // Probes (required by testbench)
-    // ----------------------------------------------------
     `define PROBE_ADDR      mem_addr
     `define PROBE_DATA_IN   mem_data_in
     `define PROBE_DATA_OUT  mem_data_out
