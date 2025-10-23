@@ -46,9 +46,7 @@ module control #(
     output logic [3:0]        alusel_o
 );
 
-    // ----------------------------------------------------------
     // Opcode group definitions (RV32I base ISA)
-    // ----------------------------------------------------------
     localparam [6:0]
         OP_R      = 7'b0110011, // R-type
         OP_I      = 7'b0010011, // I-type arithmetic
@@ -60,9 +58,7 @@ module control #(
         OP_LUI    = 7'b0110111, // Load upper immediate
         OP_AUIPC  = 7'b0010111; // Add upper immediate to PC
 
-    // ----------------------------------------------------------
-    // ALU operation encodings (can match constants.svh if defined)
-    // ----------------------------------------------------------
+    // ALU operation encodings
     localparam [3:0]
         ALU_ADD = 4'd0,
         ALU_SUB = 4'd1,
@@ -75,9 +71,7 @@ module control #(
         ALU_SRA = 4'd8,
         ALU_NOP = 4'd15;
 
-    // ----------------------------------------------------------
     // Control signal generation
-    // ----------------------------------------------------------
     always_comb begin
         // Default safe values
         pcsel_o    = 1'b0;

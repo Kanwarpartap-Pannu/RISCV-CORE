@@ -1,5 +1,5 @@
 # vsim -suppress 3839 -c -do "/eecs/home/kanwarp/EECS-4201-project/project/pd2/verif/scripts/run.macro" /eecs/home/kanwarp/EECS-4201-project/project/pd2/work.top 
-# Start time: 10:12:50 on Oct 12,2025
+# Start time: 21:30:55 on Oct 12,2025
 # Loading sv_std.std
 # Loading /eecs/home/kanwarp/EECS-4201-project/project/pd2/work.top
 # Loading /eecs/home/kanwarp/EECS-4201-project/project/pd2/work.clockgen
@@ -13,15 +13,10 @@
 # Loading /eecs/home/kanwarp/EECS-4201-project/project/pd2/work.igen
 # Loading /eecs/home/kanwarp/EECS-4201-project/project/pd2/work.control_sv_unit
 # Loading /eecs/home/kanwarp/EECS-4201-project/project/pd2/work.control
-# ** Warning: (vsim-2685) [TFMPC] - Too few port connections for 'fetch1'.  Expected 4, found 3.
-#    Time: 0 ps  Iteration: 0  Instance: /top/dut/core/fetch1 File: /eecs/home/kanwarp/EECS-4201-project/project/pd2/design/code/pd2.sv Line: 78
-# ** Warning: (vsim-3722) /eecs/home/kanwarp/EECS-4201-project/project/pd2/design/code/pd2.sv(78): [TFMPC] - Missing connection for port 'insn_o'.
 # do /eecs/home/kanwarp/EECS-4201-project/project/pd2/verif/scripts/run.macro
-# IMEMORY: Loaded 127 32-bit words from /eecs/home/kanwarp/EECS-4201-project/project/pd2/verif/data/test1.x
-# ** Warning: (vsim-PLI-3407) Too many data words read on line 122 of file "/eecs/home/kanwarp/EECS-4201-project/project/pd2/verif/data/test1.pattern". (Current address [121], address range [0:120])    : /eecs/home/kanwarp/EECS-4201-project/project/pd2/verif/tests/pattern_check.h(4)
-#    Time: 0 ps  Iteration: 0  Region: /top/genblk3
+# IMEMORY: Loaded 51 32-bit words from /eecs/home/kanwarp/EECS-4201-project/project/pd2/verif/data/test3.x
 # Check passed
 # ** Note: $finish    : /eecs/home/kanwarp/EECS-4201-project/project/pd2/verif/tests/pattern_check.h(28)
-#    Time: 252 ps  Iteration: 1  Region: /top/genblk3
-# End time: 10:12:51 on Oct 12,2025, Elapsed time: 0:00:01
-# Errors: 0, Warnings: 3
+#    Time: 112 ps  Iteration: 1  Region: /top/genblk3
+# End time: 21:30:55 on Oct 12,2025, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0

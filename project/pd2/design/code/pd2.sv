@@ -78,8 +78,8 @@ module pd2 #(
     ) fetch1 (
         .clk(clk),
         .rst(reset),
-        .pc_o(f_pc)           
-        //.insn_o(f_insn)         
+        .pc_o(f_pc),           
+        .insn_o(f_insn)         
     );
 
     // ----------------------------------------------------
