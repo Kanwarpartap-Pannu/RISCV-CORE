@@ -29,11 +29,10 @@ module decode #(
     assign rs1_o    = insn_o[19:15];     // [19:15] source 1
 
 
-assign rd_o     = ((opcode_o == 7'h33) || (opcode_o == 7'h13) || (opcode_o == 7'h03) ||
-                   (opcode_o == 7'h37) || (opcode_o == 7'h17) || (opcode_o == 7'h6F)) ? insn_i[11:7] : 5'b0;
+assign rd_o = insn_i[11:7];  // always expose raw bits for pattern check //Modify decode fronm pd2
 
-assign rs2_o    = ((opcode_o == 7'h33) || (opcode_o == 7'h23) || (opcode_o == 7'h63)) ? insn_i[24:20] : 5'b0;
-assign funct7_o = (opcode_o == 7'h33) ? insn_i[31:25] : 7'b0;
+assign rs2_o    = insn_i[24:20]; //Modify decode from pd2
+assign funct7_o = insn_i[31:25]; //Modify decode from pd2
 assign shamt_o  = insn_i[24:20];
 
     assign pc_o   = pc_i;

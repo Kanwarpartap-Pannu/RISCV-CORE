@@ -112,8 +112,8 @@ module pd3 #(
     ) u_decode (
         .clk(clk),
         .rst(reset),
-        .insn_i(insn_f),
-        .pc_i(pc),
+        .insn_i(insn_f), //Fetches the instruction output
+        .pc_i(pc), //Fetches the PC
         .pc_o(pc_d),
         .insn_o(insn_d),
         .opcode_o(opcode_d),
@@ -144,7 +144,10 @@ module pd3 #(
     );
 
     // Register file
-    register_file #(.DWIDTH(DWIDTH)) u_rf (
+    register_file #(
+        .DWIDTH(DWIDTH),
+        .SP_INIT(32'h0110_0000)   // Explicitly set stack pointer initial value to avoid error faced 
+    ) u_rf (
         .clk(clk),
         .rst(reset),
         .rs1_i(rs1_d),
@@ -154,7 +157,7 @@ module pd3 #(
         .regwren_i(regwren_c),
         .rs1data_o(rs1_data),
         .rs2data_o(rs2_data)
-    );
+);
 
     // Operand selection: op2 = rs2 or imm depending on control.rs2sel (1 -> reg, 0 -> imm)
     logic [DWIDTH-1:0] op2;
@@ -162,6 +165,7 @@ module pd3 #(
 
     // ALU instance - uses funct3/funct7 coming from decode
     alu #(.DWIDTH(DWIDTH), .AWIDTH(AWIDTH)) u_alu (
+        .opcode_i(opcode_d),
         .pc_i(pc),
         .rs1_i(rs1_data),
         .rs2_i(op2),
@@ -237,7 +241,6 @@ module pd3 #(
         endcase
     end
 
-    // ----- Probe nets (must match probes.svh) -----
     // Fetch
     logic [AWIDTH-1:0] f_pc;
     logic [DWIDTH-1:0] f_insn;

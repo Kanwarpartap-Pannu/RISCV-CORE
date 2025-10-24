@@ -19,6 +19,7 @@ module alu #(
     parameter int DWIDTH=32,
     parameter int AWIDTH=32
 )(
+    input logic [6:0] opcode_i, //Distinguishes load/store 
     input logic [AWIDTH-1:0] pc_i,
     input logic [DWIDTH-1:0] rs1_i,
     input logic [DWIDTH-1:0] rs2_i,
@@ -38,14 +39,20 @@ module alu #(
         brtaken_o = 1'b0;
 
         // ALU datapath: arithmetic / logical / shift ops selected by funct3/funct7
-        unique case (funct3_i)
-            3'b000: begin
-                // ADD / SUB (SUB indicated by funct7 == 7'b0100000)
-                if (funct7_i == 7'b0100000)
-                    res_o = rs1_i - rs2_i; // SUB
-                else
-                    res_o = rs1_i + rs2_i; // ADD (also used for load/store addr calc)
-            end
+        if (opcode_i == 7'b0000011 || opcode_i == 7'b0100011) begin
+            // Load or Store: compute effective address
+            res_o = rs1_i + rs2_i; // (rs2_i will be imm for load/store)
+        end
+
+        // Arithmetic / Logical operations
+        else begin
+            unique case (funct3_i)
+                3'b000: begin
+                    if (funct7_i == 7'b0100000)
+                        res_o = rs1_i - rs2_i; // SUB
+                    else
+                        res_o = rs1_i + rs2_i; // ADD
+                end
 
             3'b001: res_o = rs1_i << shamt; // SLL
 
@@ -69,6 +76,7 @@ module alu #(
 
             default: res_o = rs1_i + rs2_i;
         endcase
+        end
 
         // Branch comparison results (funct3 encodes branch type)
         unique case (funct3_i)

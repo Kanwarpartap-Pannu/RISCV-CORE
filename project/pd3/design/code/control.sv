@@ -146,7 +146,7 @@ module control #(
                 regwren_o = 1'b0;
                 immsel_o  = 1'b1;
                 rs1sel_o  = 1'b1;
-                rs2sel_o  = 1'b1;
+                rs2sel_o  = 1'b0;
                 memwren_o = 1'b1;
                 alusel_o  = ALU_ADD;
             end

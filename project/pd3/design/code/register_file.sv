@@ -18,7 +18,9 @@
  */
 
  module register_file #(
-     parameter int DWIDTH=32
+     parameter DWIDTH = 32,
+     // PD3 stack pointer reset value coded at top instead 
+     parameter [31:0] SP_INIT = 32'h0100_0000
  )(
      // inputs
      input logic clk,
@@ -37,20 +39,21 @@
     logic [DWIDTH-1:0] regs [0:31];
     int i;
 
+//Removed below to test if it is overiding values from pd3 constant causing a stack pointer mismatch 
     // Compute initial SP value if macros are available; provide safe default otherwise.
-`ifdef STACK_ADDR
-    localparam logic [DWIDTH-1:0] SP_INIT = `STACK_ADDR;
-`elsif LINE_COUNT
+//`ifdef STACK_ADDR
+//    localparam logic [DWIDTH-1:0] SP_INIT = `STACK_ADDR;
+//`elsif LINE_COUNT
     // If LINE_COUNT is defined (memory words), place SP at end of memory region (BASE addr + bytes).
     // Note: BASE_ADDR may be a parameter elsewhere; fall back to 0x01000000 if not provided.
-`ifdef BASE_ADDR
-    localparam logic [DWIDTH-1:0] SP_INIT = BASE_ADDR + (`LINE_COUNT * (DWIDTH/8));
-`else
-    localparam logic [DWIDTH-1:0] SP_INIT = 32'h01000000 + (`LINE_COUNT * (DWIDTH/8));
-`endif
-`else
-    localparam logic [DWIDTH-1:0] SP_INIT = 32'h01000000;
-`endif
+//`ifdef BASE_ADDR
+   // localparam logic [DWIDTH-1:0] SP_INIT = BASE_ADDR + (`LINE_COUNT * (DWIDTH/8));
+//`else
+//    localparam logic [DWIDTH-1:0] SP_INIT = 32'h01000000 + (`LINE_COUNT * (DWIDTH/8));
+//`endif
+//`else
+  //  localparam logic [DWIDTH-1:0] SP_INIT = 32'h01100000;
+//`endif
 
     // Synchronous reset + write-back on rising clock.
     always_ff @(posedge clk) begin
