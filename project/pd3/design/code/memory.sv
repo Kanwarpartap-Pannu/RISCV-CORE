@@ -81,9 +81,9 @@ module memory #(
                 main_memory[address + 1] <= data_i[15:8];
                 main_memory[address + 2] <= data_i[23:16];
                 main_memory[address + 3] <= data_i[31:24];
-                $display("IMEMORY: Wrote 0x%08h to 0x%08h", data_i, addr_i);
+                //$display("IMEMORY: Wrote 0x%08h to 0x%08h", data_i, addr_i);
             end else begin
-                $display("IMEMORY: OOB write @0x%08h", addr_i);
+                //$display("IMEMORY: OOB write @0x%08h", addr_i);
             end
         end
  	end

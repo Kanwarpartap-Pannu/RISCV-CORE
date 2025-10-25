@@ -24,17 +24,13 @@ module decode #(
   
 
     // Field extraction (combinational logic)
-    assign opcode_o = insn_o[6:0];       // [6:0]   opcode
-    assign funct3_o = insn_o[14:12];     // [14:12] funct3
-    assign rs1_o    = insn_o[19:15];     // [19:15] source 1
-
-
-assign rd_o     = ((opcode_o == 7'h33) || (opcode_o == 7'h13) || (opcode_o == 7'h03) ||
-                   (opcode_o == 7'h37) || (opcode_o == 7'h17) || (opcode_o == 7'h6F)) ? insn_i[11:7] : 5'b0;
-
-assign rs2_o    = ((opcode_o == 7'h33) || (opcode_o == 7'h23) || (opcode_o == 7'h63)) ? insn_i[24:20] : 5'b0;
-assign funct7_o = (opcode_o == 7'h33) ? insn_i[31:25] : 7'b0;
-assign shamt_o  = insn_i[24:20];
+    assign opcode_o = insn_i[6:0];
+    assign rd_o     = insn_i[11:7];
+    assign funct3_o = insn_i[14:12];
+    assign rs1_o    = insn_i[19:15];
+    assign rs2_o    = insn_i[24:20];
+    assign funct7_o = insn_i[31:25];
+    assign shamt_o  = insn_i[24:20];  // alias of rs2 for shift instructions
 
     assign pc_o   = pc_i;
     assign insn_o = insn_i;

@@ -1,8 +1,8 @@
 /*
  * Module: register_file
  *
- * Description: Branch control logic. Only sets the branch control bits based on the
- * branch instruction
+ * Description: Register file implementation 32 32-bit RV32 registers. Ensure that the stack pointer register ('x2') is set such that the stack grows downwards (from high address to low address).
+
  *
  * Inputs:
  * 1) clk
@@ -33,40 +33,38 @@
      output logic [DWIDTH-1:0] rs2data_o
  );
 
-    // 32 x DWIDTH register file. reg[0] hardwired to 0.
-    logic [DWIDTH-1:0] regs [0:31];
-    int i;
+    /*
+     * Process definitions to be filled by
+     * student below...
+     */
 
-    // Compute initial SP value if macros are available; provide safe default otherwise.
-`ifdef STACK_ADDR
-    localparam logic [DWIDTH-1:0] SP_INIT = `STACK_ADDR;
-`elsif LINE_COUNT
-    // If LINE_COUNT is defined (memory words), place SP at end of memory region (BASE addr + bytes).
-    // Note: BASE_ADDR may be a parameter elsewhere; fall back to 0x01000000 if not provided.
-`ifdef BASE_ADDR
-    localparam logic [DWIDTH-1:0] SP_INIT = BASE_ADDR + (`LINE_COUNT * (DWIDTH/8));
-`else
-    localparam logic [DWIDTH-1:0] SP_INIT = 32'h01000000 + (`LINE_COUNT * (DWIDTH/8));
-`endif
-`else
-    localparam logic [DWIDTH-1:0] SP_INIT = 32'h01000000;
-`endif
+     // 32 registers, 32 bits each
+    logic [DWIDTH-1:0] regs [31:0];
 
-    // Synchronous reset + write-back on rising clock.
-    always_ff @(posedge clk) begin
+    // ==================================================
+    // RESET: clear all registers, initialize stack pointer
+    // ==================================================
+    always_ff @(posedge clk or posedge rst) begin
         if (rst) begin
-            // clear registers, set stack pointer x2
-            for (i = 0; i < 32; i = i + 1)
+            for (int i = 0; i < 32; i++)
                 regs[i] <= '0;
-            regs[2] <= SP_INIT; // x2 = stack pointer (stack grows down)
-        end else begin
+
+            // Initialize stack pointer (x2)
+            // Stack "grows downward" in memory, so we start high.
+            // Use some large address if known, or lab default.
+            regs[2] <= 32'h01100000;  // example top of stack
+        end
+        else begin
+            // Write-back stage: write to rd
             if (regwren_i && (rd_i != 5'd0)) begin
-                regs[rd_i] <= datawb_i; // writeback (x0 is immutable)
+                regs[rd_i] <= datawb_i;
             end
         end
     end
 
-    // Combinational read ports (x0 reads as zero)
+    // ==================================================
+    // Combinational reads for rs1 and rs2
+    // ==================================================
     assign rs1data_o = (rs1_i == 5'd0) ? '0 : regs[rs1_i];
     assign rs2data_o = (rs2_i == 5'd0) ? '0 : regs[rs2_i];
 

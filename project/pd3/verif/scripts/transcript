@@ -1,28 +1,41 @@
 # vsim -suppress 3839 -c -do "/eecs/home/kanwarp/EECS-4201-project/project/pd3/verif/scripts/run.macro" /eecs/home/kanwarp/EECS-4201-project/project/pd3/work.top 
-# Start time: 15:12:12 on Oct 23,2025
+# Start time: 15:08:50 on Oct 25,2025
 # Loading sv_std.std
 # Loading /eecs/home/kanwarp/EECS-4201-project/project/pd3/work.top
 # Loading /eecs/home/kanwarp/EECS-4201-project/project/pd3/work.clockgen
 # Loading /eecs/home/kanwarp/EECS-4201-project/project/pd3/work.design_wrapper
 # Loading /eecs/home/kanwarp/EECS-4201-project/project/pd3/work.pd3
 # Loading /eecs/home/kanwarp/EECS-4201-project/project/pd3/work.memory
+# Loading /eecs/home/kanwarp/EECS-4201-project/project/pd3/work.fetch
 # Loading /eecs/home/kanwarp/EECS-4201-project/project/pd3/work.decode
 # Loading /eecs/home/kanwarp/EECS-4201-project/project/pd3/work.igen
 # Loading /eecs/home/kanwarp/EECS-4201-project/project/pd3/work.control
-# Loading /eecs/home/kanwarp/EECS-4201-project/project/pd3/work.register_file
 # Loading /eecs/home/kanwarp/EECS-4201-project/project/pd3/work.alu
-# Loading /eecs/home/kanwarp/EECS-4201-project/project/pd3/work.branch_control
+# Loading /eecs/home/kanwarp/EECS-4201-project/project/pd3/work.register_file
 # do /eecs/home/kanwarp/EECS-4201-project/project/pd3/verif/scripts/run.macro
-# IMEMORY: Loaded 127 32-bit words from /eecs/home/kanwarp/EECS-4201-project/project/pd3/verif/data/test1.x
-# IMEMORY: Loaded 127 32-bit words from /eecs/home/kanwarp/EECS-4201-project/project/pd3/verif/data/test1.x
-# ** Warning: (vsim-PLI-3407) Too many data words read on line 122 of file "/eecs/home/kanwarp/EECS-4201-project/project/pd3/verif/data/test1.pattern". (Current address [121], address range [0:120])    : /eecs/home/kanwarp/EECS-4201-project/project/pd3/verif/tests/pattern_check.h(4)
+# IMEMORY: Loaded 39 32-bit words from /eecs/home/kanwarp/EECS-4201-project/project/pd3/verif/data/test2.x
+# ** Warning: (vsim-PLI-3407) Too many data words read on line 39 of file "/eecs/home/kanwarp/EECS-4201-project/project/pd3/verif/data/test2.pattern". (Current address [38], address range [0:37])    : /eecs/home/kanwarp/EECS-4201-project/project/pd3/verif/tests/pattern_check.h(4)
 #    Time: 0 ps  Iteration: 0  Region: /top/genblk3
-# D stage mismatch: expected PC=01000000, OPCODE=13, RD=02, RS1=02, RS2=10, FUNCT3=0, FUNCT7=7e, IMM=ffffffd0, got PC=01000000, OPCODE=13, RD=02, RS1=02, RS2=00, FUNCT3=0, FUNCT7=00, IMM=ffffffd0 
-# R stage mismatch: expected READ_RS1=02, READ_RS2=10, READ_RS1_DATA=01100000, READ_RS2_DATA=00000000, got READ_RS1=02, READ_RS2=00, READ_RS1_DATA=010001fc, READ_RS2_DATA=00000000
-# E stage mismatch: expected PC=01000000, ALU_RES=010fffd0, BR_TAKEN=0, got PC=01000000, ALU_RES=010001cc, BR_TAKEN=0
+# [0] ALU DEBUG: PC=xxxxxxxx RS1=xxxxxxxx RS2=xxxxxxxx RESULT=00000000
+# [0] ALU DEBUG: PC=xxxxxxxx RS1=xxxxxxxx RS2=00000000 RESULT=00000000
+# [3] ALU DEBUG: PC=01000000 RS1=01000000 RS2=00000000 RESULT=00000000
+# [3] ALU DEBUG: PC=01000000 RS1=01000000 RS2=00000000 RESULT=00000000
+# [3] ALU DEBUG: PC=01000000 RS1=01100000 RS2=ffffffe0 RESULT=00000000
+# [13] DEBUG: PC=01000000 OPCODE=0010011 IMM=ffffffe0 RS1=2 RS2=0
+# [13] ALU DEBUG: PC=01000004 RS1=010fffe0 RS2=ffffffe0 RESULT=00000000
+# [13] ALU DEBUG: PC=01000004 RS1=010fffe0 RS2=ffffffe0 RESULT=00000000
+# [13] ALU DEBUG: PC=01000004 RS1=010fffe0 RS2=0000001c RESULT=00000000
+# [15] DEBUG: PC=01000004 OPCODE=0100011 IMM=0000001c RS1=2 RS2=1
+# [15] ALU DEBUG: PC=01000008 RS1=010fffe0 RS2=0000001c RESULT=00000000
+# [15] ALU DEBUG: PC=01000008 RS1=00000000 RS2=0000001c RESULT=00000000
+# [15] ALU DEBUG: PC=01000008 RS1=00000000 RS2=00000003 RESULT=00000000
+# F stage mismatch: expected PC=01000008, INSN=00a00513, got PC=01000008, INSN=00300793
+# D stage mismatch: expected PC=01000008, OPCODE=13, RD=0a, RS1=00, RS2=0a, FUNCT3=0, FUNCT7=00, IMM=0000000a, got PC=01000008, OPCODE=13, RD=0f, RS1=00, RS2=03, FUNCT3=0, FUNCT7=00, IMM=00000003 
+# R stage mismatch: expected READ_RS1=00, READ_RS2=0a, READ_RS1_DATA=00000000, READ_RS2_DATA=00000000, got READ_RS1=00, READ_RS2=03, READ_RS1_DATA=00000000, READ_RS2_DATA=00000000
+# E stage mismatch: expected PC=01000008, ALU_RES=0000000a, BR_TAKEN=0, got PC=01000008, ALU_RES=00000003, BR_TAKEN=0
 # ** Fatal: Assertion error.
-#    Time: 12 ps  Scope: top.genblk3.tick_check File: /eecs/home/kanwarp/EECS-4201-project/project/pd3/verif/tests/pattern_check.h Line: 35
+#    Time: 16 ps  Scope: top.genblk3.tick_check File: /eecs/home/kanwarp/EECS-4201-project/project/pd3/verif/tests/pattern_check.h Line: 35
 # ** Note: $finish    : /eecs/home/kanwarp/EECS-4201-project/project/pd3/verif/tests/pattern_check.h(35)
-#    Time: 12 ps  Iteration: 1  Region: /top/genblk3
-# End time: 15:12:12 on Oct 23,2025, Elapsed time: 0:00:00
+#    Time: 16 ps  Iteration: 1  Region: /top/genblk3
+# End time: 15:08:51 on Oct 25,2025, Elapsed time: 0:00:01
 # Errors: 1, Warnings: 1

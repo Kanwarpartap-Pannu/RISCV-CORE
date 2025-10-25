@@ -69,6 +69,7 @@ module control #(
         ALU_SLL = 4'd6,
         ALU_SRL = 4'd7,
         ALU_SRA = 4'd8,
+        ALU_LUI = 4'd9,
         ALU_NOP = 4'd15;
 
     // Control signal generation
@@ -146,7 +147,7 @@ module control #(
                 regwren_o = 1'b0;
                 immsel_o  = 1'b1;
                 rs1sel_o  = 1'b1;
-                rs2sel_o  = 1'b1;
+                rs2sel_o  = 1'b0;
                 memwren_o = 1'b1;
                 alusel_o  = ALU_ADD;
             end
@@ -190,7 +191,7 @@ module control #(
                 rs1sel_o  = 1'b0;
                 rs2sel_o  = 1'b0;
                 wbsel_o   = 2'b00;
-                alusel_o  = ALU_ADD;
+                alusel_o  = ALU_LUI;
             end
 
             // -------------------- AUIPC --------------------
