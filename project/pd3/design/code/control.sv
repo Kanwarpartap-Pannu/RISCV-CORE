@@ -47,6 +47,7 @@ module control #(
 );
 
     // Opcode group definitions (RV32I base ISA)
+    // Constants.svh not working here, so redefining
     localparam [6:0]
         OP_R      = 7'b0110011, // R-type
         OP_I      = 7'b0010011, // I-type arithmetic

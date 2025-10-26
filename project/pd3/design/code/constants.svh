@@ -7,13 +7,12 @@
 `ifndef CONSTANTS_SVH_
 `define CONSTANTS_SVH_
 
-// ZERO macro
+// ZERO 
 `ifndef ZERO
 `define ZERO 32'd0
 `endif
 
-// Opcode group definitions (RV32I base ISA) as macros to avoid
-// duplicate-parameter issues across separate compilation units.
+// Opcode group definitions (RV32I base ISA) .
 `ifndef OP_R
 `define OP_R      7'b0110011
 `endif

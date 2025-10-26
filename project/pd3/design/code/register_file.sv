@@ -41,18 +41,15 @@
      // 32 registers, 32 bits each
     logic [DWIDTH-1:0] regs [31:0];
 
-    // ==================================================
     // RESET: clear all registers, initialize stack pointer
-    // ==================================================
     always_ff @(posedge clk or posedge rst) begin
         if (rst) begin
             for (int i = 0; i < 32; i++)
                 regs[i] <= '0;
 
             // Initialize stack pointer (x2)
-            // Stack "grows downward" in memory, so we start high.
-            // Use some large address if known, or lab default.
-            regs[2] <= 32'h01100000;  // example top of stack
+            // Stack "grows downward" in memory, so we start high
+            regs[2] <= 32'h01100000;  // top of stack
         end
         else begin
             // Write-back stage: write to rd
@@ -62,9 +59,7 @@
         end
     end
 
-    // ==================================================
     // Combinational reads for rs1 and rs2
-    // ==================================================
     assign rs1data_o = (rs1_i == 5'd0) ? '0 : regs[rs1_i];
     assign rs2data_o = (rs2_i == 5'd0) ? '0 : regs[rs2_i];
 

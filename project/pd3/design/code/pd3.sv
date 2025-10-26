@@ -15,7 +15,7 @@ module pd3 #(
     input logic reset
 );
 
-// DECODE stage outputs
+    // DECODE stage signals
     logic [AWIDTH-1:0] d_pc;
     logic [DWIDTH-1:0] d_insn;
     logic [6:0]        d_opcode;
@@ -27,7 +27,7 @@ module pd3 #(
     logic [4:0]        d_shamt;
     logic [DWIDTH-1:0] d_imm;
 
-    // CONTROL outputs
+    // CONTROL Signals
     logic              ctrl_pcsel;
     logic              ctrl_immsel;
     logic              ctrl_regwren;
@@ -63,7 +63,7 @@ module pd3 #(
     logic breq_o;
     logic brlt_o;
 
-
+    // Instruction Memory
     memory #(
         .AWIDTH(32),
         .DWIDTH(32),
@@ -77,7 +77,8 @@ module pd3 #(
         .write_en_i(write_en),
         .data_o(f_insn)
    );
- 
+
+    // Default memory signals
     assign read_en = 1'b1;
     assign write_en = 1'b0;
 
@@ -134,15 +135,11 @@ module pd3 #(
         .alusel_o(ctrl_alusel)
     );
 
+    // Select rs1 and rs2 inputs to ALU based on control signals
     assign rs1_i = (ctrl_rs1sel) ?  rs1data_o : d_pc;
     assign rs2_i = (ctrl_rs2sel) ?  rs2data_o : d_imm;
-    always_ff @(posedge clk) begin
-    if (!reset) begin
-        $display("[%0t] DEBUG: PC=%h OPCODE=%b IMM=%h RS1=%0d RS2=%0d", 
-                  $time, d_pc, d_opcode, d_imm, d_rs1, d_rs2);
-    end
-end
-
+    
+    // Branch control unit
     branch_control #(
         .DWIDTH(DWIDTH)
     ) u_branch_control (
@@ -155,25 +152,28 @@ end
     );
 
 
+    // Excute stage - ALU
     alu #(
         .DWIDTH(DWIDTH),
         .AWIDTH(AWIDTH)
     ) u_alu (
         .pc_i(d_pc),
-        .rs1_i(rs1_i), // to be connected
-        .rs2_i(rs2_i), // to be connected
+        .rs1_i(rs1_i), 
+        .rs2_i(rs2_i), 
         .funct3_i(d_funct3),
         .funct7_i(d_funct7),
         .opcode_i(d_opcode),
         .alusel_i(ctrl_alusel),
         .eq(breq_o),
         .lt(brlt_o),
-        .res_o(alu_res),      // to be connected
-        .brtaken_o(br_taken)   // to be connected
+        .res_o(alu_res),      
+        .brtaken_o(br_taken)   
     );
 
-    assign datawb_i =  32'b0; // default
 
+    assign datawb_i =  32'b0; // default value for now
+
+    // Register File
     register_file #(
         .DWIDTH(DWIDTH)
     ) u_register_file (
@@ -182,10 +182,10 @@ end
         .rs1_i(d_rs1),
         .rs2_i(d_rs2),
         .rd_i(d_rd),
-        .datawb_i(datawb_i),      // to be connected
+        .datawb_i(datawb_i),      
         .regwren_i(ctrl_regwren),
-        .rs1data_o(rs1data_o),     // to be connected
-        .rs2data_o(rs2data_o)      // to be connected
+        .rs1data_o(rs1data_o),     
+        .rs2data_o(rs2data_o)      
     );
 
 
