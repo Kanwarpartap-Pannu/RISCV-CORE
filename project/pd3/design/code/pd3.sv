@@ -59,6 +59,10 @@ module pd3 #(
     logic [DWIDTH - 1:0] rs1data_o;
     logic [DWIDTH - 1:0] rs2data_o;
 
+    //branch control signals
+    logic breq_o;
+    logic brlt_o;
+
 
     memory #(
         .AWIDTH(32),
@@ -139,6 +143,17 @@ module pd3 #(
     end
 end
 
+    branch_control #(
+        .DWIDTH(DWIDTH)
+    ) u_branch_control (
+        .opcode_i(d_opcode),
+        .funct3_i(d_funct3),
+        .rs1_i(rs1data_o), // from register file becuase
+        .rs2_i(rs2data_o), // rs1_i and rs2_i will be muxed to select pc and imm rather than register data
+        .breq_o(breq_o),
+        .brlt_o(brlt_o)
+    );
+
 
     alu #(
         .DWIDTH(DWIDTH),
@@ -151,14 +166,13 @@ end
         .funct7_i(d_funct7),
         .opcode_i(d_opcode),
         .alusel_i(ctrl_alusel),
+        .eq(breq_o),
+        .lt(brlt_o),
         .res_o(alu_res),      // to be connected
         .brtaken_o(br_taken)   // to be connected
     );
 
-    assign datawb_i = (ctrl_wbsel == 2'b00) ? alu_res :
-                       (ctrl_wbsel == 2'b01) ? f_insn :    // from memory
-                       (ctrl_wbsel == 2'b10) ? (d_pc + 4) :
-                       32'b0; // default
+    assign datawb_i =  32'b0; // default
 
     register_file #(
         .DWIDTH(DWIDTH)

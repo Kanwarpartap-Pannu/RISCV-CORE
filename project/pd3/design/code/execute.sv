@@ -19,6 +19,8 @@ module alu #(
     input  logic [6:0]        funct7_i,
     input  logic [6:0]        opcode_i,     // << optional, now supported
     input  logic [3:0]        alusel_i,     // from control
+    input  logic eq,
+    input  logic lt,
     output logic [DWIDTH-1:0] res_o,
     output logic              brtaken_o
 );
@@ -27,7 +29,6 @@ module alu #(
     // Internal signals
     // =====================================================
     logic signed [DWIDTH-1:0] s_rs1, s_rs2;
-    logic eq, lt, ltu;
 
     assign s_rs1 = rs1_i;
     assign s_rs2 = rs2_i;
@@ -39,11 +40,7 @@ module alu #(
     always_comb begin
         res_o     = '0;
         brtaken_o = 1'b0;
-
-        // Basic compare flags
-        eq  = (rs1_i == rs2_i);
-        lt  = (s_rs1 < s_rs2);
-        ltu = (rs1_i < rs2_i);
+        
         $display("[%0t] ALU DEBUG: PC=%h RS1=%h RS2=%h RESULT=%h", 
                   $time, pc_i, rs1_i, rs2_i, res_o);
         unique case (alusel_i)
@@ -56,7 +53,8 @@ module alu #(
             4'd6:  res_o = rs1_i << rs2_i[4:0];                      // SLL
             4'd7:  res_o = rs1_i >> rs2_i[4:0];                      // SRL
             4'd8:  res_o = $signed(rs1_i) >>> rs2_i[4:0];  
-            4'd9:  res_o = rs2_i;  // LUI: output immediate directly          // SRA
+            4'd9:  res_o = rs2_i;  // LUI: output immediate directly 
+            4'd10: res_o = rs1_i + rs2_i;         // Brnach target address calculation
             4'd15: res_o = 32'd0;                                    // NOP
             default: res_o = 32'd0;
         endcase
@@ -68,8 +66,8 @@ module alu #(
                 3'b001: brtaken_o = !eq;       // BNE
                 3'b100: brtaken_o = lt;        // BLT
                 3'b101: brtaken_o = !lt;       // BGE
-                3'b110: brtaken_o = ltu;       // BLTU
-                3'b111: brtaken_o = !ltu;      // BGEU
+                3'b110: brtaken_o = lt;       // BLTU
+                3'b111: brtaken_o = !lt;      // BGEU
                 default: brtaken_o = 1'b0;
             endcase
         end

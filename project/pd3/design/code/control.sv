@@ -70,6 +70,7 @@ module control #(
         ALU_SRL = 4'd7,
         ALU_SRA = 4'd8,
         ALU_LUI = 4'd9,
+        ALU_BRANCH = 4'd10,
         ALU_NOP = 4'd15;
 
     // Control signal generation
@@ -156,10 +157,10 @@ module control #(
             OP_BRANCH: begin
                 regwren_o = 1'b0;
                 immsel_o  = 1'b1;
-                rs1sel_o  = 1'b1;
-                rs2sel_o  = 1'b1;
+                rs1sel_o  = 1'b0;
+                rs2sel_o  = 1'b0;
                 pcsel_o   = 1'b1;  // use branch target PC
-                alusel_o  = ALU_SUB; // for compare
+                alusel_o  = ALU_BRANCH; // for compare
             end
 
             // -------------------- JAL --------------------
