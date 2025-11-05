@@ -1,0 +1,7 @@
+# vsim -c code.pd3_tb -do "run" 
+# Start time: 12:31:07 on Oct 26,2025
+# ** Error (suppressible): (vsim-19) Failed to access library 'code' at "code".
+# No such file or directory. (errno = ENOENT)
+# Error loading design
+# End time: 12:31:07 on Oct 26,2025, Elapsed time: 0:00:00
+# Errors: 1, Warnings: 0
