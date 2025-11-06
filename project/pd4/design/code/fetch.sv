@@ -20,6 +20,11 @@ module fetch #(
 	// inputs
 	input logic clk,
 	input logic rst,
+
+    //New inputs for next PC
+    input  logic [AWIDTH-1:0] pc_next_i, 
+    input  logic              pc_next_valid_i,
+
 	// outputs	
 	output logic [AWIDTH - 1:0] pc_o,
     output logic [DWIDTH - 1:0] insn_o
@@ -35,7 +40,10 @@ module fetch #(
         if (rst) begin
             pc <= BASEADDR;
         end else begin
-            pc <= pc + 32'd4;
+                if (pc_next_valid_i)
+                pc <= pc_next_i; 
+            else
+                pc <= pc + 32'd4;
         end
     end
        

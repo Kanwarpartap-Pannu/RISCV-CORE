@@ -51,7 +51,7 @@ module pd4 #(
     logic read_en;
        
     // Fetch signals
-    logic [DWIDTH - 1:0] f_pc;
+    logic [AWIDTH - 1:0] f_pc;
     logic [DWIDTH - 1:0] f_insn;
 
     // Alu signals
@@ -74,12 +74,16 @@ module pd4 #(
     logic [DWIDTH - 1:0] next_pc_o;
     logic [DWIDTH - 1:0] memory_data_i;
 
+    // Next PC Controls 
+    logic [AWIDTH-1:0] pc_next;
+    logic              pc_next_valid;
+
     // Instruction Memory
     memory #(
         .AWIDTH(32),
         .DWIDTH(32),
         .BASE_ADDR(32'h01000000)
-       ) memory1 (
+       ) imem(
         .clk(clk),
         .rst(reset),
         .addr_i(f_pc),
@@ -101,6 +105,8 @@ module pd4 #(
     ) fetch1 (
         .clk(clk),
         .rst(reset),
+        .pc_next_i(pc_next),
+        .pc_next_valid_i(pc_next_valid),
         .pc_o(f_pc),           
         .insn_o(f_insn)         
     );
@@ -203,19 +209,107 @@ module pd4 #(
     // next we have our result which is correct for all stages so we need to mux and decide wether to write back alu result or memory data
     // we need to implement memory for data memory access stage which I think is easiest if we just have another memory instance for data memory
 
+    // Decode load/store size
+    logic [1:0] mem_size;       // 00=B, 01=H, 10=W
+    logic       mem_unsigned;   // 1 for LBU/LHU
+
+    always_comb begin
+    mem_size     = 2'b10; // default W
+    mem_unsigned = 1'b0;
+    unique case (d_opcode)
+        7'b0000011: begin // LOAD
+        unique case (d_funct3)
+            3'b000: begin mem_size=2'b00; mem_unsigned=1'b0; end // LB
+            3'b001: begin mem_size=2'b01; mem_unsigned=1'b0; end // LH
+            3'b010: begin mem_size=2'b10; mem_unsigned=1'b0; end // LW
+            3'b100: begin mem_size=2'b00; mem_unsigned=1'b1; end // LBU
+            3'b101: begin mem_size=2'b01; mem_unsigned=1'b1; end // LHU
+            default: ;
+        endcase
+        end
+        7'b0100011: begin // STORE
+        unique case (d_funct3)
+            3'b000: mem_size=2'b00; // SB
+            3'b001: mem_size=2'b01; // SH
+            3'b010: mem_size=2'b10; // SW
+            default: ;
+        endcase
+        end
+        default: ;
+    endcase
+    end
+
+    // Raw 32-bit word from DMEM
+    logic [31:0] rword;            // raw read word from DMEM
+    logic [31:0] dmem_wdata;       // RMW store value
+    logic [1:0]  a = alu_res[1:0]; // byte offset in the addressed word
+
+    logic [31:0] store_mask;
+    logic [31:0] store_value_shifted;
+
+    always_comb begin
+    store_mask = 32'b0;
+    store_value_shifted = 32'b0;
+    unique case (mem_size)
+        2'b00: begin // SB
+        store_mask = 32'h0000_00FF << (8*a);
+        store_value_shifted = {4{rs2data_o[7:0]}} << (8*a);
+        end
+        2'b01: begin // SH
+        store_mask = (a[1]==1'b0) ? 32'h0000_FFFF : 32'hFFFF_0000;
+        store_value_shifted = (a[1]==1'b0)
+                            ? {16'h0000, rs2data_o[15:0]}
+                            : {rs2data_o[15:0], 16'h0000};
+        end
+        2'b10: begin // SW
+        store_mask = 32'hFFFF_FFFF;
+        store_value_shifted = rs2data_o;
+        end
+        default: ;
+    endcase
+
+    // Read-Modify-Write combine for stores
+    dmem_wdata = (rword & ~store_mask) | (store_value_shifted & store_mask);
+    end
+
+    // Load extraction + sign/zero extension
+    logic [7:0]  byte_sel;
+    logic [15:0] half_sel;
+    logic [31:0] load_data_ext;   // goes to write-back on loads
+
+    always_comb begin
+    // pick byte by addr[1:0]
+    unique case (a)
+        2'b00: byte_sel = rword[7:0];
+        2'b01: byte_sel = rword[15:8];
+        2'b10: byte_sel = rword[23:16];
+        default: byte_sel = rword[31:24];
+    endcase
+    // pick half by addr[1]
+    half_sel = (a[1]==1'b0) ? rword[15:0] : rword[31:16];
+
+    unique case (mem_size)
+        2'b00: load_data_ext = mem_unsigned ? {24'b0, byte_sel}
+                                            : {{24{byte_sel[7]}}, byte_sel};    // LB/LBU
+        2'b01: load_data_ext = mem_unsigned ? {16'b0, half_sel}
+                                            : {{16{half_sel[15]}}, half_sel};   // LH/LHU
+        default: load_data_ext = rword; // LW
+    endcase
+    end
+
     // Program Data Memory
     memory #(
         .AWIDTH(32),
         .DWIDTH(32),
         .BASE_ADDR(32'h01000000)
-       ) memory1 (
+       ) dmem (
         .clk(clk),
         .rst(reset),
         .addr_i(alu_res),
-        .data_i(rs2data_o),
-        .read_en_i(read_en),
-        .write_en_i(write_en),
-        .data_o(memory_data_i) // 
+        .data_i(dmem_wdata),                       // masked store value (RMW)
+        .read_en_i (ctrl_memren | ctrl_memwren),   // Read on load or store for the RMW
+        .write_en_i(ctrl_memwren),                 // Control Store 
+        .data_o(rword)                             // raw 32-bit read 
    );
 
 
@@ -225,14 +319,28 @@ module pd4 #(
     ) u_writeback (
         .pc_i(d_pc),
         .alu_res_i(alu_res),
-        .memory_data_i(memory_data_i), 
+        .memory_data_i(load_data_ext), 
         .wbsel_i(ctrl_wbsel),
         .brtaken_i(br_taken),
         .writeback_data_o(writeback_data_o),
         .next_pc_o(next_pc_o)
     );
 
-
+    // Next PC logic 
+    always_comb begin
+        pc_next       = next_pc_o;
+        pc_next_valid = 1'b0;
+        if (d_opcode == 7'b1100111) begin // JALR
+            pc_next       = (rs1data_o + d_imm) & ~32'd1;
+            pc_next_valid = 1'b1;
+        end else if (d_opcode == 7'b1101111) begin // JAL
+            pc_next       = d_pc + d_imm;
+            pc_next_valid = 1'b1;
+        end else if (d_opcode == 7'b1100011 && br_taken) begin // BRANCH
+            pc_next       = d_pc + d_imm;
+            pc_next_valid = 1'b1;
+        end
+    end
 
     // Probes (required by testbench)
 
@@ -251,7 +359,7 @@ module pd4 #(
 
     `define PROBE_R_WRITE_ENABLE  ctrl_regwren  // ??
     `define PROBE_R_WRITE_DESTINATION  d_rd // ??
-    `define PROBE_R_WRITE_DATA datawb_i // ??
+    `define PROBE_R_WRITE_DATA writeback_data_o // ??
     `define PROBE_R_READ_RS1 d_rs1  // ??
     `define PROBE_R_READ_RS2 d_rs2  // ??
     `define PROBE_R_READ_RS1_DATA rs1data_o    // ??
@@ -261,14 +369,15 @@ module pd4 #(
     `define PROBE_E_ALU_RES  alu_res       // ??
     `define PROBE_E_BR_TAKEN  br_taken       // ??
 
-
+    `include "probes.svh"
+    
 // program termination logic
 reg is_program = 0;
 always_ff @(posedge clk) begin
-    if (data_out == 32'h00000073) $finish;  // directly terminate if see ecall
-    if (data_out == 32'h00008067) is_program = 1;  // if see ret instruction, it is simple program test
+    if (f_insn == 32'h00000073) $finish;  // directly terminate if see ecall
+    if (f_insn == 32'h00008067) is_program = 1;  // if see ret instruction, it is simple program test
     // [TODO] Change register_file_0.registers[2] to the appropriate x2 register based on your module instantiations...
-    if (is_program && (register_file_0.registers[2] == 32'h01000000 + `MEM_DEPTH)) $finish;
+    if (is_program && (u_register_file.regs[2] == 32'h01000000 + `MEM_DEPTH)) $finish;
 end
 
 endmodule : pd4
