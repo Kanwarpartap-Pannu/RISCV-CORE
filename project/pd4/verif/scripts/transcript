@@ -1,0 +1,538 @@
+# vsim -suppress 3839 -c -do "/eecs/home/kanwarp/EECS-4201-project/project/pd4/verif/scripts/run.macro" /eecs/home/kanwarp/EECS-4201-project/project/pd4/work.top 
+# Start time: 12:28:39 on Nov 08,2025
+# Loading sv_std.std
+# Loading /eecs/home/kanwarp/EECS-4201-project/project/pd4/work.top
+# Loading /eecs/home/kanwarp/EECS-4201-project/project/pd4/work.clockgen
+# Loading /eecs/home/kanwarp/EECS-4201-project/project/pd4/work.design_wrapper
+# Loading /eecs/home/kanwarp/EECS-4201-project/project/pd4/work.pd4
+# Loading /eecs/home/kanwarp/EECS-4201-project/project/pd4/work.fetch
+# Loading /eecs/home/kanwarp/EECS-4201-project/project/pd4/work.decode_sv_unit
+# Loading /eecs/home/kanwarp/EECS-4201-project/project/pd4/work.decode
+# Loading /eecs/home/kanwarp/EECS-4201-project/project/pd4/work.igen
+# Loading /eecs/home/kanwarp/EECS-4201-project/project/pd4/work.control_sv_unit
+# Loading /eecs/home/kanwarp/EECS-4201-project/project/pd4/work.control
+# Loading /eecs/home/kanwarp/EECS-4201-project/project/pd4/work.branch_control
+# Loading /eecs/home/kanwarp/EECS-4201-project/project/pd4/work.alu
+# Loading /eecs/home/kanwarp/EECS-4201-project/project/pd4/work.register_file
+# Loading /eecs/home/kanwarp/EECS-4201-project/project/pd4/work.memory
+# Loading /eecs/home/kanwarp/EECS-4201-project/project/pd4/work.writeback
+# do /eecs/home/kanwarp/EECS-4201-project/project/pd4/verif/scripts/run.macro
+# IMEMORY: Loaded 154 32-bit words from /eecs/home/kanwarp/EECS-4201-project/project/pd4/verif/data/test1.x
+# ** Warning: (vsim-PLI-3407) Too many data words read on line 1371 of file "/eecs/home/kanwarp/EECS-4201-project/project/pd4/verif/data/test1.pattern". (Current address [1370], address range [0:1369])    : /eecs/home/kanwarp/EECS-4201-project/project/pd4/verif/tests/pattern_check.h(4)
+#    Time: 0 ps  Iteration: 0  Region: /top/genblk3
+# [0] DECODE DEBUG: INS=xxxxxxxx 
+# [0] DECODE DEBUG: INS=00000000 
+# [3] DECODE DEBUG: INS=fd010113 
+# [13] READ
+#   addr_i      = 0x01000000 | addr_dat    = 0x010fffd0
+#   address     = 0x00000000 | address_dat = 0x00000530
+#   data_o      = 0xfd010113 | data_dat_o  = 0x00000000
+#   read_en_i   = 1      | read_en_dat  = 0
+#   write_en_i  = 0      | write_en_dat = 0
+# ------------------------------------------------------------
+# [13] DECODE DEBUG: INS=02112623 
+# [15] IMEMORY: Wrote 0x00000000 to 0x010ffffc
+# [15] WRITE @ PC(?)
+#   addr_i      = 0x01000004 | addr_dat    = 0x010ffffc
+#   address     = 0x00000004 | address_dat = 0x0000055c
+#   data_i      = 0xxxxxxxxx | data_dat    = 0x00000000
+#   write_en_i  = 0      | write_en_dat = 1
+#   read_en_i   = 1      | read_en_dat  = 0
+#   MEM_BYTES   = 2464 bytes (616 words)
+#   BASE_ADDR   = 0x01000000
+# ------------------------------------------------------------
+# [15] READ
+#   addr_i      = 0x01000004 | addr_dat    = 0x010ffffc
+#   address     = 0x00000004 | address_dat = 0x0000055c
+#   data_o      = 0x02112623 | data_dat_o  = 0x00000000
+#   read_en_i   = 1      | read_en_dat  = 0
+#   write_en_i  = 0      | write_en_dat = 1
+# ------------------------------------------------------------
+# [15] DECODE DEBUG: INS=010007b7 
+# [17] READ
+#   addr_i      = 0x01000008 | addr_dat    = 0x01000000
+#   address     = 0x00000008 | address_dat = 0x00000000
+#   data_o      = 0x010007b7 | data_dat_o  = 0xfd010113
+#   read_en_i   = 1      | read_en_dat  = 0
+#   write_en_i  = 0      | write_en_dat = 0
+# ------------------------------------------------------------
+# [17] DECODE DEBUG: INS=2487a883 
+# [19] READ
+#   addr_i      = 0x0100000c | addr_dat    = 0x01000248
+#   address     = 0x0000000c | address_dat = 0x00000248
+#   data_o      = 0x2487a883 | data_dat_o  = 0x0000000c
+#   read_en_i   = 1      | read_en_dat  = 1
+#   write_en_i  = 0      | write_en_dat = 0
+# ------------------------------------------------------------
+# [19] DECODE DEBUG: INS=24878713 
+# [21] READ
+#   addr_i      = 0x01000010 | addr_dat    = 0x01000248
+#   address     = 0x00000010 | address_dat = 0x00000248
+#   data_o      = 0x24878713 | data_dat_o  = 0x0000000c
+#   read_en_i   = 1      | read_en_dat  = 0
+#   write_en_i  = 0      | write_en_dat = 0
+# ------------------------------------------------------------
+# [21] DECODE DEBUG: INS=00472803 
+# [23] READ
+#   addr_i      = 0x01000014 | addr_dat    = 0x0100024c
+#   address     = 0x00000014 | address_dat = 0x0000024c
+#   data_o      = 0x00472803 | data_dat_o  = 0x00000009
+#   read_en_i   = 1      | read_en_dat  = 1
+#   write_en_i  = 0      | write_en_dat = 0
+# ------------------------------------------------------------
+# [23] DECODE DEBUG: INS=24878713 
+# [25] READ
+#   addr_i      = 0x01000018 | addr_dat    = 0x01000248
+#   address     = 0x00000018 | address_dat = 0x00000248
+#   data_o      = 0x24878713 | data_dat_o  = 0x0000000c
+#   read_en_i   = 1      | read_en_dat  = 0
+#   write_en_i  = 0      | write_en_dat = 0
+# ------------------------------------------------------------
+# [25] DECODE DEBUG: INS=00872503 
+# [27] READ
+#   addr_i      = 0x0100001c | addr_dat    = 0x01000250
+#   address     = 0x0000001c | address_dat = 0x00000250
+#   data_o      = 0x00872503 | data_dat_o  = 0x00000004
+#   read_en_i   = 1      | read_en_dat  = 1
+#   write_en_i  = 0      | write_en_dat = 0
+# ------------------------------------------------------------
+# [27] DECODE DEBUG: INS=24878713 
+# [29] READ
+#   addr_i      = 0x01000020 | addr_dat    = 0x01000248
+#   address     = 0x00000020 | address_dat = 0x00000248
+#   data_o      = 0x24878713 | data_dat_o  = 0x0000000c
+#   read_en_i   = 1      | read_en_dat  = 0
+#   write_en_i  = 0      | write_en_dat = 0
+# ------------------------------------------------------------
+# [29] DECODE DEBUG: INS=00c72583 
+# [31] READ
+#   addr_i      = 0x01000024 | addr_dat    = 0x01000254
+#   address     = 0x00000024 | address_dat = 0x00000254
+#   data_o      = 0x00c72583 | data_dat_o  = 0x00000063
+#   read_en_i   = 1      | read_en_dat  = 1
+#   write_en_i  = 0      | write_en_dat = 0
+# ------------------------------------------------------------
+# [31] DECODE DEBUG: INS=24878713 
+# [33] READ
+#   addr_i      = 0x01000028 | addr_dat    = 0x01000248
+#   address     = 0x00000028 | address_dat = 0x00000248
+#   data_o      = 0x24878713 | data_dat_o  = 0x0000000c
+#   read_en_i   = 1      | read_en_dat  = 0
+#   write_en_i  = 0      | write_en_dat = 0
+# ------------------------------------------------------------
+# [33] DECODE DEBUG: INS=01072603 
+# [35] READ
+#   addr_i      = 0x0100002c | addr_dat    = 0x01000258
+#   address     = 0x0000002c | address_dat = 0x00000258
+#   data_o      = 0x01072603 | data_dat_o  = 0x00000078
+#   read_en_i   = 1      | read_en_dat  = 1
+#   write_en_i  = 0      | write_en_dat = 0
+# ------------------------------------------------------------
+# [35] DECODE DEBUG: INS=24878713 
+# [37] READ
+#   addr_i      = 0x01000030 | addr_dat    = 0x01000248
+#   address     = 0x00000030 | address_dat = 0x00000248
+#   data_o      = 0x24878713 | data_dat_o  = 0x0000000c
+#   read_en_i   = 1      | read_en_dat  = 0
+#   write_en_i  = 0      | write_en_dat = 0
+# ------------------------------------------------------------
+# [37] DECODE DEBUG: INS=01472683 
+# [39] READ
+#   addr_i      = 0x01000034 | addr_dat    = 0x0100025c
+#   address     = 0x00000034 | address_dat = 0x0000025c
+#   data_o      = 0x01472683 | data_dat_o  = 0x00000001
+#   read_en_i   = 1      | read_en_dat  = 1
+#   write_en_i  = 0      | write_en_dat = 0
+# ------------------------------------------------------------
+# [39] DECODE DEBUG: INS=24878713 
+# [41] READ
+#   addr_i      = 0x01000038 | addr_dat    = 0x01000248
+#   address     = 0x00000038 | address_dat = 0x00000248
+#   data_o      = 0x24878713 | data_dat_o  = 0x0000000c
+#   read_en_i   = 1      | read_en_dat  = 0
+#   write_en_i  = 0      | write_en_dat = 0
+# ------------------------------------------------------------
+# [41] DECODE DEBUG: INS=01872703 
+# [43] READ
+#   addr_i      = 0x0100003c | addr_dat    = 0x01000260
+#   address     = 0x0000003c | address_dat = 0x00000260
+#   data_o      = 0x01872703 | data_dat_o  = 0x00000003
+#   read_en_i   = 1      | read_en_dat  = 1
+#   write_en_i  = 0      | write_en_dat = 0
+# ------------------------------------------------------------
+# [43] DECODE DEBUG: INS=24878793 
+# [45] READ
+#   addr_i      = 0x01000040 | addr_dat    = 0x01000248
+#   address     = 0x00000040 | address_dat = 0x00000248
+#   data_o      = 0x24878793 | data_dat_o  = 0x0000000c
+#   read_en_i   = 1      | read_en_dat  = 0
+#   write_en_i  = 0      | write_en_dat = 0
+# ------------------------------------------------------------
+# [45] DECODE DEBUG: INS=01c7a783 
+# [47] READ
+#   addr_i      = 0x01000044 | addr_dat    = 0x01000264
+#   address     = 0x00000044 | address_dat = 0x00000264
+#   data_o      = 0x01c7a783 | data_dat_o  = 0x0000000a
+#   read_en_i   = 1      | read_en_dat  = 1
+#   write_en_i  = 0      | write_en_dat = 0
+# ------------------------------------------------------------
+# [47] DECODE DEBUG: INS=01112023 
+# [49] IMEMORY: Wrote 0x0000000c to 0x010fffd0
+# [49] WRITE @ PC(?)
+#   addr_i      = 0x01000048 | addr_dat    = 0x010fffd0
+#   address     = 0x00000048 | address_dat = 0x00000530
+#   data_i      = 0xxxxxxxxx | data_dat    = 0x0000000c
+#   write_en_i  = 0      | write_en_dat = 1
+#   read_en_i   = 1      | read_en_dat  = 0
+#   MEM_BYTES   = 2464 bytes (616 words)
+#   BASE_ADDR   = 0x01000000
+# ------------------------------------------------------------
+# [49] READ
+#   addr_i      = 0x01000048 | addr_dat    = 0x010fffd0
+#   address     = 0x00000048 | address_dat = 0x00000530
+#   data_o      = 0x01112023 | data_dat_o  = 0x00000000
+#   read_en_i   = 1      | read_en_dat  = 0
+#   write_en_i  = 0      | write_en_dat = 1
+# ------------------------------------------------------------
+# [49] DECODE DEBUG: INS=01012223 
+# [51] IMEMORY: Wrote 0x00000009 to 0x010fffd4
+# [51] WRITE @ PC(?)
+#   addr_i      = 0x0100004c | addr_dat    = 0x010fffd4
+#   address     = 0x0000004c | address_dat = 0x00000534
+#   data_i      = 0xxxxxxxxx | data_dat    = 0x00000009
+#   write_en_i  = 0      | write_en_dat = 1
+#   read_en_i   = 1      | read_en_dat  = 0
+#   MEM_BYTES   = 2464 bytes (616 words)
+#   BASE_ADDR   = 0x01000000
+# ------------------------------------------------------------
+# [51] READ
+#   addr_i      = 0x0100004c | addr_dat    = 0x010fffd4
+#   address     = 0x0000004c | address_dat = 0x00000534
+#   data_o      = 0x01012223 | data_dat_o  = 0x00000000
+#   read_en_i   = 1      | read_en_dat  = 0
+#   write_en_i  = 0      | write_en_dat = 1
+# ------------------------------------------------------------
+# [51] DECODE DEBUG: INS=00a12423 
+# [53] IMEMORY: Wrote 0x00000004 to 0x010fffd8
+# [53] WRITE @ PC(?)
+#   addr_i      = 0x01000050 | addr_dat    = 0x010fffd8
+#   address     = 0x00000050 | address_dat = 0x00000538
+#   data_i      = 0xxxxxxxxx | data_dat    = 0x00000004
+#   write_en_i  = 0      | write_en_dat = 1
+#   read_en_i   = 1      | read_en_dat  = 0
+#   MEM_BYTES   = 2464 bytes (616 words)
+#   BASE_ADDR   = 0x01000000
+# ------------------------------------------------------------
+# [53] READ
+#   addr_i      = 0x01000050 | addr_dat    = 0x010fffd8
+#   address     = 0x00000050 | address_dat = 0x00000538
+#   data_o      = 0x00a12423 | data_dat_o  = 0x00000000
+#   read_en_i   = 1      | read_en_dat  = 0
+#   write_en_i  = 0      | write_en_dat = 1
+# ------------------------------------------------------------
+# [53] DECODE DEBUG: INS=00b12623 
+# [55] IMEMORY: Wrote 0x00000063 to 0x010fffdc
+# [55] WRITE @ PC(?)
+#   addr_i      = 0x01000054 | addr_dat    = 0x010fffdc
+#   address     = 0x00000054 | address_dat = 0x0000053c
+#   data_i      = 0xxxxxxxxx | data_dat    = 0x00000063
+#   write_en_i  = 0      | write_en_dat = 1
+#   read_en_i   = 1      | read_en_dat  = 0
+#   MEM_BYTES   = 2464 bytes (616 words)
+#   BASE_ADDR   = 0x01000000
+# ------------------------------------------------------------
+# [55] READ
+#   addr_i      = 0x01000054 | addr_dat    = 0x010fffdc
+#   address     = 0x00000054 | address_dat = 0x0000053c
+#   data_o      = 0x00b12623 | data_dat_o  = 0x00000000
+#   read_en_i   = 1      | read_en_dat  = 0
+#   write_en_i  = 0      | write_en_dat = 1
+# ------------------------------------------------------------
+# [55] DECODE DEBUG: INS=00c12823 
+# [57] IMEMORY: Wrote 0x00000078 to 0x010fffe0
+# [57] WRITE @ PC(?)
+#   addr_i      = 0x01000058 | addr_dat    = 0x010fffe0
+#   address     = 0x00000058 | address_dat = 0x00000540
+#   data_i      = 0xxxxxxxxx | data_dat    = 0x00000078
+#   write_en_i  = 0      | write_en_dat = 1
+#   read_en_i   = 1      | read_en_dat  = 0
+#   MEM_BYTES   = 2464 bytes (616 words)
+#   BASE_ADDR   = 0x01000000
+# ------------------------------------------------------------
+# [57] READ
+#   addr_i      = 0x01000058 | addr_dat    = 0x010fffe0
+#   address     = 0x00000058 | address_dat = 0x00000540
+#   data_o      = 0x00c12823 | data_dat_o  = 0x00000000
+#   read_en_i   = 1      | read_en_dat  = 0
+#   write_en_i  = 0      | write_en_dat = 1
+# ------------------------------------------------------------
+# [57] DECODE DEBUG: INS=00d12a23 
+# [59] IMEMORY: Wrote 0x00000001 to 0x010fffe4
+# [59] WRITE @ PC(?)
+#   addr_i      = 0x0100005c | addr_dat    = 0x010fffe4
+#   address     = 0x0000005c | address_dat = 0x00000544
+#   data_i      = 0xxxxxxxxx | data_dat    = 0x00000001
+#   write_en_i  = 0      | write_en_dat = 1
+#   read_en_i   = 1      | read_en_dat  = 0
+#   MEM_BYTES   = 2464 bytes (616 words)
+#   BASE_ADDR   = 0x01000000
+# ------------------------------------------------------------
+# [59] READ
+#   addr_i      = 0x0100005c | addr_dat    = 0x010fffe4
+#   address     = 0x0000005c | address_dat = 0x00000544
+#   data_o      = 0x00d12a23 | data_dat_o  = 0x00000000
+#   read_en_i   = 1      | read_en_dat  = 0
+#   write_en_i  = 0      | write_en_dat = 1
+# ------------------------------------------------------------
+# [59] DECODE DEBUG: INS=00e12c23 
+# [61] IMEMORY: Wrote 0x00000003 to 0x010fffe8
+# [61] WRITE @ PC(?)
+#   addr_i      = 0x01000060 | addr_dat    = 0x010fffe8
+#   address     = 0x00000060 | address_dat = 0x00000548
+#   data_i      = 0xxxxxxxxx | data_dat    = 0x00000003
+#   write_en_i  = 0      | write_en_dat = 1
+#   read_en_i   = 1      | read_en_dat  = 0
+#   MEM_BYTES   = 2464 bytes (616 words)
+#   BASE_ADDR   = 0x01000000
+# ------------------------------------------------------------
+# [61] READ
+#   addr_i      = 0x01000060 | addr_dat    = 0x010fffe8
+#   address     = 0x00000060 | address_dat = 0x00000548
+#   data_o      = 0x00e12c23 | data_dat_o  = 0x00000000
+#   read_en_i   = 1      | read_en_dat  = 0
+#   write_en_i  = 0      | write_en_dat = 1
+# ------------------------------------------------------------
+# [61] DECODE DEBUG: INS=00f12e23 
+# [63] IMEMORY: Wrote 0x0000000a to 0x010fffec
+# [63] WRITE @ PC(?)
+#   addr_i      = 0x01000064 | addr_dat    = 0x010fffec
+#   address     = 0x00000064 | address_dat = 0x0000054c
+#   data_i      = 0xxxxxxxxx | data_dat    = 0x0000000a
+#   write_en_i  = 0      | write_en_dat = 1
+#   read_en_i   = 1      | read_en_dat  = 0
+#   MEM_BYTES   = 2464 bytes (616 words)
+#   BASE_ADDR   = 0x01000000
+# ------------------------------------------------------------
+# [63] READ
+#   addr_i      = 0x01000064 | addr_dat    = 0x010fffec
+#   address     = 0x00000064 | address_dat = 0x0000054c
+#   data_o      = 0x00f12e23 | data_dat_o  = 0x00000000
+#   read_en_i   = 1      | read_en_dat  = 0
+#   write_en_i  = 0      | write_en_dat = 1
+# ------------------------------------------------------------
+# [63] DECODE DEBUG: INS=00010793 
+# [65] READ
+#   addr_i      = 0x01000068 | addr_dat    = 0x010fffd0
+#   address     = 0x00000068 | address_dat = 0x00000530
+#   data_o      = 0x00010793 | data_dat_o  = 0x0000000c
+#   read_en_i   = 1      | read_en_dat  = 0
+#   write_en_i  = 0      | write_en_dat = 0
+# ------------------------------------------------------------
+# [65] DECODE DEBUG: INS=00800593 
+# [67] READ
+#   addr_i      = 0x0100006c | addr_dat    = 0x00000008
+#   address     = 0x0000006c | address_dat = 0x00000008
+#   data_o      = 0x00800593 | data_dat_o  = 0x010007b7
+#   read_en_i   = 1      | read_en_dat  = 0
+#   write_en_i  = 0      | write_en_dat = 0
+# ------------------------------------------------------------
+# [67] DECODE DEBUG: INS=00078513 
+# [69] READ
+#   addr_i      = 0x01000070 | addr_dat    = 0x010fffd0
+#   address     = 0x00000070 | address_dat = 0x00000530
+#   data_o      = 0x00078513 | data_dat_o  = 0x0000000c
+#   read_en_i   = 1      | read_en_dat  = 0
+#   write_en_i  = 0      | write_en_dat = 0
+# ------------------------------------------------------------
+# [69] DECODE DEBUG: INS=024000ef 
+# [71] READ
+#   addr_i      = 0x01000074 | addr_dat    = 0x01000098
+#   address     = 0x00000074 | address_dat = 0x00000098
+#   data_o      = 0x024000ef | data_dat_o  = 0xfe010113
+#   read_en_i   = 1      | read_en_dat  = 0
+#   write_en_i  = 0      | write_en_dat = 0
+# ------------------------------------------------------------
+# [71] DECODE DEBUG: INS=fe010113 
+# [73] READ
+#   addr_i      = 0x01000098 | addr_dat    = 0x010fffb0
+#   address     = 0x00000098 | address_dat = 0x00000510
+#   data_o      = 0xfe010113 | data_dat_o  = 0x00000000
+#   read_en_i   = 1      | read_en_dat  = 0
+#   write_en_i  = 0      | write_en_dat = 0
+# ------------------------------------------------------------
+# [73] DECODE DEBUG: INS=00a12623 
+# [75] IMEMORY: Wrote 0x010fffd0 to 0x010fffbc
+# [75] WRITE @ PC(?)
+#   addr_i      = 0x0100009c | addr_dat    = 0x010fffbc
+#   address     = 0x0000009c | address_dat = 0x0000051c
+#   data_i      = 0xxxxxxxxx | data_dat    = 0x010fffd0
+#   write_en_i  = 0      | write_en_dat = 1
+#   read_en_i   = 1      | read_en_dat  = 0
+#   MEM_BYTES   = 2464 bytes (616 words)
+#   BASE_ADDR   = 0x01000000
+# ------------------------------------------------------------
+# [75] READ
+#   addr_i      = 0x0100009c | addr_dat    = 0x010fffbc
+#   address     = 0x0000009c | address_dat = 0x0000051c
+#   data_o      = 0x00a12623 | data_dat_o  = 0x00000000
+#   read_en_i   = 1      | read_en_dat  = 0
+#   write_en_i  = 0      | write_en_dat = 1
+# ------------------------------------------------------------
+# [75] DECODE DEBUG: INS=00b12423 
+# [77] IMEMORY: Wrote 0x00000008 to 0x010fffb8
+# [77] WRITE @ PC(?)
+#   addr_i      = 0x010000a0 | addr_dat    = 0x010fffb8
+#   address     = 0x000000a0 | address_dat = 0x00000518
+#   data_i      = 0xxxxxxxxx | data_dat    = 0x00000008
+#   write_en_i  = 0      | write_en_dat = 1
+#   read_en_i   = 1      | read_en_dat  = 0
+#   MEM_BYTES   = 2464 bytes (616 words)
+#   BASE_ADDR   = 0x01000000
+# ------------------------------------------------------------
+# [77] READ
+#   addr_i      = 0x010000a0 | addr_dat    = 0x010fffb8
+#   address     = 0x000000a0 | address_dat = 0x00000518
+#   data_o      = 0x00b12423 | data_dat_o  = 0x00000000
+#   read_en_i   = 1      | read_en_dat  = 0
+#   write_en_i  = 0      | write_en_dat = 1
+# ------------------------------------------------------------
+# [77] DECODE DEBUG: INS=00012e23 
+# [79] IMEMORY: Wrote 0x00000000 to 0x010fffcc
+# [79] WRITE @ PC(?)
+#   addr_i      = 0x010000a4 | addr_dat    = 0x010fffcc
+#   address     = 0x000000a4 | address_dat = 0x0000052c
+#   data_i      = 0xxxxxxxxx | data_dat    = 0x00000000
+#   write_en_i  = 0      | write_en_dat = 1
+#   read_en_i   = 1      | read_en_dat  = 0
+#   MEM_BYTES   = 2464 bytes (616 words)
+#   BASE_ADDR   = 0x01000000
+# ------------------------------------------------------------
+# [79] READ
+#   addr_i      = 0x010000a4 | addr_dat    = 0x010fffcc
+#   address     = 0x000000a4 | address_dat = 0x0000052c
+#   data_o      = 0x00012e23 | data_dat_o  = 0x00000000
+#   read_en_i   = 1      | read_en_dat  = 0
+#   write_en_i  = 0      | write_en_dat = 1
+# ------------------------------------------------------------
+# [79] DECODE DEBUG: INS=0e40006f 
+# [81] READ
+#   addr_i      = 0x010000a8 | addr_dat    = 0x0100018c
+#   address     = 0x000000a8 | address_dat = 0x0000018c
+#   data_o      = 0x0e40006f | data_dat_o  = 0x01c12703
+#   read_en_i   = 1      | read_en_dat  = 0
+#   write_en_i  = 0      | write_en_dat = 0
+# ------------------------------------------------------------
+# [81] DECODE DEBUG: INS=01c12703 
+# [83] READ
+#   addr_i      = 0x0100018c | addr_dat    = 0x010fffcc
+#   address     = 0x0000018c | address_dat = 0x0000052c
+#   data_o      = 0x01c12703 | data_dat_o  = 0x00000000
+#   read_en_i   = 1      | read_en_dat  = 1
+#   write_en_i  = 0      | write_en_dat = 0
+# ------------------------------------------------------------
+# [83] DECODE DEBUG: INS=00812783 
+# [85] READ
+#   addr_i      = 0x01000190 | addr_dat    = 0x010fffb8
+#   address     = 0x00000190 | address_dat = 0x00000518
+#   data_o      = 0x00812783 | data_dat_o  = 0x00000008
+#   read_en_i   = 1      | read_en_dat  = 1
+#   write_en_i  = 0      | write_en_dat = 0
+# ------------------------------------------------------------
+# [85] DECODE DEBUG: INS=f0f74ce3 
+# [87] READ
+#   addr_i      = 0x01000194 | addr_dat    = 0x010000ac
+#   address     = 0x00000194 | address_dat = 0x000000ac
+#   data_o      = 0xf0f74ce3 | data_dat_o  = 0x00100793
+#   read_en_i   = 1      | read_en_dat  = 0
+#   write_en_i  = 0      | write_en_dat = 0
+# ------------------------------------------------------------
+# [87] DECODE DEBUG: INS=00100793 
+# [89] READ
+#   addr_i      = 0x010000ac | addr_dat    = 0x00000001
+#   address     = 0x000000ac | address_dat = 0x00000001
+#   data_o      = 0x00100793 | data_dat_o  = 0x23fd0101
+#   read_en_i   = 1      | read_en_dat  = 0
+#   write_en_i  = 0      | write_en_dat = 0
+# ------------------------------------------------------------
+# [89] DECODE DEBUG: INS=00f12c23 
+# [91] IMEMORY: Wrote 0x00000001 to 0x010fffc8
+# [91] WRITE @ PC(?)
+#   addr_i      = 0x010000b0 | addr_dat    = 0x010fffc8
+#   address     = 0x000000b0 | address_dat = 0x00000528
+#   data_i      = 0xxxxxxxxx | data_dat    = 0x00000001
+#   write_en_i  = 0      | write_en_dat = 1
+#   read_en_i   = 1      | read_en_dat  = 0
+#   MEM_BYTES   = 2464 bytes (616 words)
+#   BASE_ADDR   = 0x01000000
+# ------------------------------------------------------------
+# [91] READ
+#   addr_i      = 0x010000b0 | addr_dat    = 0x010fffc8
+#   address     = 0x000000b0 | address_dat = 0x00000528
+#   data_o      = 0x00f12c23 | data_dat_o  = 0x00000000
+#   read_en_i   = 1      | read_en_dat  = 0
+#   write_en_i  = 0      | write_en_dat = 1
+# ------------------------------------------------------------
+# [91] DECODE DEBUG: INS=0b80006f 
+# [93] READ
+#   addr_i      = 0x010000b4 | addr_dat    = 0x0100016c
+#   address     = 0x000000b4 | address_dat = 0x0000016c
+#   data_o      = 0x0b80006f | data_dat_o  = 0x00812703
+#   read_en_i   = 1      | read_en_dat  = 0
+#   write_en_i  = 0      | write_en_dat = 0
+# ------------------------------------------------------------
+# [93] DECODE DEBUG: INS=00812703 
+# [95] READ
+#   addr_i      = 0x0100016c | addr_dat    = 0x010fffb8
+#   address     = 0x0000016c | address_dat = 0x00000518
+#   data_o      = 0x00812703 | data_dat_o  = 0x00000008
+#   read_en_i   = 1      | read_en_dat  = 1
+#   write_en_i  = 0      | write_en_dat = 0
+# ------------------------------------------------------------
+# [95] DECODE DEBUG: INS=01c12783 
+# [97] READ
+#   addr_i      = 0x01000170 | addr_dat    = 0x010fffcc
+#   address     = 0x00000170 | address_dat = 0x0000052c
+#   data_o      = 0x01c12783 | data_dat_o  = 0x00000000
+#   read_en_i   = 1      | read_en_dat  = 1
+#   write_en_i  = 0      | write_en_dat = 0
+# ------------------------------------------------------------
+# [97] DECODE DEBUG: INS=40f707b3 
+# [99] READ
+#   addr_i      = 0x01000174 | addr_dat    = 0x00000008
+#   address     = 0x00000174 | address_dat = 0x00000008
+#   data_o      = 0x40f707b3 | data_dat_o  = 0x010007b7
+#   read_en_i   = 1      | read_en_dat  = 0
+#   write_en_i  = 0      | write_en_dat = 0
+# ------------------------------------------------------------
+# [99] DECODE DEBUG: INS=01812703 
+# [101] READ
+#   addr_i      = 0x01000178 | addr_dat    = 0x010fffc8
+#   address     = 0x00000178 | address_dat = 0x00000528
+#   data_o      = 0x01812703 | data_dat_o  = 0x00000001
+#   read_en_i   = 1      | read_en_dat  = 1
+#   write_en_i  = 0      | write_en_dat = 0
+# ------------------------------------------------------------
+# [101] DECODE DEBUG: INS=f2f74ee3 
+# [103] READ
+#   addr_i      = 0x0100017c | addr_dat    = 0x010000b8
+#   address     = 0x0000017c | address_dat = 0x000000b8
+#   data_o      = 0xf2f74ee3 | data_dat_o  = 0x01812703
+#   read_en_i   = 1      | read_en_dat  = 0
+#   write_en_i  = 0      | write_en_dat = 0
+# ------------------------------------------------------------
+# [103] DECODE DEBUG: INS=01812703 
+# [105] READ
+#   addr_i      = 0x010000b8 | addr_dat    = 0x010fffc8
+#   address     = 0x000000b8 | address_dat = 0x00000528
+#   data_o      = 0x01812703 | data_dat_o  = 0x00000001
+#   read_en_i   = 1      | read_en_dat  = 1
+#   write_en_i  = 0      | write_en_dat = 0
+# ------------------------------------------------------------
+# [105] DECODE DEBUG: INS=400007b7 
+# M stage mismatch: expected PC=010000bc, ADDRESS=40000000, SIZE_ENCODED=0, DATA=fd010113, got PC=010000bc, ADDRESS=40000000, SIZE_ENCODED=0, DATA=00000000
+# ** Fatal: Assertion error.
+#    Time: 106 ps  Scope: top.genblk3.tick_check File: /eecs/home/kanwarp/EECS-4201-project/project/pd4/verif/tests/pattern_check.h Line: 45
+# ** Note: $finish    : /eecs/home/kanwarp/EECS-4201-project/project/pd4/verif/tests/pattern_check.h(45)
+#    Time: 106 ps  Iteration: 1  Region: /top/genblk3
+# End time: 12:28:40 on Nov 08,2025, Elapsed time: 0:00:01
+# Errors: 1, Warnings: 1

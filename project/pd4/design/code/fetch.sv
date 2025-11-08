@@ -20,6 +20,8 @@ module fetch #(
 	// inputs
 	input logic clk,
 	input logic rst,
+    input logic pcsel_o,
+    input logic [DWIDTH - 1:0] alu_res,
 	// outputs	
 	output logic [AWIDTH - 1:0] pc_o,
     output logic [DWIDTH - 1:0] insn_o
@@ -28,6 +30,8 @@ module fetch #(
      * Process definitions to be filled by
      * student below...
      */
+
+     // must be extended to include which pc to fetch from based on branch taken or not or jump instructions 
     
     logic [AWIDTH - 1:0] pc;
       
@@ -35,7 +39,11 @@ module fetch #(
         if (rst) begin
             pc <= BASEADDR;
         end else begin
-            pc <= pc + 32'd4;
+            unique case (pcsel_o)
+                1'b0: pc <= pc + 32'd4; // sequential
+                1'b1: pc <= alu_res;         // 
+                default: pc <= pc + 32'd4;
+            endcase
         end
     end
        

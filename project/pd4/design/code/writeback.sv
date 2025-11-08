@@ -38,7 +38,7 @@
     // ok essentially we have a mux that just selects between alu res
     // or memory data or pc+4 based on wbsel input 
     always_comb begin
-        unique case()
+        unique case(wbsel_i)
             2'd0: writeback_data_o = alu_res_i;        // ALU result
             2'd1: writeback_data_o = memory_data_i;    // Memory data
             2'd2: writeback_data_o = pc_i + 32'd4;         // PC + 4

@@ -1,0 +1,463 @@
+m255
+K4
+z2
+!s11f MIXED_VERSIONS
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+Z0 d/eecs/home/kanwarp/EECS-4201-project/project/pd4/verif/scripts
+valu
+Z1 DXx6 sv_std 3 std 0 22 VYECXdT12H8WgbUP_5Y6:3
+Z2 !s110 1762622919
+!i10b 1
+!s100 Q_anX8DI9PnEb>E1Sc7YA2
+Z3 !s11b Dg1SIo80bB@j0V0VzS_@n1
+I97BCH6;l^Y@8oz;H2HG1D0
+Z4 VDg1SIo80bB@j0V0VzS_@n1
+S1
+R0
+w1762369141
+8/eecs/home/kanwarp/EECS-4201-project/project/pd4/design/code/execute.sv
+F/eecs/home/kanwarp/EECS-4201-project/project/pd4/design/code/execute.sv
+!i122 148
+L0 18 60
+Z5 OV;L;2020.1;71
+r1
+!s85 0
+31
+Z6 !s108 1762622919.000000
+!s107 /eecs/home/kanwarp/EECS-4201-project/project/pd4/verif/tests/tasks.h|/eecs/home/kanwarp/EECS-4201-project/project/pd4/verif/tests/pattern_check.h|/eecs/home/kanwarp/EECS-4201-project/project/pd4/verif/tests/pattern_dump.h|/eecs/home/kanwarp/EECS-4201-project/project/pd4/verif/tests/trace_dump.h|/eecs/home/kanwarp/EECS-4201-project/project/pd4/verif/tests/fields.h|/eecs/home/kanwarp/EECS-4201-project/project/pd4/verif/tests/tracegen.v|/eecs/home/kanwarp/EECS-4201-project/project/pd4/design//probes.svh|/eecs/home/kanwarp/EECS-4201-project/project/pd4/verif/tests/test_pd.sv|/eecs/home/kanwarp/EECS-4201-project/project/pd4/design/design_wrapper.sv|/eecs/home/kanwarp/EECS-4201-project/project/pd4/verif/tests/clockgen.sv|/eecs/home/kanwarp/EECS-4201-project/project/pd4/design/code/pd4.sv|/eecs/home/kanwarp/EECS-4201-project/project/pd4/design/code/execute.sv|/eecs/home/kanwarp/EECS-4201-project/project/pd4/design/code/writeback.sv|/eecs/home/kanwarp/EECS-4201-project/project/pd4/design/code/register_file.sv|/eecs/home/kanwarp/EECS-4201-project/project/pd4/design/code/igen.sv|/eecs/home/kanwarp/EECS-4201-project/project/pd4/design/code/decode.sv|/eecs/home/kanwarp/EECS-4201-project/project/pd4/design/code/branch_control.sv|/eecs/home/kanwarp/EECS-4201-project/project/pd4/design/code/control.sv|/eecs/home/kanwarp/EECS-4201-project/project/pd4/design/code/fetch.sv|/eecs/home/kanwarp/EECS-4201-project/project/pd4/design/code/memory.sv|/eecs/home/kanwarp/EECS-4201-project/project/pd4/design/code/constants.svh|
+Z7 !s90 -work|/eecs/home/kanwarp/EECS-4201-project/project/pd4/work|-suppress|7061|-sv|+incdir+/eecs/home/kanwarp/EECS-4201-project/project/pd4/design/code|+incdir+/eecs/home/kanwarp/EECS-4201-project/project/pd4/design/|+incdir+/eecs/home/kanwarp/EECS-4201-project/project/pd4/verif/tests|+define+MEM_PATH="/eecs/home/kanwarp/EECS-4201-project/project/pd4/verif/data/test1.x"|+define+TEST_VECTOR="/eecs/home/kanwarp/EECS-4201-project/project/pd4/verif/data/test_vector.x"|+define+MEM_DEPTH=1048576|+define+GEN_TRACE=0|+define+TRACE_FILE="test1.trace"|+define+LINE_COUNT=154|+define+PATTERN_FILE="/eecs/home/kanwarp/EECS-4201-project/project/pd4/verif/data/test1.pattern"|+define+PATTERN_LINE_COUNT=1370|+define+PATTERN_DUMP_FILE="test1.dump"|+define+PATTERN_DUMP=0|+define+PATTERN_CHECK=1|+define+VCD_FILE="test1.vcd"|+define+TIMEOUT=50000|-stats=none|/eecs/home/kanwarp/EECS-4201-project/project/pd4/design/code/constants.svh|/eecs/home/kanwarp/EECS-4201-project/project/pd4/design/code/memory.sv|/eecs/home/kanwarp/EECS-4201-project/project/pd4/design/code/fetch.sv|/eecs/home/kanwarp/EECS-4201-project/project/pd4/design/code/control.sv|/eecs/home/kanwarp/EECS-4201-project/project/pd4/design/code/branch_control.sv|/eecs/home/kanwarp/EECS-4201-project/project/pd4/design/code/decode.sv|/eecs/home/kanwarp/EECS-4201-project/project/pd4/design/code/igen.sv|/eecs/home/kanwarp/EECS-4201-project/project/pd4/design/code/register_file.sv|/eecs/home/kanwarp/EECS-4201-project/project/pd4/design/code/writeback.sv|/eecs/home/kanwarp/EECS-4201-project/project/pd4/design/code/execute.sv|/eecs/home/kanwarp/EECS-4201-project/project/pd4/design/code/pd4.sv|/eecs/home/kanwarp/EECS-4201-project/project/pd4/verif/tests/clockgen.sv|/eecs/home/kanwarp/EECS-4201-project/project/pd4/design/design_wrapper.sv|/eecs/home/kanwarp/EECS-4201-project/project/pd4/verif/tests/test_pd.sv|
+!i113 1
+Z8 o-suppress 7061 -work /eecs/home/kanwarp/EECS-4201-project/project/pd4/work -sv
+Z9 !s92 -suppress 7061 -work /eecs/home/kanwarp/EECS-4201-project/project/pd4/work -sv +incdir+/eecs/home/kanwarp/EECS-4201-project/project/pd4/design/code +incdir+/eecs/home/kanwarp/EECS-4201-project/project/pd4/design/ +incdir+/eecs/home/kanwarp/EECS-4201-project/project/pd4/verif/tests +define+MEM_PATH=\"/eecs/home/kanwarp/EECS-4201-project/project/pd4/verif/data/test1.x\" +define+TEST_VECTOR=\"/eecs/home/kanwarp/EECS-4201-project/project/pd4/verif/data/test_vector.x\" +define+MEM_DEPTH=1048576 +define+GEN_TRACE=0 +define+TRACE_FILE=\"test1.trace\" +define+LINE_COUNT=154 +define+PATTERN_FILE=\"/eecs/home/kanwarp/EECS-4201-project/project/pd4/verif/data/test1.pattern\" +define+PATTERN_LINE_COUNT=1370 +define+PATTERN_DUMP_FILE=\"test1.dump\" +define+PATTERN_DUMP=0 +define+PATTERN_CHECK=1 +define+VCD_FILE=\"test1.vcd\" +define+TIMEOUT=50000
+Z10 tCvgOpt 0
+vbranch_control
+R1
+R2
+!i10b 1
+!s100 K13zC<nGHQ9B66;JC6?KJ3
+R3
+IDh65GM7[cma?ib;`h1o2D0
+R4
+S1
+R0
+w1762369128
+8/eecs/home/kanwarp/EECS-4201-project/project/pd4/design/code/branch_control.sv
+F/eecs/home/kanwarp/EECS-4201-project/project/pd4/design/code/branch_control.sv
+!i122 148
+L0 18 21
+R5
+r1
+!s85 0
+31
+R6
+Z11 !s107 /eecs/home/kanwarp/EECS-4201-project/project/pd4/verif/tests/tasks.h|/eecs/home/kanwarp/EECS-4201-project/project/pd4/verif/tests/pattern_check.h|/eecs/home/kanwarp/EECS-4201-project/project/pd4/verif/tests/pattern_dump.h|/eecs/home/kanwarp/EECS-4201-project/project/pd4/verif/tests/trace_dump.h|/eecs/home/kanwarp/EECS-4201-project/project/pd4/verif/tests/fields.h|/eecs/home/kanwarp/EECS-4201-project/project/pd4/verif/tests/tracegen.v|/eecs/home/kanwarp/EECS-4201-project/project/pd4/design//probes.svh|/eecs/home/kanwarp/EECS-4201-project/project/pd4/verif/tests/test_pd.sv|/eecs/home/kanwarp/EECS-4201-project/project/pd4/design/design_wrapper.sv|/eecs/home/kanwarp/EECS-4201-project/project/pd4/verif/tests/clockgen.sv|/eecs/home/kanwarp/EECS-4201-project/project/pd4/design/code/pd4.sv|/eecs/home/kanwarp/EECS-4201-project/project/pd4/design/code/execute.sv|/eecs/home/kanwarp/EECS-4201-project/project/pd4/design/code/writeback.sv|/eecs/home/kanwarp/EECS-4201-project/project/pd4/design/code/register_file.sv|/eecs/home/kanwarp/EECS-4201-project/project/pd4/design/code/igen.sv|/eecs/home/kanwarp/EECS-4201-project/project/pd4/design/code/decode.sv|/eecs/home/kanwarp/EECS-4201-project/project/pd4/design/code/branch_control.sv|/eecs/home/kanwarp/EECS-4201-project/project/pd4/design/code/control.sv|/eecs/home/kanwarp/EECS-4201-project/project/pd4/design/code/fetch.sv|/eecs/home/kanwarp/EECS-4201-project/project/pd4/design/code/memory.sv|/eecs/home/kanwarp/EECS-4201-project/project/pd4/design/code/constants.svh|
+R7
+!i113 1
+R8
+R9
+R10
+vclockgen
+R1
+R2
+!i10b 1
+!s100 =^J=`h?[0EDP><3HB`OR:0
+R3
+I6A:Ch?jnFAXZ`f5j;SMPk1
+R4
+S1
+R0
+Z12 w1757449005
+8/eecs/home/kanwarp/EECS-4201-project/project/pd4/verif/tests/clockgen.sv
+F/eecs/home/kanwarp/EECS-4201-project/project/pd4/verif/tests/clockgen.sv
+!i122 148
+L0 11 39
+R5
+r1
+!s85 0
+31
+R6
+R11
+R7
+!i113 1
+R8
+R9
+R10
+Xconstants_svh_unit
+R1
+R2
+Vm0<5JlMH677lbXmz<Z@_d0
+r1
+!s85 0
+!i10b 1
+!s100 iRabz?Lh^m@9aa2T78>?U1
+Im0<5JlMH677lbXmz<Z@_d0
+!i103 1
+S1
+R0
+R12
+8/eecs/home/kanwarp/EECS-4201-project/project/pd4/design/code/constants.svh
+Z13 F/eecs/home/kanwarp/EECS-4201-project/project/pd4/design/code/constants.svh
+!i122 148
+Z14 L0 10 0
+R5
+31
+R6
+R11
+R7
+!i113 1
+R8
+R9
+R10
+vcontrol
+R1
+DXx4 work 15 control_sv_unit 0 22 lAPeIF2:CNGPoKZV0D[Fn3
+R2
+R4
+r1
+!s85 0
+!i10b 1
+!s100 K[[IBSzneDI<^hGEnJR_z2
+IC>T1@FENiHa?P162]JKCY1
+!s105 control_sv_unit
+S1
+R0
+Z15 w1762372556
+Z16 8/eecs/home/kanwarp/EECS-4201-project/project/pd4/design/code/control.sv
+Z17 F/eecs/home/kanwarp/EECS-4201-project/project/pd4/design/code/control.sv
+!i122 148
+L0 28 189
+R5
+31
+R6
+R11
+R7
+!i113 1
+R8
+R9
+R10
+Xcontrol_sv_unit
+R1
+R2
+VlAPeIF2:CNGPoKZV0D[Fn3
+r1
+!s85 0
+!i10b 1
+!s100 PnIZ7o;O310;_?A2?8VYK2
+IlAPeIF2:CNGPoKZV0D[Fn3
+!i103 1
+S1
+R0
+R15
+R16
+R17
+R13
+!i122 148
+R14
+R5
+31
+R6
+R11
+R7
+!i113 1
+R8
+R9
+R10
+vdecode
+R1
+DXx4 work 14 decode_sv_unit 0 22 SezH<l8bFC[@5iD_4P`:R3
+R2
+R4
+r1
+!s85 0
+!i10b 1
+!s100 RG59CLY?aI7?8TG`N=ML13
+I2?W94A^4SXaQ122`=8n@k3
+!s105 decode_sv_unit
+S1
+R0
+Z18 w1762369122
+Z19 8/eecs/home/kanwarp/EECS-4201-project/project/pd4/design/code/decode.sv
+Z20 F/eecs/home/kanwarp/EECS-4201-project/project/pd4/design/code/decode.sv
+!i122 148
+L0 3 48
+R5
+31
+R6
+R11
+R7
+!i113 1
+R8
+R9
+R10
+Xdecode_sv_unit
+R1
+R2
+VSezH<l8bFC[@5iD_4P`:R3
+r1
+!s85 0
+!i10b 1
+!s100 jVM^l6jETZfman7kzWgff0
+ISezH<l8bFC[@5iD_4P`:R3
+!i103 1
+S1
+R0
+R18
+R19
+R20
+R13
+!i122 148
+R14
+R5
+31
+R6
+R11
+R7
+!i113 1
+R8
+R9
+R10
+vdesign_wrapper
+R1
+R2
+!i10b 1
+!s100 5cQDkom59MIRY^N[Yd`Nl1
+R3
+IS;]?j`d?An?khIAKVW4jQ1
+R4
+S1
+R0
+R12
+8/eecs/home/kanwarp/EECS-4201-project/project/pd4/design/design_wrapper.sv
+F/eecs/home/kanwarp/EECS-4201-project/project/pd4/design/design_wrapper.sv
+!i122 148
+L0 6 10
+R5
+r1
+!s85 0
+31
+R6
+R11
+R7
+!i113 1
+R8
+R9
+R10
+vfetch
+R1
+R2
+!i10b 1
+!s100 i`gSB2E3I?z]oDIfdazWT0
+R3
+I^J?LEk1@UE<nmmnLSgA^31
+R4
+S1
+R0
+w1762453210
+8/eecs/home/kanwarp/EECS-4201-project/project/pd4/design/code/fetch.sv
+F/eecs/home/kanwarp/EECS-4201-project/project/pd4/design/code/fetch.sv
+!i122 148
+L0 15 38
+R5
+r1
+!s85 0
+31
+R6
+R11
+R7
+!i113 1
+R8
+R9
+R10
+vigen
+R1
+R2
+!i10b 1
+!s100 <M5fFXi9fGgizS;U96?d_0
+R3
+IbUKO9>@:_Q9mo]j=iCbOH3
+R4
+S1
+R0
+w1762369173
+8/eecs/home/kanwarp/EECS-4201-project/project/pd4/design/code/igen.sv
+F/eecs/home/kanwarp/EECS-4201-project/project/pd4/design/code/igen.sv
+!i122 148
+L0 13 53
+R5
+r1
+!s85 0
+31
+R6
+R11
+R7
+!i113 1
+R8
+R9
+R10
+vmemory
+R1
+R2
+!i10b 1
+!s100 hEITCFblD6c2:ej^UCDX@1
+R3
+IT`A<@GBEd23?Wg`HRDCmg2
+R4
+S1
+R0
+w1762622879
+8/eecs/home/kanwarp/EECS-4201-project/project/pd4/design/code/memory.sv
+F/eecs/home/kanwarp/EECS-4201-project/project/pd4/design/code/memory.sv
+!i122 148
+L0 19 151
+R5
+r1
+!s85 0
+31
+R6
+R11
+R7
+!i113 1
+R8
+R9
+R10
+vmemory_data
+R1
+!s110 1762538445
+!i10b 1
+!s100 1N8PVb7:QgdW2=3oR2cJ=1
+R3
+Ihc_YLOiOUcmiL><`e0XhL0
+R4
+S1
+R0
+w1762538411
+8/eecs/home/kanwarp/EECS-4201-project/project/pd4/design/code/memory_data.sv
+F/eecs/home/kanwarp/EECS-4201-project/project/pd4/design/code/memory_data.sv
+!i122 49
+L0 19 74
+R5
+r1
+!s85 0
+31
+!s108 1762538444.000000
+!s107 /eecs/home/kanwarp/EECS-4201-project/project/pd4/verif/tests/tasks.h|/eecs/home/kanwarp/EECS-4201-project/project/pd4/verif/tests/pattern_check.h|/eecs/home/kanwarp/EECS-4201-project/project/pd4/verif/tests/pattern_dump.h|/eecs/home/kanwarp/EECS-4201-project/project/pd4/verif/tests/trace_dump.h|/eecs/home/kanwarp/EECS-4201-project/project/pd4/verif/tests/fields.h|/eecs/home/kanwarp/EECS-4201-project/project/pd4/verif/tests/tracegen.v|/eecs/home/kanwarp/EECS-4201-project/project/pd4/design//probes.svh|/eecs/home/kanwarp/EECS-4201-project/project/pd4/verif/tests/test_pd.sv|/eecs/home/kanwarp/EECS-4201-project/project/pd4/design/design_wrapper.sv|/eecs/home/kanwarp/EECS-4201-project/project/pd4/verif/tests/clockgen.sv|/eecs/home/kanwarp/EECS-4201-project/project/pd4/design/code/pd4.sv|/eecs/home/kanwarp/EECS-4201-project/project/pd4/design/code/execute.sv|/eecs/home/kanwarp/EECS-4201-project/project/pd4/design/code/writeback.sv|/eecs/home/kanwarp/EECS-4201-project/project/pd4/design/code/register_file.sv|/eecs/home/kanwarp/EECS-4201-project/project/pd4/design/code/igen.sv|/eecs/home/kanwarp/EECS-4201-project/project/pd4/design/code/decode.sv|/eecs/home/kanwarp/EECS-4201-project/project/pd4/design/code/branch_control.sv|/eecs/home/kanwarp/EECS-4201-project/project/pd4/design/code/control.sv|/eecs/home/kanwarp/EECS-4201-project/project/pd4/design/code/fetch.sv|/eecs/home/kanwarp/EECS-4201-project/project/pd4/design/code/memory_data.sv|/eecs/home/kanwarp/EECS-4201-project/project/pd4/design/code/memory.sv|/eecs/home/kanwarp/EECS-4201-project/project/pd4/design/code/constants.svh|
+!s90 -work|/eecs/home/kanwarp/EECS-4201-project/project/pd4/work|-suppress|7061|-sv|+incdir+/eecs/home/kanwarp/EECS-4201-project/project/pd4/design/code|+incdir+/eecs/home/kanwarp/EECS-4201-project/project/pd4/design/|+incdir+/eecs/home/kanwarp/EECS-4201-project/project/pd4/verif/tests|+define+MEM_PATH="/eecs/home/kanwarp/EECS-4201-project/project/pd4/verif/data/test1.x"|+define+TEST_VECTOR="/eecs/home/kanwarp/EECS-4201-project/project/pd4/verif/data/test_vector.x"|+define+MEM_DEPTH=1048576|+define+GEN_TRACE=0|+define+TRACE_FILE="test1.trace"|+define+LINE_COUNT=154|+define+PATTERN_FILE="/eecs/home/kanwarp/EECS-4201-project/project/pd4/verif/data/test1.pattern"|+define+PATTERN_LINE_COUNT=1370|+define+PATTERN_DUMP_FILE="test1.dump"|+define+PATTERN_DUMP=0|+define+PATTERN_CHECK=1|+define+VCD_FILE="test1.vcd"|+define+TIMEOUT=50000|-stats=none|/eecs/home/kanwarp/EECS-4201-project/project/pd4/design/code/constants.svh|/eecs/home/kanwarp/EECS-4201-project/project/pd4/design/code/memory.sv|/eecs/home/kanwarp/EECS-4201-project/project/pd4/design/code/memory_data.sv|/eecs/home/kanwarp/EECS-4201-project/project/pd4/design/code/fetch.sv|/eecs/home/kanwarp/EECS-4201-project/project/pd4/design/code/control.sv|/eecs/home/kanwarp/EECS-4201-project/project/pd4/design/code/branch_control.sv|/eecs/home/kanwarp/EECS-4201-project/project/pd4/design/code/decode.sv|/eecs/home/kanwarp/EECS-4201-project/project/pd4/design/code/igen.sv|/eecs/home/kanwarp/EECS-4201-project/project/pd4/design/code/register_file.sv|/eecs/home/kanwarp/EECS-4201-project/project/pd4/design/code/writeback.sv|/eecs/home/kanwarp/EECS-4201-project/project/pd4/design/code/execute.sv|/eecs/home/kanwarp/EECS-4201-project/project/pd4/design/code/pd4.sv|/eecs/home/kanwarp/EECS-4201-project/project/pd4/verif/tests/clockgen.sv|/eecs/home/kanwarp/EECS-4201-project/project/pd4/design/design_wrapper.sv|/eecs/home/kanwarp/EECS-4201-project/project/pd4/verif/tests/test_pd.sv|
+!i113 1
+R8
+R9
+R10
+vpd4
+R1
+R2
+!i10b 1
+!s100 FI0f@>[mceC47CKD:zn4A2
+R3
+IoO=h4K@kLH8]JXYNmj=Tz1
+R4
+S1
+R0
+w1762618267
+8/eecs/home/kanwarp/EECS-4201-project/project/pd4/design/code/pd4.sv
+F/eecs/home/kanwarp/EECS-4201-project/project/pd4/design/code/pd4.sv
+!i122 148
+L0 11 291
+R5
+r1
+!s85 0
+31
+R6
+R11
+R7
+!i113 1
+R8
+R9
+R10
+vregister_file
+R1
+R2
+!i10b 1
+!s100 6=@EAb0H9LS^=bIKnRb6_3
+R3
+I:4ahJZ@BZYgGYUY5RCkh@3
+R4
+S1
+R0
+w1762538403
+8/eecs/home/kanwarp/EECS-4201-project/project/pd4/design/code/register_file.sv
+F/eecs/home/kanwarp/EECS-4201-project/project/pd4/design/code/register_file.sv
+!i122 148
+L0 20 47
+R5
+r1
+!s85 0
+31
+R6
+R11
+R7
+!i113 1
+R8
+R9
+R10
+vtop
+R1
+R2
+!i10b 1
+!s100 oQdgFiHem8DPjdCS9U4330
+R3
+I0gmhTf6zkQ;gbNG]zKL6R2
+R4
+S1
+R0
+w1762368805
+8/eecs/home/kanwarp/EECS-4201-project/project/pd4/verif/tests/test_pd.sv
+F/eecs/home/kanwarp/EECS-4201-project/project/pd4/verif/tests/test_pd.sv
+F/eecs/home/kanwarp/EECS-4201-project/project/pd4/verif/tests/tracegen.v
+F/eecs/home/kanwarp/EECS-4201-project/project/pd4/verif/tests/fields.h
+F/eecs/home/kanwarp/EECS-4201-project/project/pd4/verif/tests/trace_dump.h
+F/eecs/home/kanwarp/EECS-4201-project/project/pd4/verif/tests/pattern_dump.h
+F/eecs/home/kanwarp/EECS-4201-project/project/pd4/verif/tests/pattern_check.h
+F/eecs/home/kanwarp/EECS-4201-project/project/pd4/verif/tests/tasks.h
+!i122 148
+L0 4 464
+R5
+r1
+!s85 0
+31
+R6
+R11
+R7
+!i113 1
+R8
+R9
+R10
+vwriteback
+R1
+R2
+!i10b 1
+!s100 gLc4CSekeZe=PMznBajQj0
+R3
+IZaaFfX8Fn;L:7:Yz?HFaT3
+R4
+S1
+R0
+w1762538401
+8/eecs/home/kanwarp/EECS-4201-project/project/pd4/design/code/writeback.sv
+F/eecs/home/kanwarp/EECS-4201-project/project/pd4/design/code/writeback.sv
+!i122 148
+L0 18 32
+R5
+r1
+!s85 0
+31
+R6
+R11
+R7
+!i113 1
+R8
+R9
+R10

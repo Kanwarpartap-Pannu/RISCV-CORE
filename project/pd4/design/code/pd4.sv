@@ -69,27 +69,17 @@ module pd4 #(
     logic breq_o;
     logic brlt_o;
 
+    // Memory data Signals
+    logic [1:0] size_encoded;
+
     // writeback signals
     logic [DWIDTH - 1:0] writeback_data_o;
     logic [DWIDTH - 1:0] next_pc_o;
     logic [DWIDTH - 1:0] memory_data_i;
 
-    // Instruction Memory
-    memory #(
-        .AWIDTH(32),
-        .DWIDTH(32),
-        .BASE_ADDR(32'h01000000)
-       ) memory1 (
-        .clk(clk),
-        .rst(reset),
-        .addr_i(f_pc),
-        .data_i(data_i),
-        .read_en_i(read_en),
-        .write_en_i(write_en),
-        .data_o(f_insn)
-   );
+    
 
-    // Default memory signals
+    // Default memory signals for instruction memory
     assign read_en = 1'b1;
     assign write_en = 1'b0;
 
@@ -101,6 +91,8 @@ module pd4 #(
     ) fetch1 (
         .clk(clk),
         .rst(reset),
+        .pcsel_o(ctrl_pcsel),
+        .alu_res(alu_res),
         .pc_o(f_pc),           
         .insn_o(f_insn)         
     );
@@ -203,7 +195,26 @@ module pd4 #(
     // next we have our result which is correct for all stages so we need to mux and decide wether to write back alu result or memory data
     // we need to implement memory for data memory access stage which I think is easiest if we just have another memory instance for data memory
 
-    // Program Data Memory
+    // we need mux here to get correct size encoded signal based on funct3
+    // Opcodes
+    localparam OPCODE_LOAD  = 7'b0000011;
+    localparam OPCODE_STORE = 7'b0100011;
+
+    always_comb begin
+        case (d_opcode)
+            OPCODE_LOAD, OPCODE_STORE: begin
+                case (d_funct3)
+                    3'b000, 3'b100: size_encoded = 2'b00; // byte (LB/LBU or SB)
+                    3'b001, 3'b101: size_encoded = 2'b01; // halfword (LH/LHU or SH)
+                    3'b010:         size_encoded = 2'b10; // word (LW or SW)
+                    default:        size_encoded = 2'b00; // default to word
+                endcase
+            end
+            default: size_encoded = 2'b00; // default word for others
+        endcase
+    end
+
+    // Instruction Memory
     memory #(
         .AWIDTH(32),
         .DWIDTH(32),
@@ -211,11 +222,17 @@ module pd4 #(
        ) memory1 (
         .clk(clk),
         .rst(reset),
-        .addr_i(alu_res),
-        .data_i(rs2data_o),
+        .addr_i(f_pc),
+        .addr_dat(alu_res),
+        .data_i(data_i),
+        .data_dat(rs2data_o),
         .read_en_i(read_en),
         .write_en_i(write_en),
-        .data_o(memory_data_i) // 
+        .read_en_dat(ctrl_memren),
+        .write_en_dat(ctrl_memwren),
+        .size_encoded(size_encoded), // new input for size encoding
+        .data_o(f_insn),
+        .data_dat_o(memory_data_i)
    );
 
 
@@ -261,14 +278,24 @@ module pd4 #(
     `define PROBE_E_ALU_RES  alu_res       // ??
     `define PROBE_E_BR_TAKEN  br_taken       // ??
 
+    `define PROBE_M_PC      d_pc          // ??
+    `define PROBE_M_ADDRESS        alu_res   // ??
+    `define PROBE_M_SIZE_ENCODED    size_encoded // ??
+    `define PROBE_M_DATA            memory_data_i  // ??
+
+    `define PROBE_W_PC            d_pc    // ??
+    `define PROBE_W_ENABLE         ctrl_regwren  // ??
+    `define PROBE_W_DESTINATION     d_rd  // ??
+    `define PROBE_W_DATA      writeback_data_o        // ??
+
 
 // program termination logic
 reg is_program = 0;
 always_ff @(posedge clk) begin
-    if (data_out == 32'h00000073) $finish;  // directly terminate if see ecall
-    if (data_out == 32'h00008067) is_program = 1;  // if see ret instruction, it is simple program test
+    if (f_insn == 32'h00000073) $finish;  // directly terminate if see ecall
+    if (f_insn == 32'h00008067) is_program = 1;  // if see ret instruction, it is simple program test
     // [TODO] Change register_file_0.registers[2] to the appropriate x2 register based on your module instantiations...
-    if (is_program && (register_file_0.registers[2] == 32'h01000000 + `MEM_DEPTH)) $finish;
+    if (is_program && (u_register_file.regs[2] == 32'h01000000 + `MEM_DEPTH)) $finish;
 end
 
 endmodule : pd4
