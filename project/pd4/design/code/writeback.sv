@@ -33,6 +33,7 @@
      * student below...
      */
 
+    assign next_pc_o = brtaken_i ? alu_res_i : pc_i;
 
      // Mux for write-back data selection we need to mux between alu result and memory data
     // ok essentially we have a mux that just selects between alu res
@@ -44,6 +45,7 @@
             2'd2: writeback_data_o = pc_i + 32'd4;         // PC + 4
             default: writeback_data_o = 0;
         endcase
+
 
     end
 endmodule : writeback

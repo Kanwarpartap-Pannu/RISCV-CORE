@@ -33,6 +33,7 @@ module control #(
     input  logic [6:0]        opcode_i,
     input  logic [6:0]        funct7_i,
     input  logic [2:0]        funct3_i,
+    input  logic [4:0]        br_taken,
 
     // outputs
     output logic              pcsel_o,
@@ -160,7 +161,7 @@ module control #(
                 immsel_o  = 1'b1;
                 rs1sel_o  = 1'b0;
                 rs2sel_o  = 1'b0;
-                pcsel_o   = 1'b1;  // use branch target PC
+                pcsel_o   = (br_taken) ? 1'b1 : 1'b0;  // use branch target PC
                 alusel_o  = ALU_BRANCH; // for compare
             end
 

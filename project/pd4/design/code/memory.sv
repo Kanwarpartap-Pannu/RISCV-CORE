@@ -95,11 +95,11 @@ module memory #(
                 data_dat_o = '0;
             end else if (read_en_i) begin
                 case (size_encoded)
-          2'b10: data_dat_o = {{24{main_memory[address_dat][7]}}, main_memory[address_dat]};
-          2'b01: data_dat_o = {{16{main_memory[address_dat + 1][7]}},
-                                main_memory[address_dat + 1],
-                                main_memory[address_dat]};
-          2'b00: data_dat_o = {
+        //   2'b00: data_dat_o = {{24{main_memory[address_dat][7]}}, main_memory[address_dat]};
+        //   2'b01: data_dat_o = {{16{main_memory[address_dat + 1][7]}},
+        //                         main_memory[address_dat + 1],
+        //                         main_memory[address_dat]};
+          2'b10, 2'b11, 2'b00, 2'b01: data_dat_o = {
                                 main_memory[address_dat + 3],
                                 main_memory[address_dat + 2],
                                 main_memory[address_dat + 1],

@@ -23,7 +23,7 @@
     `define PROBE_E_ALU_RES  alu_res       // ??
     `define PROBE_E_BR_TAKEN  br_taken       // ??
 
-    `define PROBE_M_PC      d_pc          // ??
+    `define PROBE_M_PC      d_pc         // ??
     `define PROBE_M_ADDRESS        alu_res   // ??
     `define PROBE_M_SIZE_ENCODED    size_encoded // ??
     `define PROBE_M_DATA            memory_data_i // ??

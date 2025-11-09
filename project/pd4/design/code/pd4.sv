@@ -127,6 +127,7 @@ module pd4 #(
         .opcode_i(d_opcode),
         .funct7_i(d_funct7),
         .funct3_i(d_funct3),
+        .br_taken(br_taken),
 
         .pcsel_o(ctrl_pcsel),
         .immsel_o(ctrl_immsel),
@@ -194,9 +195,9 @@ module pd4 #(
     );   
 
     // Ok up to here my pipeline handles fetch, decode, execute stages
-    // but fetch needs to know which pc to fetch from based on branch taken or not so it needs to be modifed to include that logic
+    // but fetch needs to know which pc to fetch from based on branch taken or JAL,JALr so it needs to be modifed to include that logic
     // next we have our result which is correct for all stages so we need to mux and decide wether to write back alu result or memory data
-    // we need to implement memory for data memory access stage which I think is easiest if we just have another memory instance for data memory
+    // we need to implement memory for data memory access stage which I think is easiest if we just add more ports to our existing memory module
 
     // we need mux here to get correct size encoded signal based on funct3
     // Opcodes
@@ -204,18 +205,15 @@ module pd4 #(
     localparam OPCODE_STORE = 7'b0100011;
 
     always_comb begin
-        case (d_opcode)
-            OPCODE_LOAD, OPCODE_STORE: begin
                 case (d_funct3)
-                    3'b000, 3'b100: size_encoded = 2'b00; // byte (LB/LBU or SB)
-                    3'b001, 3'b101: size_encoded = 2'b01; // halfword (LH/LHU or SH)
-                    3'b010:         size_encoded = 2'b10; // word (LW or SW)
+                    3'b000, 3'b100: size_encoded = 2'b00; // word 
+                    3'b001, 3'b101: size_encoded = 2'b01; // halfword 
+                    3'b010:         size_encoded = 2'b10; // byte 
+                    3'b111:         size_encoded = 2'b11; // doubleword
                     default:        size_encoded = 2'b00; // default to word
                 endcase
             end
-            default: size_encoded = 2'b00; // default word for others
-        endcase
-    end
+           
 
     // Instruction Memory
     memory #(
@@ -286,7 +284,7 @@ module pd4 #(
     `define PROBE_M_SIZE_ENCODED    size_encoded // ??
     `define PROBE_M_DATA            memory_data_i  // ??
 
-    `define PROBE_W_PC            d_pc    // ??
+    `define PROBE_W_PC            d_pc  // ??
     `define PROBE_W_ENABLE         ctrl_regwren  // ??
     `define PROBE_W_DESTINATION     d_rd  // ??
     `define PROBE_W_DATA      writeback_data_o        // ??
