@@ -1,5 +1,5 @@
 # vsim -suppress 3839 -c -do "/eecs/home/kanwarp/EECS-4201-project/project/pd4/verif/scripts/run.macro" /eecs/home/kanwarp/EECS-4201-project/project/pd4/work.top 
-# Start time: 12:56:06 on Nov 09,2025
+# Start time: 14:35:58 on Nov 09,2025
 # Loading sv_std.std
 # Loading /eecs/home/kanwarp/EECS-4201-project/project/pd4/work.top
 # Loading /eecs/home/kanwarp/EECS-4201-project/project/pd4/work.clockgen
@@ -16,167 +16,78 @@
 # Loading /eecs/home/kanwarp/EECS-4201-project/project/pd4/work.register_file
 # Loading /eecs/home/kanwarp/EECS-4201-project/project/pd4/work.memory
 # Loading /eecs/home/kanwarp/EECS-4201-project/project/pd4/work.writeback
-# ** Warning: (vsim-2685) [TFMPC] - Too few port connections for 'fetch1'.  Expected 7, found 6.
-#    Time: 0 ps  Iteration: 0  Instance: /top/dut/core/fetch1 File: /eecs/home/kanwarp/EECS-4201-project/project/pd4/design/code/pd4.sv Line: 92
-# ** Warning: (vsim-3722) /eecs/home/kanwarp/EECS-4201-project/project/pd4/design/code/pd4.sv(92): [TFMPC] - Missing connection for port 'br_taken'.
-# ** Warning: (vsim-3015) [PCDPC] - Port size (5) does not match connection size (1) for port 'br_taken'. The port definition is at: /eecs/home/kanwarp/EECS-4201-project/project/pd4/design/code/control.sv(36).
-#    Time: 0 ps  Iteration: 0  Instance: /top/dut/core/u_control File: /eecs/home/kanwarp/EECS-4201-project/project/pd4/design/code/pd4.sv Line: 125
 # do /eecs/home/kanwarp/EECS-4201-project/project/pd4/verif/scripts/run.macro
-# IMEMORY: Loaded 58 32-bit words from /eecs/home/kanwarp/EECS-4201-project/project/pd4/verif/data/test2.x
-# ** Warning: (vsim-PLI-3407) Too many data words read on line 3298 of file "/eecs/home/kanwarp/EECS-4201-project/project/pd4/verif/data/test2.pattern". (Current address [3297], address range [0:3296])    : /eecs/home/kanwarp/EECS-4201-project/project/pd4/verif/tests/pattern_check.h(4)
+# IMEMORY: Loaded 154 32-bit words from /eecs/home/kanwarp/EECS-4201-project/project/pd4/verif/data/test1.x
+# ** Warning: (vsim-PLI-3407) Too many data words read on line 1371 of file "/eecs/home/kanwarp/EECS-4201-project/project/pd4/verif/data/test1.pattern". (Current address [1370], address range [0:1369])    : /eecs/home/kanwarp/EECS-4201-project/project/pd4/verif/tests/pattern_check.h(4)
 #    Time: 0 ps  Iteration: 0  Region: /top/genblk3
 # [0] DECODE DEBUG: INS=xxxxxxxx Funct3=xxx
 # [0] DECODE DEBUG: INS=00000000 Funct3=000
-# [3] DECODE DEBUG: INS=fe010113 Funct3=000
-# [13] DECODE DEBUG: INS=00112e23 Funct3=010
+# [3] DECODE DEBUG: INS=fd010113 Funct3=000
+# [13] DECODE DEBUG: INS=02112623 Funct3=010
 # [15] IMEMORY: Wrote 0x00000000 to 0x010ffffc
-# [15] DECODE DEBUG: INS=00a00513 Funct3=000
-# [17] DECODE DEBUG: INS=024000ef Funct3=000
-# [19] DECODE DEBUG: INS=fe010113 Funct3=000
-# [21] DECODE DEBUG: INS=00112e23 Funct3=010
-# [23] IMEMORY: Wrote 0x01000010 to 0x010fffdc
-# [23] DECODE DEBUG: INS=00812c23 Funct3=010
-# [25] IMEMORY: Wrote 0x00000000 to 0x010fffd8
-# [25] DECODE DEBUG: INS=00a12623 Funct3=010
-# [27] IMEMORY: Wrote 0x0000000a to 0x010fffcc
-# [27] DECODE DEBUG: INS=00c12703 Funct3=010
-# [29] DECODE DEBUG: INS=00100793 Funct3=000
-# [31] DECODE DEBUG: INS=00e7c663 Funct3=100
-# [33] DECODE DEBUG: INS=00c12783 Funct3=010
-# [35] DECODE DEBUG: INS=fff78793 Funct3=000
-# [37] DECODE DEBUG: INS=00078513 Funct3=000
-# [39] DECODE DEBUG: INS=fd1ff0ef Funct3=111
-# [41] DECODE DEBUG: INS=fe010113 Funct3=000
-# [43] DECODE DEBUG: INS=00112e23 Funct3=010
-# [45] IMEMORY: Wrote 0x01000064 to 0x010fffbc
-# [45] DECODE DEBUG: INS=00812c23 Funct3=010
-# [47] IMEMORY: Wrote 0x00000000 to 0x010fffb8
-# [47] DECODE DEBUG: INS=00a12623 Funct3=010
-# [49] IMEMORY: Wrote 0x00000009 to 0x010fffac
-# [49] DECODE DEBUG: INS=00c12703 Funct3=010
-# [51] DECODE DEBUG: INS=00100793 Funct3=000
-# [53] DECODE DEBUG: INS=00e7c663 Funct3=100
-# [55] DECODE DEBUG: INS=00c12783 Funct3=010
-# [57] DECODE DEBUG: INS=fff78793 Funct3=000
-# [59] DECODE DEBUG: INS=00078513 Funct3=000
-# [61] DECODE DEBUG: INS=fd1ff0ef Funct3=111
-# [63] DECODE DEBUG: INS=fe010113 Funct3=000
-# [65] DECODE DEBUG: INS=00112e23 Funct3=010
-# [67] IMEMORY: Wrote 0x01000064 to 0x010fff9c
-# [67] DECODE DEBUG: INS=00812c23 Funct3=010
-# [69] IMEMORY: Wrote 0x00000000 to 0x010fff98
-# [69] DECODE DEBUG: INS=00a12623 Funct3=010
-# [71] IMEMORY: Wrote 0x00000008 to 0x010fff8c
-# [71] DECODE DEBUG: INS=00c12703 Funct3=010
-# [73] DECODE DEBUG: INS=00100793 Funct3=000
-# [75] DECODE DEBUG: INS=00e7c663 Funct3=100
-# [77] DECODE DEBUG: INS=00c12783 Funct3=010
-# [79] DECODE DEBUG: INS=fff78793 Funct3=000
-# [81] DECODE DEBUG: INS=00078513 Funct3=000
-# [83] DECODE DEBUG: INS=fd1ff0ef Funct3=111
-# [85] DECODE DEBUG: INS=fe010113 Funct3=000
-# [87] DECODE DEBUG: INS=00112e23 Funct3=010
-# [89] IMEMORY: Wrote 0x01000064 to 0x010fff7c
-# [89] DECODE DEBUG: INS=00812c23 Funct3=010
-# [91] IMEMORY: Wrote 0x00000000 to 0x010fff78
-# [91] DECODE DEBUG: INS=00a12623 Funct3=010
-# [93] IMEMORY: Wrote 0x00000007 to 0x010fff6c
-# [93] DECODE DEBUG: INS=00c12703 Funct3=010
-# [95] DECODE DEBUG: INS=00100793 Funct3=000
-# [97] DECODE DEBUG: INS=00e7c663 Funct3=100
-# [99] DECODE DEBUG: INS=00c12783 Funct3=010
-# [101] DECODE DEBUG: INS=fff78793 Funct3=000
-# [103] DECODE DEBUG: INS=00078513 Funct3=000
-# [105] DECODE DEBUG: INS=fd1ff0ef Funct3=111
-# [107] DECODE DEBUG: INS=fe010113 Funct3=000
-# [109] DECODE DEBUG: INS=00112e23 Funct3=010
-# [111] IMEMORY: Wrote 0x01000064 to 0x010fff5c
-# [111] DECODE DEBUG: INS=00812c23 Funct3=010
-# [113] IMEMORY: Wrote 0x00000000 to 0x010fff58
-# [113] DECODE DEBUG: INS=00a12623 Funct3=010
-# [115] IMEMORY: Wrote 0x00000006 to 0x010fff4c
-# [115] DECODE DEBUG: INS=00c12703 Funct3=010
-# [117] DECODE DEBUG: INS=00100793 Funct3=000
-# [119] DECODE DEBUG: INS=00e7c663 Funct3=100
-# [121] DECODE DEBUG: INS=00c12783 Funct3=010
-# [123] DECODE DEBUG: INS=fff78793 Funct3=000
-# [125] DECODE DEBUG: INS=00078513 Funct3=000
-# [127] DECODE DEBUG: INS=fd1ff0ef Funct3=111
-# [129] DECODE DEBUG: INS=fe010113 Funct3=000
-# [131] DECODE DEBUG: INS=00112e23 Funct3=010
-# [133] IMEMORY: Wrote 0x01000064 to 0x010fff3c
-# [133] DECODE DEBUG: INS=00812c23 Funct3=010
-# [135] IMEMORY: Wrote 0x00000000 to 0x010fff38
-# [135] DECODE DEBUG: INS=00a12623 Funct3=010
-# [137] IMEMORY: Wrote 0x00000005 to 0x010fff2c
-# [137] DECODE DEBUG: INS=00c12703 Funct3=010
-# [139] DECODE DEBUG: INS=00100793 Funct3=000
-# [141] DECODE DEBUG: INS=00e7c663 Funct3=100
-# [143] DECODE DEBUG: INS=00c12783 Funct3=010
-# [145] DECODE DEBUG: INS=fff78793 Funct3=000
-# [147] DECODE DEBUG: INS=00078513 Funct3=000
-# [149] DECODE DEBUG: INS=fd1ff0ef Funct3=111
-# [151] DECODE DEBUG: INS=fe010113 Funct3=000
-# [153] DECODE DEBUG: INS=00112e23 Funct3=010
-# [155] IMEMORY: Wrote 0x01000064 to 0x010fff1c
-# [155] DECODE DEBUG: INS=00812c23 Funct3=010
-# [157] IMEMORY: Wrote 0x00000000 to 0x010fff18
-# [157] DECODE DEBUG: INS=00a12623 Funct3=010
-# [159] IMEMORY: Wrote 0x00000004 to 0x010fff0c
-# [159] DECODE DEBUG: INS=00c12703 Funct3=010
-# [161] DECODE DEBUG: INS=00100793 Funct3=000
-# [163] DECODE DEBUG: INS=00e7c663 Funct3=100
-# [165] DECODE DEBUG: INS=00c12783 Funct3=010
-# [167] DECODE DEBUG: INS=fff78793 Funct3=000
-# [169] DECODE DEBUG: INS=00078513 Funct3=000
-# [171] DECODE DEBUG: INS=fd1ff0ef Funct3=111
-# [173] DECODE DEBUG: INS=fe010113 Funct3=000
-# [175] DECODE DEBUG: INS=00112e23 Funct3=010
-# [177] IMEMORY: Wrote 0x01000064 to 0x010ffefc
-# [177] DECODE DEBUG: INS=00812c23 Funct3=010
-# [179] IMEMORY: Wrote 0x00000000 to 0x010ffef8
-# [179] DECODE DEBUG: INS=00a12623 Funct3=010
-# [181] IMEMORY: Wrote 0x00000003 to 0x010ffeec
-# [181] DECODE DEBUG: INS=00c12703 Funct3=010
-# [183] DECODE DEBUG: INS=00100793 Funct3=000
-# [185] DECODE DEBUG: INS=00e7c663 Funct3=100
-# [187] DECODE DEBUG: INS=00c12783 Funct3=010
-# [189] DECODE DEBUG: INS=fff78793 Funct3=000
-# [191] DECODE DEBUG: INS=00078513 Funct3=000
-# [193] DECODE DEBUG: INS=fd1ff0ef Funct3=111
-# [195] DECODE DEBUG: INS=fe010113 Funct3=000
-# [197] DECODE DEBUG: INS=00112e23 Funct3=010
-# [199] IMEMORY: Wrote 0x01000064 to 0x010ffedc
-# [199] DECODE DEBUG: INS=00812c23 Funct3=010
-# [201] IMEMORY: Wrote 0x00000000 to 0x010ffed8
-# [201] DECODE DEBUG: INS=00a12623 Funct3=010
-# [203] IMEMORY: Wrote 0x00000002 to 0x010ffecc
-# [203] DECODE DEBUG: INS=00c12703 Funct3=010
-# [205] DECODE DEBUG: INS=00100793 Funct3=000
-# [207] DECODE DEBUG: INS=00e7c663 Funct3=100
-# [209] DECODE DEBUG: INS=00c12783 Funct3=010
-# [211] DECODE DEBUG: INS=fff78793 Funct3=000
-# [213] DECODE DEBUG: INS=00078513 Funct3=000
-# [215] DECODE DEBUG: INS=fd1ff0ef Funct3=111
-# [217] DECODE DEBUG: INS=fe010113 Funct3=000
-# [219] DECODE DEBUG: INS=00112e23 Funct3=010
-# [221] IMEMORY: Wrote 0x01000064 to 0x010ffebc
-# [221] DECODE DEBUG: INS=00812c23 Funct3=010
-# [223] IMEMORY: Wrote 0x00000000 to 0x010ffeb8
-# [223] DECODE DEBUG: INS=00a12623 Funct3=010
-# [225] IMEMORY: Wrote 0x00000001 to 0x010ffeac
-# [225] DECODE DEBUG: INS=00c12703 Funct3=010
-# [227] DECODE DEBUG: INS=00100793 Funct3=000
-# [229] DECODE DEBUG: INS=00e7c663 Funct3=100
-# [231] DECODE DEBUG: INS=00c12783 Funct3=010
-# [233] DECODE DEBUG: INS=0300006f Funct3=000
-# [235] DECODE DEBUG: INS=00078513 Funct3=000
-# [237] DECODE DEBUG: INS=01c12083 Funct3=010
-# M stage mismatch: expected PC=01000084, ADDRESS=010ffebc, SIZE_ENCODED=2, DATA=01000064, got PC=01000084, ADDRESS=010ffebc, SIZE_ENCODED=2, DATA=00000064
-# W stage mismatch: expected PC=01000084, ENABLE=1, DESTINATION=01, DATA=01000064, got PC=01000084, ENABLE=1, DESTINATION=01, DATA=00000064
+# [15] DECODE DEBUG: INS=010007b7 Funct3=000
+# [17] DECODE DEBUG: INS=2487a883 Funct3=010
+# [19] DECODE DEBUG: INS=24878713 Funct3=000
+# [21] DECODE DEBUG: INS=00472803 Funct3=010
+# [23] DECODE DEBUG: INS=24878713 Funct3=000
+# [25] DECODE DEBUG: INS=00872503 Funct3=010
+# [27] DECODE DEBUG: INS=24878713 Funct3=000
+# [29] DECODE DEBUG: INS=00c72583 Funct3=010
+# [31] DECODE DEBUG: INS=24878713 Funct3=000
+# [33] DECODE DEBUG: INS=01072603 Funct3=010
+# [35] DECODE DEBUG: INS=24878713 Funct3=000
+# [37] DECODE DEBUG: INS=01472683 Funct3=010
+# [39] DECODE DEBUG: INS=24878713 Funct3=000
+# [41] DECODE DEBUG: INS=01872703 Funct3=010
+# [43] DECODE DEBUG: INS=24878793 Funct3=000
+# [45] DECODE DEBUG: INS=01c7a783 Funct3=010
+# [47] DECODE DEBUG: INS=01112023 Funct3=010
+# [49] IMEMORY: Wrote 0x0000000c to 0x010fffd0
+# [49] DECODE DEBUG: INS=01012223 Funct3=010
+# [51] IMEMORY: Wrote 0x00000009 to 0x010fffd4
+# [51] DECODE DEBUG: INS=00a12423 Funct3=010
+# [53] IMEMORY: Wrote 0x00000004 to 0x010fffd8
+# [53] DECODE DEBUG: INS=00b12623 Funct3=010
+# [55] IMEMORY: Wrote 0x00000063 to 0x010fffdc
+# [55] DECODE DEBUG: INS=00c12823 Funct3=010
+# [57] IMEMORY: Wrote 0x00000078 to 0x010fffe0
+# [57] DECODE DEBUG: INS=00d12a23 Funct3=010
+# [59] IMEMORY: Wrote 0x00000001 to 0x010fffe4
+# [59] DECODE DEBUG: INS=00e12c23 Funct3=010
+# [61] IMEMORY: Wrote 0x00000003 to 0x010fffe8
+# [61] DECODE DEBUG: INS=00f12e23 Funct3=010
+# [63] IMEMORY: Wrote 0x0000000a to 0x010fffec
+# [63] DECODE DEBUG: INS=00010793 Funct3=000
+# [65] DECODE DEBUG: INS=00800593 Funct3=000
+# [67] DECODE DEBUG: INS=00078513 Funct3=000
+# [69] DECODE DEBUG: INS=024000ef Funct3=000
+# [71] DECODE DEBUG: INS=fe010113 Funct3=000
+# [73] DECODE DEBUG: INS=00a12623 Funct3=010
+# [75] IMEMORY: Wrote 0x010fffd0 to 0x010fffbc
+# [75] DECODE DEBUG: INS=00b12423 Funct3=010
+# [77] IMEMORY: Wrote 0x00000008 to 0x010fffb8
+# [77] DECODE DEBUG: INS=00012e23 Funct3=010
+# [79] IMEMORY: Wrote 0x00000000 to 0x010fffcc
+# [79] DECODE DEBUG: INS=0e40006f Funct3=000
+# [81] DECODE DEBUG: INS=01c12703 Funct3=010
+# [83] DECODE DEBUG: INS=00812783 Funct3=010
+# [85] DECODE DEBUG: INS=f0f74ce3 Funct3=100
+# [87] DECODE DEBUG: INS=00100793 Funct3=000
+# [89] DECODE DEBUG: INS=00f12c23 Funct3=010
+# [91] IMEMORY: Wrote 0x00000001 to 0x010fffc8
+# [91] DECODE DEBUG: INS=0b80006f Funct3=000
+# [93] DECODE DEBUG: INS=00812703 Funct3=010
+# [95] DECODE DEBUG: INS=01c12783 Funct3=010
+# [97] DECODE DEBUG: INS=40f707b3 Funct3=000
+# [99] DECODE DEBUG: INS=01812703 Funct3=010
+# [101] DECODE DEBUG: INS=f2f74ee3 Funct3=100
+# [103] DECODE DEBUG: INS=01812703 Funct3=010
+# [105] DECODE DEBUG: INS=400007b7 Funct3=000
+# [107] DECODE DEBUG: INS=fff78793 Funct3=000
+# M stage mismatch: expected PC=010000c0, ADDRESS=3fffffff, SIZE_ENCODED=0, DATA=01011300, got PC=010000c0, ADDRESS=3fffffff, SIZE_ENCODED=0, DATA=00000000
 # ** Fatal: Assertion error.
-#    Time: 238 ps  Scope: top.genblk3.tick_check File: /eecs/home/kanwarp/EECS-4201-project/project/pd4/verif/tests/pattern_check.h Line: 45
+#    Time: 108 ps  Scope: top.genblk3.tick_check File: /eecs/home/kanwarp/EECS-4201-project/project/pd4/verif/tests/pattern_check.h Line: 45
 # ** Note: $finish    : /eecs/home/kanwarp/EECS-4201-project/project/pd4/verif/tests/pattern_check.h(45)
-#    Time: 238 ps  Iteration: 1  Region: /top/genblk3
-# End time: 12:56:07 on Nov 09,2025, Elapsed time: 0:00:01
-# Errors: 1, Warnings: 4
+#    Time: 108 ps  Iteration: 1  Region: /top/genblk3
+# End time: 14:35:58 on Nov 09,2025, Elapsed time: 0:00:00
+# Errors: 1, Warnings: 1

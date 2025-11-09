@@ -115,12 +115,12 @@ module memory #(
         if (write_en_dat) begin
             if (write_en_dat) begin
                 case (size_encoded)
-        2'b10: main_memory[address_dat] <= data_dat[7:0]; // byte
+        2'b00: main_memory[address_dat] <= data_dat[7:0]; // byte
         2'b01: begin // halfword
           main_memory[address_dat]     <= data_dat[7:0];
           main_memory[address_dat + 1] <= data_dat[15:8];
         end
-        2'b00: begin // word
+        2'b10: begin // word
           main_memory[address_dat]     <= data_dat[7:0];
           main_memory[address_dat + 1] <= data_dat[15:8];
           main_memory[address_dat + 2] <= data_dat[23:16];
