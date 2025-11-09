@@ -28,6 +28,7 @@ module alu #(
     input  logic [3:0]        alusel_i,     // from control
     input  logic eq,                        // for branch evaluation
     input  logic lt,                        // for branch evaluation
+    input  logic ltu,                       // for branch evaluation
     output logic [DWIDTH-1:0] res_o,
     output logic              brtaken_o
 );
@@ -67,8 +68,8 @@ module alu #(
                 3'b001: brtaken_o = !eq;       // BNE
                 3'b100: brtaken_o = lt;        // BLT
                 3'b101: brtaken_o = !lt;       // BGE
-                3'b110: brtaken_o = lt;       // BLTU
-                3'b111: brtaken_o = !lt;      // BGEU
+                3'b110: brtaken_o = ltu;       // BLTU
+                3'b111: brtaken_o = !ltu;      // BGEU
                 default: brtaken_o = 1'b0;
             endcase
         end

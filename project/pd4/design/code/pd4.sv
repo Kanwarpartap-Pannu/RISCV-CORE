@@ -68,6 +68,7 @@ module pd4 #(
     //branch control signals
     logic breq_o;
     logic brlt_o;
+    logic brltu_o;
 
     // Memory data Signals
     logic [1:0] size_encoded;
@@ -151,7 +152,8 @@ module pd4 #(
         .rs1_i(rs1data_o), // from register file becuase
         .rs2_i(rs2data_o), // rs1_i and rs2_i will be muxed to select pc and imm rather than register data
         .breq_o(breq_o),
-        .brlt_o(brlt_o)
+        .brlt_o(brlt_o),
+        .brltu_o(brltu_o)
     );
 
 
@@ -169,6 +171,7 @@ module pd4 #(
         .alusel_i(ctrl_alusel),
         .eq(breq_o),
         .lt(brlt_o),
+        .ltu(brltu_o),
         .res_o(alu_res),      
         .brtaken_o(br_taken)   
     );

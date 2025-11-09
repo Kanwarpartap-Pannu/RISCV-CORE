@@ -35,8 +35,8 @@ module decode #(
     assign pc_o   = pc_i;
     assign insn_o = insn_i;
     always_comb begin
-    $display("[%0t] DECODE DEBUG: INS=%h ", 
-                  $time, insn_i);
+    //$display("[%0t] DECODE DEBUG: INS=%h ", 
+    //              $time, insn_i);
     end
     // Immediate Generation (through the provided igen module)
     igen #(

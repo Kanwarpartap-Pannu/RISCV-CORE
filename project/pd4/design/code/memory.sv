@@ -48,9 +48,7 @@ module memory #(
    	logic [AWIDTH-1:0] address;
     logic [AWIDTH-1:0] address_dat;
    	assign address = addr_i - BASE_ADDR;
-    assign address_dat = ((32'(addr_dat) < 32'(BASE_ADDR)) ?
-                      ((32'(addr_dat) + 32'(BASE_ADDR)) - 32'(BASE_ADDR)) :
-                      ((addr_dat) - (BASE_ADDR))) % MEM_BYTES;
+    assign address_dat = (((addr_dat & 32'h00FFFFFF) | 32'h01000000)-BASE_ADDR) % MEM_BYTES;
   	int i;
  
    	initial begin
@@ -96,31 +94,41 @@ module memory #(
             if ($isunknown(addr_dat)) begin
                 data_dat_o = '0;
             end else if (read_en_i) begin
-                // Word-aligned fetch: little-endian assembly
-                data_dat_o = {
-                          main_memory[address_dat + 3],
-                          main_memory[address_dat + 2],
-                          main_memory[address_dat + 1],
-                          main_memory[address_dat]
-                };
-            end else begin
-                data_dat_o = 32'h0;
-                //$display("IMEMORY: OOB read @0x%08h (mapped 0x%08h)", addr_dat, address);
-            end
+                case (size_encoded)
+          2'b10: data_dat_o = {{24{main_memory[address_dat][7]}}, main_memory[address_dat]};
+          2'b01: data_dat_o = {{16{main_memory[address_dat + 1][7]}},
+                                main_memory[address_dat + 1],
+                                main_memory[address_dat]};
+          2'b00: data_dat_o = {
+                                main_memory[address_dat + 3],
+                                main_memory[address_dat + 2],
+                                main_memory[address_dat + 1],
+                                main_memory[address_dat]
+                              };
+          default: data_dat_o = 32'h0;
+        endcase
+            end 
         end
   	end
 
     always_ff @(posedge clk) begin
         if (write_en_dat) begin
             if (write_en_dat) begin
-                main_memory[address_dat] <= data_dat[7:0];
-                main_memory[address_dat + 1] <= data_dat[15:8];
-                main_memory[address_dat + 2] <= data_dat[23:16];
-                main_memory[address_dat + 3] <= data_dat[31:24];
+                case (size_encoded)
+        2'b10: main_memory[address_dat] <= data_dat[7:0]; // byte
+        2'b01: begin // halfword
+          main_memory[address_dat]     <= data_dat[7:0];
+          main_memory[address_dat + 1] <= data_dat[15:8];
+        end
+        2'b00: begin // word
+          main_memory[address_dat]     <= data_dat[7:0];
+          main_memory[address_dat + 1] <= data_dat[15:8];
+          main_memory[address_dat + 2] <= data_dat[23:16];
+          main_memory[address_dat + 3] <= data_dat[31:24];
+        end
+      endcase
                 $display("[%0t] IMEMORY: Wrote 0x%08h to 0x%08h",$time, data_dat, addr_dat);
-            end else begin
-                //$display("IMEMORY: OOB write @0x%08h", addr_i);
-            end
+            end 
         end
  	end
 	
@@ -138,32 +146,5 @@ module memory #(
         end
  	end
 
-    always_ff @(posedge clk) begin
-    if (!rst) begin
-        // Debug writes to instruction/data ports
-        if (write_en_i || write_en_dat) begin
-            $display("[%0t] WRITE @ PC(?)", $time);
-            $display("  addr_i      = 0x%08h | addr_dat    = 0x%08h", addr_i, addr_dat);
-            $display("  address     = 0x%08h | address_dat = 0x%08h", address, address_dat);
-            $display("  data_i      = 0x%08h | data_dat    = 0x%08h", data_i, data_dat);
-            $display("  write_en_i  = %b      | write_en_dat = %b", write_en_i, write_en_dat);
-            $display("  read_en_i   = %b      | read_en_dat  = %b", read_en_i, read_en_dat);
-            $display("  MEM_BYTES   = %0d bytes (%0d words)", MEM_BYTES, MEM_BYTES/4);
-            $display("  BASE_ADDR   = 0x%08h", BASE_ADDR);
-            $display("------------------------------------------------------------");
-        end
-
-        // Debug reads from instruction/data ports
-        if (read_en_i || read_en_dat) begin
-            $display("[%0t] READ", $time);
-            $display("  addr_i      = 0x%08h | addr_dat    = 0x%08h", addr_i, addr_dat);
-            $display("  address     = 0x%08h | address_dat = 0x%08h", address, address_dat);
-            $display("  data_o      = 0x%08h | data_dat_o  = 0x%08h", data_o, data_dat_o);
-            $display("  read_en_i   = %b      | read_en_dat  = %b", read_en_i, read_en_dat);
-            $display("  write_en_i  = %b      | write_en_dat = %b", write_en_i, write_en_dat);
-            $display("------------------------------------------------------------");
-        end
-    end
-end
  
 endmodule : memory

@@ -25,7 +25,8 @@
     input logic [DWIDTH-1:0] rs2_i,
     // outputs
     output logic breq_o,
-    output logic brlt_o
+    output logic brlt_o,
+    output logic brltu_o
 );
 
     /*
@@ -34,5 +35,6 @@
      */
     assign breq_o = (rs1_i == rs2_i);
     assign brlt_o = ($signed(rs1_i) < $signed(rs2_i));
+    assign brltu_o = (rs1_i < rs2_i);
 
 endmodule : branch_control
