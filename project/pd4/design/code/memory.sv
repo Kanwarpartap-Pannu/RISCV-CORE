@@ -103,9 +103,9 @@ module memory #(
         //                         main_memory[address_dat + 1],
         //                         main_memory[address_dat]};
           2'b10, 2'b11,2'b00,2'b01: data_dat_o = {             // above is memory access for different sizes but testbench wants full word always so combined all cases into one
-                                main_memory[address_dat + 3],
-                                main_memory[address_dat + 2],
-                                main_memory[address_dat + 1],
+                                main_memory[(address_dat + 3)% MEM_BYTES],
+                                main_memory[(address_dat + 2)% MEM_BYTES],
+                                main_memory[(address_dat + 1)% MEM_BYTES],
                                 main_memory[address_dat]
                               };
           default: data_dat_o = 32'h0;
