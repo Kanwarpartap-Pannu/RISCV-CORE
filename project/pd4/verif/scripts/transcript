@@ -1,5 +1,5 @@
 # vsim -suppress 3839 -c -do "/eecs/home/kanwarp/EECS-4201-project/project/pd4/verif/scripts/run.macro" /eecs/home/kanwarp/EECS-4201-project/project/pd4/work.top 
-# Start time: 14:35:58 on Nov 09,2025
+# Start time: 13:31:29 on Nov 13,2025
 # Loading sv_std.std
 # Loading /eecs/home/kanwarp/EECS-4201-project/project/pd4/work.top
 # Loading /eecs/home/kanwarp/EECS-4201-project/project/pd4/work.clockgen
@@ -84,10 +84,10 @@
 # [103] DECODE DEBUG: INS=01812703 Funct3=010
 # [105] DECODE DEBUG: INS=400007b7 Funct3=000
 # [107] DECODE DEBUG: INS=fff78793 Funct3=000
-# M stage mismatch: expected PC=010000c0, ADDRESS=3fffffff, SIZE_ENCODED=0, DATA=01011300, got PC=010000c0, ADDRESS=3fffffff, SIZE_ENCODED=0, DATA=00000000
+# M stage mismatch: expected PC=010000c0, ADDRESS=3fffffff, SIZE_ENCODED=0, DATA=01011300, got PC=010000c0, ADDRESS=3fffffff, SIZE_ENCODED=0, DATA=xxxxxx00
 # ** Fatal: Assertion error.
 #    Time: 108 ps  Scope: top.genblk3.tick_check File: /eecs/home/kanwarp/EECS-4201-project/project/pd4/verif/tests/pattern_check.h Line: 45
 # ** Note: $finish    : /eecs/home/kanwarp/EECS-4201-project/project/pd4/verif/tests/pattern_check.h(45)
 #    Time: 108 ps  Iteration: 1  Region: /top/genblk3
-# End time: 14:35:58 on Nov 09,2025, Elapsed time: 0:00:00
+# End time: 13:31:29 on Nov 13,2025, Elapsed time: 0:00:00
 # Errors: 1, Warnings: 1

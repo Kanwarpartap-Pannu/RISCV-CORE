@@ -35,6 +35,6 @@
      */
     assign breq_o = (rs1_i == rs2_i);
     assign brlt_o = ($signed(rs1_i) < $signed(rs2_i));
-    assign brltu_o = (rs1_i < rs2_i);
+    assign brltu_o = (rs1_i < rs2_i);  // added unsigned comparison since last pd
 
 endmodule : branch_control

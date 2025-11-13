@@ -194,16 +194,7 @@ module pd4 #(
         .rs2data_o(rs2data_o)      
     );   
 
-    // Ok up to here my pipeline handles fetch, decode, execute stages
-    // but fetch needs to know which pc to fetch from based on branch taken or JAL,JALr so it needs to be modifed to include that logic
-    // next we have our result which is correct for all stages so we need to mux and decide wether to write back alu result or memory data
-    // we need to implement memory for data memory access stage which I think is easiest if we just add more ports to our existing memory module
-
-    // we need mux here to get correct size encoded signal based on funct3
-    // Opcodes
-    localparam OPCODE_LOAD  = 7'b0000011;
-    localparam OPCODE_STORE = 7'b0100011;
-
+    // Data Memory size encoding logic based on lower 2 bits of funct3
     always_comb begin
                 case (d_funct3)
                     3'b000, 3'b100: size_encoded = 2'b00; // word 
@@ -215,7 +206,7 @@ module pd4 #(
             end
            
 
-    // Instruction Memory
+    // Memory
     memory #(
         .AWIDTH(32),
         .DWIDTH(32),
@@ -225,15 +216,15 @@ module pd4 #(
         .rst(reset),
         .addr_i(f_pc),
         .addr_dat(alu_res),
-        .data_i(data_i),
-        .data_dat(rs2data_o),
-        .read_en_i(read_en),
+        .data_i(data_i), 
+        .data_dat(rs2data_o), // data to write to data memory from rs2 only will happen is write enable is high
+        .read_en_i(read_en), // controls for instruction memory hardset to always read never write
         .write_en_i(write_en),
-        .read_en_dat(ctrl_memren),
+        .read_en_dat(ctrl_memren), // controls for data memory 
         .write_en_dat(ctrl_memwren),
         .size_encoded(size_encoded), // new input for size encoding
         .data_o(f_insn),
-        .data_dat_o(memory_data_i)
+        .data_dat_o(memory_data_i) // data read from data memory
    );
 
 
@@ -241,12 +232,12 @@ module pd4 #(
         .DWIDTH(DWIDTH),
         .AWIDTH(AWIDTH)
     ) u_writeback (
-        .pc_i(d_pc),
+        .pc_i(d_pc), 
         .alu_res_i(alu_res),
-        .memory_data_i(memory_data_i), 
-        .wbsel_i(ctrl_wbsel),
-        .brtaken_i(br_taken),
-        .writeback_data_o(writeback_data_o),
+        .memory_data_i(memory_data_i), // data from data memory
+        .wbsel_i(ctrl_wbsel), // control signal to select what to write back
+        .brtaken_i(br_taken), // to drive next pc logic
+        .writeback_data_o(writeback_data_o), // data to write back to register file
         .next_pc_o(next_pc_o)
     );
 

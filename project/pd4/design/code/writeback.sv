@@ -33,11 +33,9 @@
      * student below...
      */
 
-    assign next_pc_o = brtaken_i ? alu_res_i : pc_i;
+    assign next_pc_o = brtaken_i ? alu_res_i : pc_i + 32'd4; // though we chose to implement this in fetch 
 
-     // Mux for write-back data selection we need to mux between alu result and memory data
-    // ok essentially we have a mux that just selects between alu res
-    // or memory data or pc+4 based on wbsel input 
+    // Mux for write-back data selection
     always_comb begin
         unique case(wbsel_i)
             2'd0: writeback_data_o = alu_res_i;        // ALU result

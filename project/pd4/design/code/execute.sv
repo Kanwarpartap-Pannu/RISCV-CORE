@@ -28,7 +28,7 @@ module alu #(
     input  logic [3:0]        alusel_i,     // from control
     input  logic eq,                        // for branch evaluation
     input  logic lt,                        // for branch evaluation
-    input  logic ltu,                       // for branch evaluation
+    input  logic ltu,                       // for branch evaluation new signal since last pd
     output logic [DWIDTH-1:0] res_o,
     output logic              brtaken_o
 );

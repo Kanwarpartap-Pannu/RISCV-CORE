@@ -161,7 +161,7 @@ module control #(
                 immsel_o  = 1'b1;
                 rs1sel_o  = 1'b0;
                 rs2sel_o  = 1'b0;
-                pcsel_o   = (br_taken) ? 1'b1 : 1'b0;  // use branch target PC
+                pcsel_o   = (br_taken) ? 1'b1 : 1'b0;  // use branch target PC only if branch taken previous pd we had it was always high
                 alusel_o  = ALU_BRANCH; // for compare
             end
 

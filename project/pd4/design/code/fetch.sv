@@ -21,7 +21,7 @@ module fetch #(
 	input logic clk,
 	input logic rst,
     input logic pcsel_o,
-    input logic [DWIDTH - 1:0] alu_res,
+    input logic [DWIDTH - 1:0] alu_res, // target pc from alu according to cycle path if jump or branch
 	// outputs	
 	output logic [AWIDTH - 1:0] pc_o,
     output logic [DWIDTH - 1:0] insn_o
@@ -41,7 +41,7 @@ module fetch #(
         end else begin
             unique case (pcsel_o)
                 1'b0: pc <= pc + 32'd4; // sequential
-                1'b1: pc <= alu_res;         // 
+                1'b1: pc <= alu_res;         //  based on pcsel from control either branch target or jump target
                 default: pc <= pc + 32'd4;
             endcase
         end
