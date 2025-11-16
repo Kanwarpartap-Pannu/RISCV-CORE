@@ -40,6 +40,8 @@ module memory #(
   output logic [DWIDTH-1:0] data_dat_o
 );
 
+    // note since all modulo operations are with power of 2 we can optimize it to bit masking if needed in future but I think verilog does it automatically
+
     localparam int MEM_BYTES = (MEM_DEPTH )* (DWIDTH/8);  // Total memory size in bytes
 
 	logic [DWIDTH-1:0] temp_memory [0:`LINE_COUNT - 1];
@@ -104,7 +106,7 @@ module memory #(
         //                         main_memory[address_dat]};
           2'b10, 2'b11,2'b00,2'b01: data_dat_o = {             // above is memory access for different sizes but testbench wants full word always so combined all cases into one
                                 main_memory[(address_dat + 3)% MEM_BYTES],
-                                main_memory[(address_dat + 2)% MEM_BYTES],
+                                main_memory[(address_dat + 2)% MEM_BYTES], // if the adress_dat points to last adress then adress_dat +1 will be out of bound so we use modulo to wrap around
                                 main_memory[(address_dat + 1)% MEM_BYTES],
                                 main_memory[address_dat]
                               };
@@ -138,6 +140,7 @@ module memory #(
         end
  	end
 	
+    /* this is old code which is kept for reference
     // Sequential write logic for instruction memory this won't conflict since its always driven low
 	always_ff @(posedge clk) begin
         if (write_en_i) begin
@@ -152,6 +155,6 @@ module memory #(
             end
         end
  	end
-
+    */
  
 endmodule : memory
