@@ -4,7 +4,7 @@ fetch.sv
 control.sv
 branch_control.sv
 decode.sv
-alu.sv
+execute.sv
 igen.sv
 register_file.sv
 writeback.sv

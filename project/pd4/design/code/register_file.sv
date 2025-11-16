@@ -59,7 +59,7 @@
         end
     end
 
-    // Combinational reads for rs1 and rs2
+    // Combinational reads for rs1 and rs2  
     assign rs1data_o = (rs1_i == 5'd0) ? '0 : regs[rs1_i];
     assign rs2data_o = (rs2_i == 5'd0) ? '0 : regs[rs2_i];
 
