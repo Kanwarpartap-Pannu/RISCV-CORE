@@ -1,0 +1,34 @@
+# vsim -suppress 3839 -c -do "/eecs/home/erwinz/EECS4201/RISCV-CORE/project/pd5/verif/scripts/run.macro" /eecs/home/erwinz/EECS4201/RISCV-CORE/project/pd5/work.top 
+# Start time: 20:16:08 on Nov 29,2025
+# Loading sv_std.std
+# Loading /eecs/home/erwinz/EECS4201/RISCV-CORE/project/pd5/work.top
+# Loading /eecs/home/erwinz/EECS4201/RISCV-CORE/project/pd5/work.clockgen
+# Loading /eecs/home/erwinz/EECS4201/RISCV-CORE/project/pd5/work.design_wrapper
+# Loading /eecs/home/erwinz/EECS4201/RISCV-CORE/project/pd5/work.pd5
+# Loading /eecs/home/erwinz/EECS4201/RISCV-CORE/project/pd5/work.fetch
+# Loading /eecs/home/erwinz/EECS4201/RISCV-CORE/project/pd5/work.decode_sv_unit
+# Loading /eecs/home/erwinz/EECS4201/RISCV-CORE/project/pd5/work.decode
+# Loading /eecs/home/erwinz/EECS4201/RISCV-CORE/project/pd5/work.igen
+# Loading /eecs/home/erwinz/EECS4201/RISCV-CORE/project/pd5/work.control_sv_unit
+# Loading /eecs/home/erwinz/EECS4201/RISCV-CORE/project/pd5/work.control
+# Loading /eecs/home/erwinz/EECS4201/RISCV-CORE/project/pd5/work.register_file
+# Loading /eecs/home/erwinz/EECS4201/RISCV-CORE/project/pd5/work.branch_control
+# Loading /eecs/home/erwinz/EECS4201/RISCV-CORE/project/pd5/work.alu
+# Loading /eecs/home/erwinz/EECS4201/RISCV-CORE/project/pd5/work.memory
+# Loading /eecs/home/erwinz/EECS4201/RISCV-CORE/project/pd5/work.writeback
+# do /eecs/home/erwinz/EECS4201/RISCV-CORE/project/pd5/verif/scripts/run.macro
+# IMEMORY: Loaded 154 32-bit words from /eecs/home/erwinz/EECS4201/RISCV-CORE/project/pd5/verif/data/test1.x
+# [0] DECODE DEBUG: INS=xxxxxxxx Funct3=xxx
+# [1] DECODE DEBUG: INS=00000000 Funct3=000
+# [1] DECODE DEBUG: INS=00000013 Funct3=000
+# D stage mismatch: expected PC=01000000, OPCODE=13, RD=02, RS1=02, RS2=00, FUNCT3=0, FUNCT7=00, IMM=ffffffd0, got PC=00000000, OPCODE=13, RD=00, RS1=00, RS2=00, FUNCT3=0, FUNCT7=00, IMM=00000000 
+# R stage mismatch: expected READ_RS1=02, READ_RS2=00, READ_RS1_DATA=01100000, READ_RS2_DATA=00000000, got READ_RS1=00, READ_RS2=00, READ_RS1_DATA=00000000, READ_RS2_DATA=00000000
+# E stage mismatch: expected PC=01000000, ALU_RES=010fffd0, BR_TAKEN=0, got PC=00000000, ALU_RES=00000000, BR_TAKEN=0
+# M stage mismatch: expected PC=01000000, ADDRESS=00000000, SIZE_ENCODED=x, DATA=0, got PC=fa020226, ADDRESS=00000000, SIZE_ENCODED=00000000, DATA=0
+# W stage mismatch: expected PC=01000000, ENABLE=1, DESTINATION=02, DATA=010fffd0, got PC=00000000, ENABLE=0, DESTINATION=00, DATA=00000000
+# ** Fatal: Assertion error.
+#    Time: 12 ps  Scope: top.genblk3.tick_check File: /eecs/home/erwinz/EECS4201/RISCV-CORE/project/pd5/verif/tests/pattern_check.h Line: 45
+# ** Note: $finish    : /eecs/home/erwinz/EECS4201/RISCV-CORE/project/pd5/verif/tests/pattern_check.h(45)
+#    Time: 12 ps  Iteration: 1  Region: /top/genblk3
+# End time: 20:16:09 on Nov 29,2025, Elapsed time: 0:00:01
+# Errors: 1, Warnings: 0

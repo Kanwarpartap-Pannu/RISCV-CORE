@@ -22,6 +22,9 @@ module fetch #(
 	input logic rst,
     input logic pcsel_o,
     input logic [DWIDTH - 1:0] alu_res, // target pc from alu according to cycle path if jump or branch
+    input logic pc_write_en,                // when 0 freeze PC (for stall)
+    input logic [AWIDTH-1:0] branch_target_in, // explicit branch target
+
 	// outputs	
 	output logic [AWIDTH - 1:0] pc_o,
     output logic [DWIDTH - 1:0] insn_o
@@ -35,15 +38,20 @@ module fetch #(
     
     logic [AWIDTH - 1:0] pc;
       
-    always_ff @(posedge clk) begin 
+    always_ff @(posedge clk or posedge rst) begin 
         if (rst) begin
             pc <= BASEADDR;
         end else begin
-            unique case (pcsel_o)
-                1'b0: pc <= pc + 32'd4; // sequential
-                1'b1: pc <= alu_res;         //  based on pcsel from control either branch target or jump target
-                default: pc <= pc + 32'd4;
-            endcase
+            if (!pc_write_en) begin
+                // freeze PC during stall
+                pc <= pc;
+            end else begin
+                unique case (pcsel_o)
+                    1'b0: pc <= pc + 32'd4;           // sequential
+                    1'b1: pc <= branch_target_in;    // branch/jump target
+                    default: pc <= pc + 32'd4;
+                endcase
+            end
         end
     end
        
