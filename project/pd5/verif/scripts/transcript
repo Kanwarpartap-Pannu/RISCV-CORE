@@ -1,0 +1,35 @@
+# vsim -suppress 3839 -c -do "/eecs/home/kanwarp/EECS-4201-project/project/pd5/verif/scripts/run.macro" /eecs/home/kanwarp/EECS-4201-project/project/pd5/work.top 
+# Start time: 15:22:16 on Dec 03,2025
+# Loading sv_std.std
+# Loading /eecs/home/kanwarp/EECS-4201-project/project/pd5/work.top
+# Loading /eecs/home/kanwarp/EECS-4201-project/project/pd5/work.clockgen
+# Loading /eecs/home/kanwarp/EECS-4201-project/project/pd5/work.design_wrapper
+# Loading /eecs/home/kanwarp/EECS-4201-project/project/pd5/work.pd5
+# Loading /eecs/home/kanwarp/EECS-4201-project/project/pd5/work.fetch
+# Loading /eecs/home/kanwarp/EECS-4201-project/project/pd5/work.if_id_pipe
+# Loading /eecs/home/kanwarp/EECS-4201-project/project/pd5/work.decode_sv_unit
+# Loading /eecs/home/kanwarp/EECS-4201-project/project/pd5/work.decode
+# Loading /eecs/home/kanwarp/EECS-4201-project/project/pd5/work.igen
+# Loading /eecs/home/kanwarp/EECS-4201-project/project/pd5/work.register_file
+# Loading /eecs/home/kanwarp/EECS-4201-project/project/pd5/work.control_sv_unit
+# Loading /eecs/home/kanwarp/EECS-4201-project/project/pd5/work.control
+# Loading /eecs/home/kanwarp/EECS-4201-project/project/pd5/work.id_ix_pipe
+# Loading /eecs/home/kanwarp/EECS-4201-project/project/pd5/work.branch_control
+# Loading /eecs/home/kanwarp/EECS-4201-project/project/pd5/work.alu
+# Loading /eecs/home/kanwarp/EECS-4201-project/project/pd5/work.ix_mem_pipe
+# Loading /eecs/home/kanwarp/EECS-4201-project/project/pd5/work.memory
+# Loading /eecs/home/kanwarp/EECS-4201-project/project/pd5/work.mem_wb_pipe
+# Loading /eecs/home/kanwarp/EECS-4201-project/project/pd5/work.writeback
+# do /eecs/home/kanwarp/EECS-4201-project/project/pd5/verif/scripts/run.macro
+# IMEMORY: Loaded 154 32-bit words from /eecs/home/kanwarp/EECS-4201-project/project/pd5/verif/data/test1.x
+# ** Warning: (vsim-PLI-3407) Too many data words read on line 761 of file "/eecs/home/kanwarp/EECS-4201-project/project/pd5/verif/data/test1.pattern". (Current address [760], address range [0:759])    : /eecs/home/kanwarp/EECS-4201-project/project/pd5/verif/tests/pattern_check.h(4)
+#    Time: 0 ps  Iteration: 0  Region: /top/genblk3
+# [0] DECODE DEBUG: INS=xxxxxxxx Funct3=xxx
+# [1] DECODE DEBUG: INS=00000000 Funct3=000
+# M stage mismatch: expected PC=00000000, ADDRESS=00000000, SIZE_ENCODED=x, DATA=0, got PC=00000000, ADDRESS=00000000, SIZE_ENCODED=00000000, DATA=0
+# ** Fatal: Assertion error.
+#    Time: 12 ps  Scope: top.genblk3.tick_check File: /eecs/home/kanwarp/EECS-4201-project/project/pd5/verif/tests/pattern_check.h Line: 45
+# ** Note: $finish    : /eecs/home/kanwarp/EECS-4201-project/project/pd5/verif/tests/pattern_check.h(45)
+#    Time: 12 ps  Iteration: 1  Region: /top/genblk3
+# End time: 15:22:17 on Dec 03,2025, Elapsed time: 0:00:01
+# Errors: 1, Warnings: 1

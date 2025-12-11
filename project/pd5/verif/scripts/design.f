@@ -9,3 +9,7 @@ igen.sv
 register_file.sv
 writeback.sv
 pd5.sv
+id_ix_pipe.sv
+if_id_pipe.sv
+ix_mem_pipe.sv
+mem_wb_pipe.sv

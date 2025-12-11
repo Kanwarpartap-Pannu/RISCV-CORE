@@ -38,6 +38,7 @@ module decode #(
     $display("[%0t] DECODE DEBUG: INS=%h Funct3=%b", 
                  $time, insn_i, funct3_o);
     end
+
     // Immediate Generation (through the provided igen module)
     igen #(
         .DWIDTH(DWIDTH)
@@ -46,5 +47,6 @@ module decode #(
         .insn_i(insn_o),
         .imm_o(imm_o)
     );
+    
 
 endmodule : decode
