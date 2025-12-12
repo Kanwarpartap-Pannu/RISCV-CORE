@@ -16,7 +16,7 @@ module ix_mem_pipe #(
     input  logic [AWIDTH-1:0] pc_i,          // PC+4 or branch target
     input  logic [DWIDTH-1:0] rs2_val_i,     // for store instructions
     input  logic [4:0]        rd_i,          // destination register number
-
+    input  logic [2:0]        funct3_i,     // funct3 from EX stage
     // Control signals from ID/EX
     input  logic              memren_i,
     input  logic              memwren_i,
@@ -32,6 +32,7 @@ module ix_mem_pipe #(
     output logic [AWIDTH-1:0] pc_o,
     output logic [DWIDTH-1:0] rs2_val_o,
     output logic [4:0]        rd_o,
+    output logic [2:0]        funct3_o,
 
     // Control
     output logic              memren_o,
@@ -55,6 +56,7 @@ module ix_mem_pipe #(
     logic              regwren_pipe;
     logic [1:0]        wbsel_pipe;
     logic [3:0]        alusel_pipe;
+    logic [2:0]        funct3_pipe;
 
     // =======================
     // Pipeline register logic
@@ -67,6 +69,8 @@ module ix_mem_pipe #(
             pc_pipe       <= '0;
             rs2_val_pipe  <= '0;
             rd_pipe       <= 5'b0;
+            funct3_pipe   <= 3'b0;
+
 
             memren_pipe   <= 1'b0;
             memwren_pipe  <= 1'b0;
@@ -82,6 +86,7 @@ module ix_mem_pipe #(
             pc_pipe       <= '0;
             rs2_val_pipe  <= '0;
             rd_pipe       <= 5'b0;
+            funct3_pipe   <= 3'b0;
 
             memren_pipe   <= 1'b0;
             memwren_pipe  <= 1'b0;
@@ -97,6 +102,7 @@ module ix_mem_pipe #(
             pc_pipe       <= pc_i;
             rs2_val_pipe  <= rs2_val_i;
             rd_pipe       <= rd_i;
+            funct3_pipe   <= funct3_i;
 
             memren_pipe   <= memren_i;
             memwren_pipe  <= memwren_i;
@@ -117,6 +123,7 @@ module ix_mem_pipe #(
         pc_o       = pc_pipe;
         rs2_val_o  = rs2_val_pipe;
         rd_o       = rd_pipe;
+        funct3_o   = funct3_pipe;
 
         memren_o   = memren_pipe;
         memwren_o  = memwren_pipe;

@@ -26,7 +26,7 @@
 
     `define PROBE_M_PC      pc_mem_o         // ??
     `define PROBE_M_ADDRESS        alu_res_mem_o   // ??
-    `define PROBE_M_SIZE_ENCODED    size_encoded // ??
+    `define PROBE_M_SIZE_ENCODED    size_encoded_o // ??
     `define PROBE_M_DATA            memory_data_i  // ??
 
     `define PROBE_W_PC            pc_wb_o  // ??
