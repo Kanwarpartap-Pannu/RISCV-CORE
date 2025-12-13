@@ -14,8 +14,16 @@ module pd5 #(
     input logic clk,
     input logic reset
 );
+    // stall signals 
+    logic stall;
 
-        
+    //flush signals
+    logic flush;
+
+    //forwarding signals
+    logic       WM_enable;
+    logic [1:0] WX_enable;
+    logic [1:0] MX_enable;  
     //Excute stage Signals
     logic [DWIDTH - 1:0] rs1_i; // register for first input to excute fed by ID_EX Pipe registers 
     logic [DWIDTH - 1:0] rs2_i; // register for second input to excute fed by ID_EX Pipe registers
@@ -69,6 +77,20 @@ module pd5 #(
 
     logic [2:0]        funct3_mem_o; // funct3 from ix_mem pipe to memory for size encoding
     
+    // EX/MEM pipe signals
+    logic [DWIDTH-1:0] alu_res_mem_o;
+    logic [AWIDTH-1:0] pc_mem_o;
+    logic [DWIDTH-1:0] rs2_val_mem_o;
+    logic [4:0]        rd_mem_o;
+    logic [4:0]        rs1_mem_o;
+    logic [4:0]        rs2_mem_o; 
+    logic              br_taken_mem_o;
+
+    logic              memren_mem_o;
+    logic              memwren_mem_o;
+    logic              regwren_mem_o;
+    logic [1:0]        wbsel_mem_o;
+    logic [3:0]        alusel_mem_o;
 
     // Default memory signals for instruction memory
     assign read_en = 1'b1;
@@ -92,9 +114,6 @@ module pd5 #(
         .insn_o(f_insn)         
     );
 
-    // temp signals for flush and stall
-    logic stall=0; // keep all reigster states unchanged 
-    logic flush=0; // insert bubble in pipeline
 
      // DECODE stage signals
     logic [AWIDTH-1:0] d_pc; 
@@ -174,7 +193,6 @@ module pd5 #(
         .opcode_i(d_opcode),
         .funct7_i(d_funct7),
         .funct3_i(d_funct3),
-        .br_taken(),
         .pcsel_o(ctrl_pcsel),
         .immsel_o(ctrl_immsel),
         .regwren_o(ctrl_regwren),
@@ -192,8 +210,10 @@ module pd5 #(
     logic [DWIDTH-1:0] ix_ins_o;
     logic [6:0]        ix_opcode_o;
     logic [4:0]        ix_rd_o;
-    logic [DWIDTH-1:0] ix_rs1_o;
-    logic [DWIDTH-1:0] ix_rs2_o;
+    logic [4:0]        ix_rs1_o;
+    logic [4:0]        ix_rs2_o;
+    logic [DWIDTH-1:0] ix_rs1_data_o;
+    logic [DWIDTH-1:0] ix_rs2_data_o;
     logic [6:0]        ix_funct7_o;
     logic [2:0]        ix_funct3_o;
     logic [4:0]        ix_shamt_o;
@@ -223,10 +243,14 @@ module pd5 #(
         .opcode_o(ix_opcode_o),
         .rd_i(d_rd),
         .rd_o(ix_rd_o),
-        .rs1_data_i(rs1data_o),
-        .rs2_data_i(rs2data_o),
+        .rs1_i(d_rs1),
+        .rs2_i(d_rs2),
         .rs1_o(ix_rs1_o),
         .rs2_o(ix_rs2_o),
+        .rs1_data_i(rs1data_o),
+        .rs2_data_i(rs2data_o),
+        .rs1_data_o(ix_rs1_data_o),
+        .rs2_data_o(ix_rs2_data_o),
         .funct7_i(d_funct7),
         .funct7_o(ix_funct7_o),
         .funct3_i(d_funct3),
@@ -265,8 +289,8 @@ module pd5 #(
     ) u_branch_control (
         .opcode_i(ix_opcode_o),
         .funct3_i(ix_funct3_o),
-        .rs1_i(ix_rs1_o), // from register file becuase
-        .rs2_i(ix_rs2_o), // rs1_i and rs2_i will be muxed to select pc and imm rather than register data
+        .rs1_i(ix_rs1_data_o), // from register file becuase
+        .rs2_i(ix_rs2_data_o), // rs1_i and rs2_i will be muxed to select pc and imm rather than register data
         .breq_o(breq_o),
         .brlt_o(brlt_o),
         .brltu_o(brltu_o)
@@ -284,10 +308,26 @@ module pd5 #(
     );
 
 
-    // Select rs1 and rs2 inputs to ALU based on control signals
-    assign rs1_i = (ix_rs1sel_o) ?  ix_rs1_o : ix_pc_o;
-    assign rs2_i = (ix_rs2sel_o) ?  ix_rs2_o : imm_o;
+    /* mux feeding execute source operands 
+    forwards values if needed otherwise chose based
+    on source operand select control signals
+    */
+    execute_mux # (
 
+    ) u_execute_mux (
+        .rs1(ix_rs1_data_o),
+        .rs2(ix_rs2_data_o),
+        .ex_mem_alures(alu_res_mem_o),
+        .writeback(writeback_data_o),
+        .pc(ix_pc_o),
+        .imm(imm_o),
+        .rs1_sel(ix_rs1sel_o),
+        .rs2_sel(ix_rs2sel_o),
+        .MX_enable(MX_enable),
+        .WX_enable(WX_enable),
+        .rs1_o(rs1_i),
+        .rs2_o(rs2_i)
+    );
 
     // Excute stage - ALU
     alu #(
@@ -308,18 +348,7 @@ module pd5 #(
         .brtaken_o(br_taken)   
     );
 
-    // EX/MEM pipe signals
-    logic [DWIDTH-1:0] alu_res_mem_o;
-    logic [AWIDTH-1:0] pc_mem_o;
-    logic [DWIDTH-1:0] rs2_val_mem_o;
-    logic [4:0]        rd_mem_o;
-    logic             br_taken_mem_o;
-
-    logic              memren_mem_o;
-    logic              memwren_mem_o;
-    logic              regwren_mem_o;
-    logic [1:0]        wbsel_mem_o;
-    logic [3:0]        alusel_mem_o;
+    
 
     ix_mem_pipe #(
         .DWIDTH(DWIDTH),
@@ -327,13 +356,13 @@ module pd5 #(
     ) u_ix_mem_pipe (
         .clk(clk),
         .rst(reset),
-        .stall_i(stall),
-        .flush_i(flush),
         .alu_res_i(alu_res),
         .brtaken_i(br_taken),
         .pc_i(ix_pc_o),
         .rs2_val_i(ix_rs2_o),
         .rd_i(ix_rd_o),
+        .rs1_i(ix_rs1_o),
+        .rs2_i(ix_rs2_o),
         .memren_i(ix_memren_o),
         .memwren_i(ix_memwren_o),
         .regwren_i(ix_regwren_o),
@@ -344,6 +373,8 @@ module pd5 #(
         .pc_o(pc_mem_o),
         .rs2_val_o(rs2_val_mem_o),
         .rd_o(rd_mem_o),
+        .rs1_o(rs1_mem_o),
+        .rs2_o(rs2_mem_o),
         .funct3_i(ix_funct3_o),
         .funct3_o(funct3_mem_o),
         .memren_o(memren_mem_o),
@@ -353,9 +384,11 @@ module pd5 #(
         .alusel_o(alusel_mem_o)
     );
 
-    // Data Memory size encoding logic based on lower 2 bits of funct3
-  
-
+    
+    logic [DWIDTH-1:0] store_data;
+    assign store_data = (WM_enable) ? writeback_data_o : rs2_val_mem_o;
+    
+    
     // Memory
     memory #(
         .AWIDTH(32),
@@ -367,13 +400,13 @@ module pd5 #(
         .addr_i(f_pc),
         .addr_dat(alu_res_mem_o),
         .data_i(data_i), 
-        .data_dat(rs2data_o), // data to write to data memory from rs2 only will happen is write enable is high
+        .data_dat(store_data), // data to write to data memory from rs2 only will happen is write enable is high
         .read_en_i(read_en), // controls for instruction memory hardset to always read never write
         .write_en_i(write_en),
-        .read_en_dat(ctrl_memren), // controls for data memory 
-        .write_en_dat(ctrl_memwren),
+        .read_en_dat(memren_mem_o), // controls for data memory 
+        .write_en_dat(memwren_mem_o),
         .funct3_i(funct3_mem_o),
-        .size_encoded_o(size_encoded_o), // new input for size encoding
+        .size_encoded_o(size_encoded_o), // new output for size encoding
         .data_o(f_insn),
         .data_dat_o(memory_data_i) // data read from data memory
    );
@@ -384,8 +417,6 @@ module pd5 #(
     ) u_mem_wb_pipe (
         .clk(clk),
         .rst(reset),
-        .stall_i(stall),
-        .flush_i(flush),
         .alu_res_i(alu_res_mem_o),
         .load_data_i(memory_data_i),
         .pc_i(pc_mem_o),
@@ -415,6 +446,36 @@ module pd5 #(
         .next_pc_o(next_pc_o)
     );
 
+    //hazard units 
+
+    stall_unit #()
+    u_stall_unit (
+        .opcode_id_ex_i(ix_opcode_o),
+        .opcode_if_id_i(d_opcode),
+        .rd_id_ex_i(ix_rd_o),
+        .rd_mem_wb_i(rd_wb_o),
+        .rs1_if_id_i(d_rs1),
+        .rs2_if_id_i(d_rs2),
+        .stall_o(stall)
+    );
+
+    flush_unit #()
+    u_flush_unit(
+        .br_taken(br_taken),
+        .flush_o(flush)
+    );
+
+    forwarding_unit #()
+    u_forwarding_unit(
+        .rd_ex_mem_i(rd_mem_o),
+        .rd_mem_wb_i(rd_wb_o),
+        .rs1_id_ex_i(ix_rs1_o),
+        .rs2_id_ex_i(ix_rs2_o),
+        .rs2_ex_mem_i(rs2_mem_o),
+        .WM_enable(WM_enable),
+        .WX_enable(WX_enable),
+        .MX_enable(MX_enable)
+    );
 
 
     // Probes (required by testbench)

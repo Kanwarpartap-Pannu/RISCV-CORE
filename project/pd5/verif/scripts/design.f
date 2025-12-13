@@ -13,3 +13,7 @@ id_ix_pipe.sv
 if_id_pipe.sv
 ix_mem_pipe.sv
 mem_wb_pipe.sv
+forwarding_unit.sv
+stall_unit.sv
+flush_unit.sv
+execute_mux.sv

@@ -6,8 +6,6 @@ module forwarding_unit #(
     input logic [4:0] rs1_id_ex_i,
     input logic [4:0] rs2_id_ex_i,
     input logic [4:0] rs2_ex_mem_i,
-    input logic [6:0] opcode_ex_mem_i,
-
     output logic WM_enable,
     output logic [1:0] MX_enable,
     output logic [1:0] WX_enable
@@ -43,7 +41,7 @@ the actual values to use are driven by the muxes in top level module(pd5.sv)
 always_comb begin
 
 // Writeback-Memory Bypass
-if ( (rd_mem_wb_i == rs2_ex_mem_i) && (opcode_ex_mem_i == OP_STORE ) ) begin
+if ( (rd_mem_wb_i == rs2_ex_mem_i) ) begin
     WM_enable=1;
 end
 else begin

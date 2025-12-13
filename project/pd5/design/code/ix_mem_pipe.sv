@@ -16,6 +16,8 @@ module ix_mem_pipe #(
     input  logic [AWIDTH-1:0] pc_i,          // PC+4 or branch target
     input  logic [DWIDTH-1:0] rs2_val_i,     // for store instructions
     input  logic [4:0]        rd_i,          // destination register number
+    input  logic [4:0]        rs1_i,
+    input  logic [4:0]        rs2_i,
     input  logic [2:0]        funct3_i,     // funct3 from EX stage
     // Control signals from ID/EX
     input  logic              memren_i,
@@ -32,6 +34,8 @@ module ix_mem_pipe #(
     output logic [AWIDTH-1:0] pc_o,
     output logic [DWIDTH-1:0] rs2_val_o,
     output logic [4:0]        rd_o,
+    output logic [4:0]        rs1_o,
+    output logic [4:0]        rs2_o,
     output logic [2:0]        funct3_o,
 
     // Control
@@ -77,24 +81,8 @@ module ix_mem_pipe #(
             regwren_pipe  <= 1'b0;
             wbsel_pipe    <= 2'b0;
             alusel_pipe   <= 4'b0;
-
-        end else if (flush_i) begin
-            
-            // Bubble inserted → disable all side effects
-            alu_res_pipe  <= '0;
-            brtaken_pipe  <= 1'b0;
-            pc_pipe       <= '0;
-            rs2_val_pipe  <= '0;
-            rd_pipe       <= 5'b0;
-            funct3_pipe   <= 3'b0;
-
-            memren_pipe   <= 1'b0;
-            memwren_pipe  <= 1'b0;
-            regwren_pipe  <= 1'b0;
-            wbsel_pipe    <= 2'b0;
-            alusel_pipe   <= 4'b0;
-
-        end else if (!stall_i) begin
+        end
+            else begin
             
             // Normal update from EX stage
             alu_res_pipe  <= alu_res_i;

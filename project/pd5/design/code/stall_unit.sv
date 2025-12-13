@@ -1,5 +1,5 @@
 module stall_unit #(
-    parameter int DWIDTH = 32, 
+    parameter int DWIDTH = 32 
 ) (
     input logic [6:0] opcode_id_ex_i,
     input logic [6:0] opcode_if_id_i,
@@ -53,7 +53,7 @@ always_comb begin
     end
 
     else begin
-        stall = 0;
+        stall_o = 0;
     end
 
 end

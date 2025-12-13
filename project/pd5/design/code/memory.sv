@@ -106,10 +106,10 @@ module memory #(
 
     // Combinational read logic for data memory
     always_comb begin
-	    data_dat_o = '0; // default to zero
+	    data_dat_o = 0; // default to zero
         if (read_en_i) begin // changed to read_en_i from read_en_dat because test bench wants it to always be high will chnange to read_en_dat for actually signals
             if ($isunknown(addr_dat)) begin
-                data_dat_o = '0;
+                data_dat_o = 0;
             end else if (read_en_i) begin
                 case (size_encoded)
           //2'b00: data_dat_o = {{24{main_memory[address_dat][7]}}, main_memory[address_dat]};

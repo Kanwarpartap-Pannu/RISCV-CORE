@@ -16,6 +16,8 @@ module id_ix_pipe #(
     input  logic [DWIDTH-1:0] rs2_data_i,
     input  logic [6:0]        opcode_i,
     input  logic [4:0]        rd_i,
+    input  logic [4:0]        rs1_i,
+    input  logic [4:0]        rs2_i,
     input  logic [6:0]        funct7_i,
     input  logic [2:0]        funct3_i,
     input  logic [4:0]        shamt_i,
@@ -36,8 +38,10 @@ module id_ix_pipe #(
     output logic [DWIDTH-1:0] ins_o,
     output logic [6:0]        opcode_o,
     output logic [4:0]        rd_o,
-    output logic [DWIDTH-1:0] rs1_o,
-    output logic [DWIDTH-1:0] rs2_o,
+    output  logic [4:0]        rs1_o,
+    output  logic [4:0]        rs2_o,
+    output logic [DWIDTH-1:0] rs1_data_o,
+    output logic [DWIDTH-1:0] rs2_data_o,
     output logic [6:0]        funct7_o,
     output logic [2:0]        funct3_o,
     output logic [4:0]        shamt_o,
@@ -59,8 +63,10 @@ module id_ix_pipe #(
     logic [AWIDTH-1:0] pc_pipe;
     logic [6:0]        opcode_pipe;
     logic [4:0]        rd_pipe;
-    logic [DWIDTH-1:0] rs1_pipe;
-    logic [DWIDTH-1:0] rs2_pipe;
+    logic [4:0]        rs1_pipe;
+    logic [4:0]        rs2_pipe;
+    logic [DWIDTH-1:0] rs1_data_pipe;
+    logic [DWIDTH-1:0] rs2_data_pipe;
     logic [6:0]        funct7_pipe;
     logic [2:0]        funct3_pipe;
     logic [4:0]        shamt_pipe;
@@ -86,6 +92,8 @@ module id_ix_pipe #(
             rd_pipe       <= '0;
             rs1_pipe      <= '0;
             rs2_pipe      <= '0;
+            rs1_data_pipe <= '0;
+            rs2_data_pipe <= '0;
             funct7_pipe   <= '0;
             funct3_pipe   <= '0;
             shamt_pipe    <= '0;
@@ -108,6 +116,8 @@ module id_ix_pipe #(
             rd_pipe       <= 5'b0;
             rs1_pipe      <= '0;
             rs2_pipe      <= '0;
+            rs1_data_pipe      <= '0;
+            rs2_data_pipe      <= '0;
             funct7_pipe   <= '0;
             funct3_pipe   <= '0;
             shamt_pipe    <= '0;
@@ -130,8 +140,10 @@ module id_ix_pipe #(
 
             opcode_pipe   <= opcode_i;
             rd_pipe       <= rd_i;
-            rs1_pipe      <= rs1_data_i;
-            rs2_pipe      <= rs2_data_i;
+            rs1_data_pipe      <= rs1_data_i;
+            rs2_data_pipe      <= rs2_data_i;
+            rs1_pipe      <= rs1_i;
+            rs2_pipe      <= rs2_i;
             funct7_pipe   <= funct7_i;
             funct3_pipe   <= funct3_i;
             shamt_pipe    <= shamt_i;
@@ -158,6 +170,8 @@ module id_ix_pipe #(
         rd_o       = rd_pipe;
         rs1_o      = rs1_pipe;
         rs2_o      = rs2_pipe;
+        rs1_data_o      = rs1_data_pipe;
+        rs2_data_o      = rs2_data_pipe;
         funct7_o   = funct7_pipe;
         funct3_o   = funct3_pipe;
         shamt_o    = shamt_pipe;

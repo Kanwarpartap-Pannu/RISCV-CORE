@@ -1,5 +1,5 @@
 module flush_unit #(
-    parameter int DWIDTH=32,
+    parameter int DWIDTH=32
 )(
     input logic br_taken,
 
@@ -15,7 +15,7 @@ for better readabilty and for clearer design
 always_comb begin
 
     // if branch was taken br_taken is set high and so is flush otherise it is low
-    flush_0 = br_taken;
+    flush_o = br_taken;
 
 end
 

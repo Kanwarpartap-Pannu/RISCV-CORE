@@ -1,5 +1,5 @@
 # vsim -suppress 3839 -c -do "/eecs/home/kanwarp/EECS-4201-project/project/pd5/verif/scripts/run.macro" /eecs/home/kanwarp/EECS-4201-project/project/pd5/work.top 
-# Start time: 15:22:57 on Dec 12,2025
+# Start time: 17:27:46 on Dec 13,2025
 # Loading sv_std.std
 # Loading /eecs/home/kanwarp/EECS-4201-project/project/pd5/work.top
 # Loading /eecs/home/kanwarp/EECS-4201-project/project/pd5/work.clockgen
@@ -15,25 +15,28 @@
 # Loading /eecs/home/kanwarp/EECS-4201-project/project/pd5/work.control
 # Loading /eecs/home/kanwarp/EECS-4201-project/project/pd5/work.id_ix_pipe
 # Loading /eecs/home/kanwarp/EECS-4201-project/project/pd5/work.branch_control
+# Loading /eecs/home/kanwarp/EECS-4201-project/project/pd5/work.execute_mux
 # Loading /eecs/home/kanwarp/EECS-4201-project/project/pd5/work.alu
 # Loading /eecs/home/kanwarp/EECS-4201-project/project/pd5/work.ix_mem_pipe
 # Loading /eecs/home/kanwarp/EECS-4201-project/project/pd5/work.memory
 # Loading /eecs/home/kanwarp/EECS-4201-project/project/pd5/work.mem_wb_pipe
 # Loading /eecs/home/kanwarp/EECS-4201-project/project/pd5/work.writeback
+# Loading /eecs/home/kanwarp/EECS-4201-project/project/pd5/work.stall_unit
+# Loading /eecs/home/kanwarp/EECS-4201-project/project/pd5/work.flush_unit
+# Loading /eecs/home/kanwarp/EECS-4201-project/project/pd5/work.forwarding_unit
+# ** Warning: (vsim-2685) [TFMPC] - Too few port connections for 'u_ix_mem_pipe'.  Expected 30, found 28.
+#    Time: 0 ps  Iteration: 0  Instance: /top/dut/core/u_ix_mem_pipe File: /eecs/home/kanwarp/EECS-4201-project/project/pd5/design/code/pd5.sv Line: 356
+# ** Warning: (vsim-3015) [PCDPC] - Port size (32) does not match connection size (5) for port 'rs2_val_i'. The port definition is at: /eecs/home/kanwarp/EECS-4201-project/project/pd5/design/code/ix_mem_pipe.sv(17).
+#    Time: 0 ps  Iteration: 0  Instance: /top/dut/core/u_ix_mem_pipe File: /eecs/home/kanwarp/EECS-4201-project/project/pd5/design/code/pd5.sv Line: 356
+# ** Warning: (vsim-3722) /eecs/home/kanwarp/EECS-4201-project/project/pd5/design/code/pd5.sv(356): [TFMPC] - Missing connection for port 'stall_i'.
+# ** Warning: (vsim-3722) /eecs/home/kanwarp/EECS-4201-project/project/pd5/design/code/pd5.sv(356): [TFMPC] - Missing connection for port 'flush_i'.
 # do /eecs/home/kanwarp/EECS-4201-project/project/pd5/verif/scripts/run.macro
-# ** Warning: (vsim-PLI-3407) Too many data words read on line 16 of file "/eecs/home/kanwarp/EECS-4201-project/project/pd5/verif/pipeline_tests/br-taken.x". (Current address [15], address range [0:14])    : /eecs/home/kanwarp/EECS-4201-project/project/pd5/design/code/memory.sv(64)
+# ** Warning: (vsim-PLI-3407) Too many data words read on line 14 of file "/eecs/home/kanwarp/EECS-4201-project/project/pd5/verif/pipeline_tests/5-stage-pipeline.x". (Current address [13], address range [0:12])    : /eecs/home/kanwarp/EECS-4201-project/project/pd5/design/code/memory.sv(64)
 #    Time: 0 ps  Iteration: 0  Instance: /top/dut/core/memory1
-# IMEMORY: Loaded 15 32-bit words from /eecs/home/kanwarp/EECS-4201-project/project/pd5/verif/pipeline_tests/br-taken.x
+# IMEMORY: Loaded 13 32-bit words from /eecs/home/kanwarp/EECS-4201-project/project/pd5/verif/pipeline_tests/5-stage-pipeline.x
 # [0] DECODE DEBUG: INS=xxxxxxxx Funct3=xxx
 # [1] DECODE DEBUG: INS=00000000 Funct3=000
-# [13] DECODE DEBUG: INS=00000013 Funct3=000
-# [17] DECODE DEBUG: INS=00308663 Funct3=000
-# [19] DECODE DEBUG: INS=01e00193 Funct3=000
-# [21] DECODE DEBUG: INS=02800213 Funct3=000
-# [23] DECODE DEBUG: INS=00018293 Funct3=000
-# [25] DECODE DEBUG: INS=00020313 Funct3=000
-# [27] DECODE DEBUG: INS=00000013 Funct3=000
-# ** Note: $finish    : /eecs/home/kanwarp/EECS-4201-project/project/pd5/design/code/pd5.sv(461)
-#    Time: 35 ps  Iteration: 1  Instance: /top/dut/core
-# End time: 15:22:57 on Dec 12,2025, Elapsed time: 0:00:00
-# Errors: 0, Warnings: 1
+# ** Note: $finish    : /eecs/home/kanwarp/EECS-4201-project/project/pd5/design/code/pd5.sv(522)
+#    Time: 31 ps  Iteration: 1  Instance: /top/dut/core
+# End time: 17:27:46 on Dec 13,2025, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 5

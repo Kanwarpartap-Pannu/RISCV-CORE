@@ -4,11 +4,6 @@ module mem_wb_pipe #(
 )(
     input  logic clk,
     input  logic rst,
-
-    // Hazard control
-    input  logic stall_i,
-    input  logic flush_i,
-
   
     // Inputs FROM MEM stage
 
@@ -42,9 +37,7 @@ module mem_wb_pipe #(
     logic              regwren_pipe;
     logic [1:0]        wbsel_pipe;
 
-    // ================
     // Pipeline register
-    // ================
     always_ff @(posedge clk or posedge rst) begin
         if (rst) begin
             alu_res_pipe   <= '0;
@@ -55,17 +48,9 @@ module mem_wb_pipe #(
             regwren_pipe   <= 1'b0;
             wbsel_pipe     <= 2'b0;
 
-        end else if (flush_i) begin
-            // Bubble: disable all register writes
-            alu_res_pipe   <= '0;
-            load_data_pipe <= '0;
-            pc_pipe        <= '0;
-            rd_pipe        <= 5'b0;
-
-            regwren_pipe   <= 1'b0;   // IMPORTANT: kill writeback
-            wbsel_pipe     <= 2'b0;
-
-        end else if (!stall_i) begin
+        end 
+        
+        else begin
             // Normal propagation
             alu_res_pipe   <= alu_res_i;
             load_data_pipe <= load_data_i;
