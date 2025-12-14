@@ -20,8 +20,7 @@ module memory #(
   // parameters
   parameter int AWIDTH = 32,
   parameter int DWIDTH = 32,
-  parameter logic [31:0] BASE_ADDR = 32'h01000000,
-  parameter logic [31:0] MEM_DEPTH = 32'h00000100 // 616 words memory depth 
+  parameter logic [31:0] BASE_ADDR = 32'h01000000
 ) (
   // inputs
   input logic clk,
@@ -43,7 +42,7 @@ module memory #(
 
     // note since all modulo operations are with power of 2 we can optimize it to bit masking if needed in future but I think verilog does it automatically
     logic [1:0] size_encoded;
-    localparam int MEM_BYTES = (MEM_DEPTH )* (DWIDTH/8);  // Total memory size in bytes
+    localparam int MEM_BYTES = (`MEM_DEPTH )* (DWIDTH/8);  // Total memory size in bytes
 
 	logic [DWIDTH-1:0] temp_memory [0:`LINE_COUNT - 1];
    	// Byte-addressable memory

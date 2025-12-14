@@ -66,10 +66,10 @@ module alu #(
             case (funct3_i) // uses signals from branch control
                 3'b000: brtaken_o = eq;        // BEQ
                 3'b001: brtaken_o = !eq;       // BNE
-                3'b100: brtaken_o = lt;        // BLT
-                3'b101: brtaken_o = !lt;       // BGE
-                3'b110: brtaken_o = ltu;       // BLTU
-                3'b111: brtaken_o = !ltu;      // BGEU
+                3'b100: brtaken_o = (lt && !eq);        // BLT
+                3'b101: brtaken_o = (!lt || eq);       // BGE
+                3'b110: brtaken_o = (ltu && !eq);       // BLTU
+                3'b111: brtaken_o = (!ltu || eq);      // BGEU
                 default: brtaken_o = 1'b0;
             endcase
         end

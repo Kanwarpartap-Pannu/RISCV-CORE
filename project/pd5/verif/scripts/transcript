@@ -1,5 +1,5 @@
 # vsim -suppress 3839 -c -do "/eecs/home/kanwarp/EECS-4201-project/project/pd5/verif/scripts/run.macro" /eecs/home/kanwarp/EECS-4201-project/project/pd5/work.top 
-# Start time: 17:27:46 on Dec 13,2025
+# Start time: 16:44:01 on Dec 14,2025
 # Loading sv_std.std
 # Loading /eecs/home/kanwarp/EECS-4201-project/project/pd5/work.top
 # Loading /eecs/home/kanwarp/EECS-4201-project/project/pd5/work.clockgen
@@ -14,8 +14,8 @@
 # Loading /eecs/home/kanwarp/EECS-4201-project/project/pd5/work.control_sv_unit
 # Loading /eecs/home/kanwarp/EECS-4201-project/project/pd5/work.control
 # Loading /eecs/home/kanwarp/EECS-4201-project/project/pd5/work.id_ix_pipe
-# Loading /eecs/home/kanwarp/EECS-4201-project/project/pd5/work.branch_control
 # Loading /eecs/home/kanwarp/EECS-4201-project/project/pd5/work.execute_mux
+# Loading /eecs/home/kanwarp/EECS-4201-project/project/pd5/work.branch_control
 # Loading /eecs/home/kanwarp/EECS-4201-project/project/pd5/work.alu
 # Loading /eecs/home/kanwarp/EECS-4201-project/project/pd5/work.ix_mem_pipe
 # Loading /eecs/home/kanwarp/EECS-4201-project/project/pd5/work.memory
@@ -24,19 +24,128 @@
 # Loading /eecs/home/kanwarp/EECS-4201-project/project/pd5/work.stall_unit
 # Loading /eecs/home/kanwarp/EECS-4201-project/project/pd5/work.flush_unit
 # Loading /eecs/home/kanwarp/EECS-4201-project/project/pd5/work.forwarding_unit
-# ** Warning: (vsim-2685) [TFMPC] - Too few port connections for 'u_ix_mem_pipe'.  Expected 30, found 28.
-#    Time: 0 ps  Iteration: 0  Instance: /top/dut/core/u_ix_mem_pipe File: /eecs/home/kanwarp/EECS-4201-project/project/pd5/design/code/pd5.sv Line: 356
-# ** Warning: (vsim-3015) [PCDPC] - Port size (32) does not match connection size (5) for port 'rs2_val_i'. The port definition is at: /eecs/home/kanwarp/EECS-4201-project/project/pd5/design/code/ix_mem_pipe.sv(17).
-#    Time: 0 ps  Iteration: 0  Instance: /top/dut/core/u_ix_mem_pipe File: /eecs/home/kanwarp/EECS-4201-project/project/pd5/design/code/pd5.sv Line: 356
-# ** Warning: (vsim-3722) /eecs/home/kanwarp/EECS-4201-project/project/pd5/design/code/pd5.sv(356): [TFMPC] - Missing connection for port 'stall_i'.
-# ** Warning: (vsim-3722) /eecs/home/kanwarp/EECS-4201-project/project/pd5/design/code/pd5.sv(356): [TFMPC] - Missing connection for port 'flush_i'.
 # do /eecs/home/kanwarp/EECS-4201-project/project/pd5/verif/scripts/run.macro
-# ** Warning: (vsim-PLI-3407) Too many data words read on line 14 of file "/eecs/home/kanwarp/EECS-4201-project/project/pd5/verif/pipeline_tests/5-stage-pipeline.x". (Current address [13], address range [0:12])    : /eecs/home/kanwarp/EECS-4201-project/project/pd5/design/code/memory.sv(64)
-#    Time: 0 ps  Iteration: 0  Instance: /top/dut/core/memory1
-# IMEMORY: Loaded 13 32-bit words from /eecs/home/kanwarp/EECS-4201-project/project/pd5/verif/pipeline_tests/5-stage-pipeline.x
-# [0] DECODE DEBUG: INS=xxxxxxxx Funct3=xxx
-# [1] DECODE DEBUG: INS=00000000 Funct3=000
-# ** Note: $finish    : /eecs/home/kanwarp/EECS-4201-project/project/pd5/design/code/pd5.sv(522)
-#    Time: 31 ps  Iteration: 1  Instance: /top/dut/core
-# End time: 17:27:46 on Dec 13,2025, Elapsed time: 0:00:00
-# Errors: 0, Warnings: 5
+# IMEMORY: Loaded 154 32-bit words from /eecs/home/kanwarp/EECS-4201-project/project/pd5/verif/rv32-bmarks/full-bmarks/BubbleSort.x
+# [21] IMEMORY: Wrote 0x00000000 to 0x010ffffc
+# [61] IMEMORY: Wrote 0x0000000c to 0x010fffd0
+# [63] IMEMORY: Wrote 0x00000009 to 0x010fffd4
+# [65] IMEMORY: Wrote 0x00000004 to 0x010fffd8
+# [67] IMEMORY: Wrote 0x00000063 to 0x010fffdc
+# [69] IMEMORY: Wrote 0x00000078 to 0x010fffe0
+# [71] IMEMORY: Wrote 0x00000001 to 0x010fffe4
+# [73] IMEMORY: Wrote 0x00000003 to 0x010fffe8
+# [75] IMEMORY: Wrote 0x0000000a to 0x010fffec
+# [91] IMEMORY: Wrote 0x010fffd0 to 0x010fffbc
+# [93] IMEMORY: Wrote 0x00000008 to 0x010fffb8
+# [97] IMEMORY: Wrote 0x00000000 to 0x010fffcc
+# [123] IMEMORY: Wrote 0x00000001 to 0x010fffc8
+# [239] IMEMORY: Wrote 0x0000000c to 0x010fffc4
+# [285] IMEMORY: Wrote 0x00000009 to 0x010fffd0
+# [305] IMEMORY: Wrote 0x0000000c to 0x010fffd4
+# [313] IMEMORY: Wrote 0x00000002 to 0x010fffc8
+# [423] IMEMORY: Wrote 0x0000000c to 0x010fffc4
+# [469] IMEMORY: Wrote 0x00000004 to 0x010fffd4
+# [489] IMEMORY: Wrote 0x0000000c to 0x010fffd8
+# [497] IMEMORY: Wrote 0x00000003 to 0x010fffc8
+# [589] IMEMORY: Wrote 0x00000004 to 0x010fffc8
+# [681] IMEMORY: Wrote 0x00000005 to 0x010fffc8
+# [791] IMEMORY: Wrote 0x00000078 to 0x010fffc4
+# [837] IMEMORY: Wrote 0x00000001 to 0x010fffe0
+# [857] IMEMORY: Wrote 0x00000078 to 0x010fffe4
+# [865] IMEMORY: Wrote 0x00000006 to 0x010fffc8
+# [975] IMEMORY: Wrote 0x00000078 to 0x010fffc4
+# [1021] IMEMORY: Wrote 0x00000003 to 0x010fffe4
+# [1041] IMEMORY: Wrote 0x00000078 to 0x010fffe8
+# [1049] IMEMORY: Wrote 0x00000007 to 0x010fffc8
+# [1159] IMEMORY: Wrote 0x00000078 to 0x010fffc4
+# [1205] IMEMORY: Wrote 0x0000000a to 0x010fffe8
+# [1225] IMEMORY: Wrote 0x00000078 to 0x010fffec
+# [1233] IMEMORY: Wrote 0x00000008 to 0x010fffc8
+# [1263] IMEMORY: Wrote 0x00000001 to 0x010fffcc
+# [1283] IMEMORY: Wrote 0x00000001 to 0x010fffc8
+# [1399] IMEMORY: Wrote 0x00000009 to 0x010fffc4
+# [1445] IMEMORY: Wrote 0x00000004 to 0x010fffd0
+# [1465] IMEMORY: Wrote 0x00000009 to 0x010fffd4
+# [1473] IMEMORY: Wrote 0x00000002 to 0x010fffc8
+# [1565] IMEMORY: Wrote 0x00000003 to 0x010fffc8
+# [1657] IMEMORY: Wrote 0x00000004 to 0x010fffc8
+# [1767] IMEMORY: Wrote 0x00000063 to 0x010fffc4
+# [1813] IMEMORY: Wrote 0x00000001 to 0x010fffdc
+# [1833] IMEMORY: Wrote 0x00000063 to 0x010fffe0
+# [1841] IMEMORY: Wrote 0x00000005 to 0x010fffc8
+# [1951] IMEMORY: Wrote 0x00000063 to 0x010fffc4
+# [1997] IMEMORY: Wrote 0x00000003 to 0x010fffe0
+# [2017] IMEMORY: Wrote 0x00000063 to 0x010fffe4
+# [2025] IMEMORY: Wrote 0x00000006 to 0x010fffc8
+# [2135] IMEMORY: Wrote 0x00000063 to 0x010fffc4
+# [2181] IMEMORY: Wrote 0x0000000a to 0x010fffe4
+# [2201] IMEMORY: Wrote 0x00000063 to 0x010fffe8
+# [2209] IMEMORY: Wrote 0x00000007 to 0x010fffc8
+# [2239] IMEMORY: Wrote 0x00000002 to 0x010fffcc
+# [2259] IMEMORY: Wrote 0x00000001 to 0x010fffc8
+# [2357] IMEMORY: Wrote 0x00000002 to 0x010fffc8
+# [2449] IMEMORY: Wrote 0x00000003 to 0x010fffc8
+# [2559] IMEMORY: Wrote 0x0000000c to 0x010fffc4
+# [2605] IMEMORY: Wrote 0x00000001 to 0x010fffd8
+# [2625] IMEMORY: Wrote 0x0000000c to 0x010fffdc
+# [2633] IMEMORY: Wrote 0x00000004 to 0x010fffc8
+# [2743] IMEMORY: Wrote 0x0000000c to 0x010fffc4
+# [2789] IMEMORY: Wrote 0x00000003 to 0x010fffdc
+# [2809] IMEMORY: Wrote 0x0000000c to 0x010fffe0
+# [2817] IMEMORY: Wrote 0x00000005 to 0x010fffc8
+# [2927] IMEMORY: Wrote 0x0000000c to 0x010fffc4
+# [2973] IMEMORY: Wrote 0x0000000a to 0x010fffe0
+# [2993] IMEMORY: Wrote 0x0000000c to 0x010fffe4
+# [3001] IMEMORY: Wrote 0x00000006 to 0x010fffc8
+# [3031] IMEMORY: Wrote 0x00000003 to 0x010fffcc
+# [3051] IMEMORY: Wrote 0x00000001 to 0x010fffc8
+# [3149] IMEMORY: Wrote 0x00000002 to 0x010fffc8
+# [3259] IMEMORY: Wrote 0x00000009 to 0x010fffc4
+# [3305] IMEMORY: Wrote 0x00000001 to 0x010fffd4
+# [3325] IMEMORY: Wrote 0x00000009 to 0x010fffd8
+# [3333] IMEMORY: Wrote 0x00000003 to 0x010fffc8
+# [3443] IMEMORY: Wrote 0x00000009 to 0x010fffc4
+# [3489] IMEMORY: Wrote 0x00000003 to 0x010fffd8
+# [3509] IMEMORY: Wrote 0x00000009 to 0x010fffdc
+# [3517] IMEMORY: Wrote 0x00000004 to 0x010fffc8
+# [3609] IMEMORY: Wrote 0x00000005 to 0x010fffc8
+# [3639] IMEMORY: Wrote 0x00000004 to 0x010fffcc
+# [3659] IMEMORY: Wrote 0x00000001 to 0x010fffc8
+# [3775] IMEMORY: Wrote 0x00000004 to 0x010fffc4
+# [3821] IMEMORY: Wrote 0x00000001 to 0x010fffd0
+# [3841] IMEMORY: Wrote 0x00000004 to 0x010fffd4
+# [3849] IMEMORY: Wrote 0x00000002 to 0x010fffc8
+# [3959] IMEMORY: Wrote 0x00000004 to 0x010fffc4
+# [4005] IMEMORY: Wrote 0x00000003 to 0x010fffd4
+# [4025] IMEMORY: Wrote 0x00000004 to 0x010fffd8
+# [4033] IMEMORY: Wrote 0x00000003 to 0x010fffc8
+# [4125] IMEMORY: Wrote 0x00000004 to 0x010fffc8
+# [4155] IMEMORY: Wrote 0x00000005 to 0x010fffcc
+# [4175] IMEMORY: Wrote 0x00000001 to 0x010fffc8
+# [4273] IMEMORY: Wrote 0x00000002 to 0x010fffc8
+# [4365] IMEMORY: Wrote 0x00000003 to 0x010fffc8
+# [4395] IMEMORY: Wrote 0x00000006 to 0x010fffcc
+# [4415] IMEMORY: Wrote 0x00000001 to 0x010fffc8
+# [4513] IMEMORY: Wrote 0x00000002 to 0x010fffc8
+# [4543] IMEMORY: Wrote 0x00000007 to 0x010fffcc
+# [4563] IMEMORY: Wrote 0x00000001 to 0x010fffc8
+# [4599] IMEMORY: Wrote 0x00000008 to 0x010fffcc
+# [4619] IMEMORY: Wrote 0x00000001 to 0x010fffc8
+# [4655] IMEMORY: Wrote 0x00000009 to 0x010fffcc
+# [4675] IMEMORY: Wrote 0x00000001 to 0x010fffc8
+# [4711] IMEMORY: Wrote 0x0000000a to 0x010fffcc
+# [4731] IMEMORY: Wrote 0x00000001 to 0x010fffc8
+# [4767] IMEMORY: Wrote 0x0000000b to 0x010fffcc
+# [4787] IMEMORY: Wrote 0x00000001 to 0x010fffc8
+# [4823] IMEMORY: Wrote 0x0000000c to 0x010fffcc
+# [4843] IMEMORY: Wrote 0x00000001 to 0x010fffc8
+# [4879] IMEMORY: Wrote 0x0000000d to 0x010fffcc
+# [4899] IMEMORY: Wrote 0x00000001 to 0x010fffc8
+# [4935] IMEMORY: Wrote 0x0000000e to 0x010fffcc
+# [4955] IMEMORY: Wrote 0x00000001 to 0x010fffc8
+# [4991] IMEMORY: Wrote 0x0000000f to 0x010fffcc
+# Timeout
+# ** Note: $finish    : /eecs/home/kanwarp/EECS-4201-project/project/pd5/verif/tests/clockgen.sv(32)
+#    Time: 5001 ps  Iteration: 1  Instance: /top/clkg
+# End time: 16:44:04 on Dec 14,2025, Elapsed time: 0:00:03
+# Errors: 0, Warnings: 0

@@ -20,7 +20,9 @@ module fetch #(
 	// inputs
 	input logic clk,
 	input logic rst,
-    input logic pcsel_o,
+    input logic pcsel,
+    input logic br_taken,
+    input logic stall, 
     input logic [DWIDTH - 1:0] alu_res, // target pc from alu according to cycle path if jump or branch
 	// outputs	
 	output logic [AWIDTH - 1:0] pc_o,
@@ -34,11 +36,17 @@ module fetch #(
      // must be extended to include which pc to fetch from based on branch taken or not or jump instructions 
     
     logic [AWIDTH - 1:0] pc;
+    logic pcsel_o;
+    assign pcsel_o = (pcsel || br_taken);
       
     always_ff @(posedge clk) begin 
         if (rst) begin
             pc <= BASEADDR;
-        end else begin
+        end 
+        else if (stall) begin 
+            pc <= pc;
+        end
+        else begin
             unique case (pcsel_o)
                 1'b0: pc <= pc + 32'd4; // sequential
                 1'b1: pc <= alu_res;         //  based on pcsel from control either branch target or jump target

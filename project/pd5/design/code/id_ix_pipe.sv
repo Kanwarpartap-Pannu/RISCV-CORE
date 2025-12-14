@@ -108,7 +108,7 @@ module id_ix_pipe #(
             wbsel_pipe    <= 2'b0;
             alusel_pipe   <= 4'b0;
 
-        end else if (flush_i) begin
+        end else if (flush_i || stall_i) begin
             // bubble: kill this instruction and its side effects
             ins_pipe      <= 32'h00000013;  // ADDI x0,x0,0 (NOP) - optional
             pc_pipe       <= '0;
@@ -159,7 +159,7 @@ module id_ix_pipe #(
             alusel_pipe   <= alusel_i;
 
         end
-        // else: stall_i == 1 → hold all pipeline regs (no assignments)
+
     end
 
     // combinational outputs

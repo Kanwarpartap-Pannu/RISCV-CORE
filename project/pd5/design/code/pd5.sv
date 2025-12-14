@@ -59,7 +59,8 @@ module pd5 #(
     logic [DWIDTH - 1:0] alu_res_wb_o; // ALU res input from MEM/WB pipe
     logic [DWIDTH - 1:0] load_data_wb_o; // data loaded input from MEM/WB pipe
     logic [AWIDTH - 1:0] pc_wb_o; // PC input from MEM/WB pipe
-    logic [4:0]        rd_wb_o; // destination register input from MEM/WB pipe
+    logic [4:0]          rd_wb_o; // destination register input from MEM/WB pipe
+    logic [6:0]          opcode_wb_o;
 
     logic              regwren_wb_o; // register write enable input from MEM/WB pipe
     logic [1:0]        wbsel_wb_o; // writeback select input from MEM/WB pipe
@@ -77,6 +78,29 @@ module pd5 #(
 
     logic [2:0]        funct3_mem_o; // funct3 from ix_mem pipe to memory for size encoding
     
+    // pipe signals for id/ix 
+    logic [AWIDTH-1:0] ix_pc_o;
+    logic [DWIDTH-1:0] ix_ins_o;
+    logic [6:0]        ix_opcode_o;
+    logic [4:0]        ix_rd_o;
+    logic [4:0]        ix_rs1_o;
+    logic [4:0]        ix_rs2_o;
+    logic [DWIDTH-1:0] ix_rs1_data_o;
+    logic [DWIDTH-1:0] ix_rs2_data_o;
+    logic [6:0]        ix_funct7_o;
+    logic [2:0]        ix_funct3_o;
+    logic [4:0]        ix_shamt_o;
+    logic             ix_pcsel_o;
+    logic             ix_immsel_o;
+    logic             ix_regwren_o;
+    logic             ix_rs1sel_o;
+    logic             ix_rs2sel_o;
+    logic             ix_memren_o;
+    logic             ix_memwren_o;
+    logic [1:0]       ix_wbsel_o;
+    logic [3:0]       ix_alusel_o;
+
+
     // EX/MEM pipe signals
     logic [DWIDTH-1:0] alu_res_mem_o;
     logic [AWIDTH-1:0] pc_mem_o;
@@ -85,6 +109,7 @@ module pd5 #(
     logic [4:0]        rs1_mem_o;
     logic [4:0]        rs2_mem_o; 
     logic              br_taken_mem_o;
+    logic [6:0]        opcode_mem_o;
 
     logic              memren_mem_o;
     logic              memwren_mem_o;
@@ -108,7 +133,9 @@ module pd5 #(
     ) fetch1 (
         .clk(clk),
         .rst(reset),
-        .pcsel_o(ctrl_pcsel),
+        .pcsel(ix_pcsel_o),
+        .br_taken(br_taken),
+        .stall(stall),
         .alu_res(alu_res),
         .pc_o(f_pc),           
         .insn_o(f_insn)         
@@ -205,27 +232,7 @@ module pd5 #(
     );
 
 
-    // pipe signals for id/ix 
-    logic [AWIDTH-1:0] ix_pc_o;
-    logic [DWIDTH-1:0] ix_ins_o;
-    logic [6:0]        ix_opcode_o;
-    logic [4:0]        ix_rd_o;
-    logic [4:0]        ix_rs1_o;
-    logic [4:0]        ix_rs2_o;
-    logic [DWIDTH-1:0] ix_rs1_data_o;
-    logic [DWIDTH-1:0] ix_rs2_data_o;
-    logic [6:0]        ix_funct7_o;
-    logic [2:0]        ix_funct3_o;
-    logic [4:0]        ix_shamt_o;
-    logic             ix_pcsel_o;
-    logic             ix_immsel_o;
-    logic             ix_regwren_o;
-    logic             ix_rs1sel_o;
-    logic             ix_rs2sel_o;
-    logic             ix_memren_o;
-    logic             ix_memwren_o;
-    logic [1:0]       ix_wbsel_o;
-    logic [3:0]       ix_alusel_o;
+    
 
     id_ix_pipe #(
         .AWIDTH(AWIDTH),
@@ -279,22 +286,7 @@ module pd5 #(
 
 
     
-     //branch control signals
-    logic breq_o;
-    logic brlt_o;
-    logic brltu_o;
-    // Branch control unit
-    branch_control #(
-        .DWIDTH(DWIDTH)
-    ) u_branch_control (
-        .opcode_i(ix_opcode_o),
-        .funct3_i(ix_funct3_o),
-        .rs1_i(ix_rs1_data_o), // from register file becuase
-        .rs2_i(ix_rs2_data_o), // rs1_i and rs2_i will be muxed to select pc and imm rather than register data
-        .breq_o(breq_o),
-        .brlt_o(brlt_o),
-        .brltu_o(brltu_o)
-    );
+    
 
     logic [31:0] imm_o;
 
@@ -321,12 +313,57 @@ module pd5 #(
         .writeback(writeback_data_o),
         .pc(ix_pc_o),
         .imm(imm_o),
+        .opcode_i(ix_opcode_o),
         .rs1_sel(ix_rs1sel_o),
         .rs2_sel(ix_rs2sel_o),
         .MX_enable(MX_enable),
         .WX_enable(WX_enable),
         .rs1_o(rs1_i),
         .rs2_o(rs2_i)
+    );
+
+     //branch control signals
+    logic breq_o;
+    logic brlt_o;
+    logic brltu_o;
+    logic [DWIDTH-1:0] rs1_branch;
+    logic [DWIDTH-1:0] rs2_branch;
+
+    always_comb begin
+    if (MX_enable == 2'b01) begin
+        rs1_branch = alu_res_mem_o;
+    end
+    else if (WX_enable == 2'b01) begin
+        rs1_branch = writeback_data_o;
+    end
+    else begin 
+        rs1_branch = ix_rs1_data_o ;
+    end
+    end
+
+    always_comb begin
+    if (MX_enable == 2'b10) begin
+        rs2_branch = alu_res_mem_o;
+    end
+    else if (WX_enable == 2'b10) begin
+        rs2_branch = writeback_data_o;
+    end
+    else begin 
+        rs2_branch = ix_rs2_data_o;
+    end
+    end
+
+    // Branch control unit
+    branch_control #(
+        .DWIDTH(DWIDTH)
+    ) u_branch_control (
+        .opcode_i(ix_opcode_o),
+        .funct3_i(ix_funct3_o),
+        .rs1_i(rs1_branch), // from register file becuase
+        .rs2_i(rs2_branch), // rs1_i and rs2_i will be muxed to select pc and imm rather than register data
+        .breq_o(breq_o),
+        .brlt_o(brlt_o),
+        .brltu_o(brltu_o)
     );
 
     // Excute stage - ALU
@@ -359,10 +396,11 @@ module pd5 #(
         .alu_res_i(alu_res),
         .brtaken_i(br_taken),
         .pc_i(ix_pc_o),
-        .rs2_val_i(ix_rs2_o),
+        .rs2_val_i(ix_rs2_data_o),
         .rd_i(ix_rd_o),
         .rs1_i(ix_rs1_o),
         .rs2_i(ix_rs2_o),
+        .opcode_i(ix_opcode_o),
         .memren_i(ix_memren_o),
         .memwren_i(ix_memwren_o),
         .regwren_i(ix_regwren_o),
@@ -375,6 +413,7 @@ module pd5 #(
         .rd_o(rd_mem_o),
         .rs1_o(rs1_mem_o),
         .rs2_o(rs2_mem_o),
+        .opcode_o(opcode_mem_o),
         .funct3_i(ix_funct3_o),
         .funct3_o(funct3_mem_o),
         .memren_o(memren_mem_o),
@@ -403,7 +442,7 @@ module pd5 #(
         .data_dat(store_data), // data to write to data memory from rs2 only will happen is write enable is high
         .read_en_i(read_en), // controls for instruction memory hardset to always read never write
         .write_en_i(write_en),
-        .read_en_dat(memren_mem_o), // controls for data memory 
+        .read_en_dat(read_en), // controls for data memory 
         .write_en_dat(memwren_mem_o),
         .funct3_i(funct3_mem_o),
         .size_encoded_o(size_encoded_o), // new output for size encoding
@@ -421,12 +460,14 @@ module pd5 #(
         .load_data_i(memory_data_i),
         .pc_i(pc_mem_o),
         .rd_i(rd_mem_o),
+        .opcode_i(opcode_mem_o),
         .regwren_i(regwren_mem_o),
         .wbsel_i(wbsel_mem_o),
         .alu_res_o(alu_res_wb_o),
         .load_data_o(load_data_wb_o),
         .pc_o(pc_wb_o),
         .rd_o(rd_wb_o),
+        .opcode_o(opcode_wb_o),
         .regwren_o(regwren_wb_o),
         .wbsel_o(wbsel_wb_o)
     );
@@ -462,6 +503,7 @@ module pd5 #(
     flush_unit #()
     u_flush_unit(
         .br_taken(br_taken),
+        .pcsel(ix_pcsel_o),
         .flush_o(flush)
     );
 
@@ -471,6 +513,8 @@ module pd5 #(
         .rd_mem_wb_i(rd_wb_o),
         .rs1_id_ex_i(ix_rs1_o),
         .rs2_id_ex_i(ix_rs2_o),
+        .ix_opcode_o(ix_opcode_o),
+        .wb_opcode_o(opcode_wb_o),
         .rs2_ex_mem_i(rs2_mem_o),
         .WM_enable(WM_enable),
         .WX_enable(WX_enable),
@@ -519,10 +563,26 @@ module pd5 #(
 // program termination logic
 reg is_program = 0;
 always_ff @(posedge clk) begin
-    if (f_insn == 32'h00000073) $finish;  // directly terminate if see ecall
+    if (f_insn == 32'h00000073) begin  // directly terminate if see ecall
+        if (u_register_file.regs[15] == 32'd1 ) begin
+        $display(" *** TEST PASSED *** ECALL");
+        end
+        else begin
+            $display(" *** TEST FAILED *** ECALL");
+        end
+        $finish;
+    end
     if (f_insn == 32'h00008067) is_program = 1;  // if see ret instruction, it is simple program test
     // [TODO] Change register_file_0.registers[2] to the appropriate x2 register based on your module instantiations...
-    if (is_program && (u_register_file.regs[2] == 32'h01000000 + `MEM_DEPTH)) $finish;
+    if (is_program && (u_register_file.regs[2] == 32'h01000000 + `MEM_DEPTH)) begin 
+        if (u_register_file.regs[15] == 32'd1 ) begin
+        $display(" *** TEST PASSED *** Stack Overflow");
+        end
+        else begin
+            $display(" *** TEST FAILED *** Stack Overflow");
+        end
+        $finish;
+    end
 end
 
 endmodule : pd5

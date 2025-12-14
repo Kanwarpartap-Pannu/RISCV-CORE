@@ -28,6 +28,7 @@ module clockgen(
       rst <= 0;
     end
     if(counter == `TIMEOUT) begin
+      $display("Timeout");
       $finish;
     end
   end

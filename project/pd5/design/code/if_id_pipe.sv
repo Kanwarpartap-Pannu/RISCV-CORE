@@ -25,7 +25,7 @@ module if_id_pipe #(
             ins_pipe <= '0;
             pc_pipe  <= '0;
 
-        end else if (flush_i) begin
+        end else if (flush_i ) begin
             // Flush pipeline → Insert NOP instruction
             ins_pipe <= 32'h00000013; // ADDI x0, x0, 0   (NOP)
             pc_pipe  <= '0;
@@ -35,11 +35,12 @@ module if_id_pipe #(
             ins_pipe <= ins_i;
             pc_pipe  <= pc_i;
 
-        end else begin
-            // Stall Hold values (no change)
-            ins_pipe <= ins_pipe;
-            pc_pipe  <= pc_pipe;
         end 
+        else begin 
+            ins_pipe <= ins_pipe;
+            pc_pipe <= pc_pipe;
+        end
+
     end
 
     assign ins_o = ins_pipe;

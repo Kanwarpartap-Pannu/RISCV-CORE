@@ -2,6 +2,7 @@ module flush_unit #(
     parameter int DWIDTH=32
 )(
     input logic br_taken,
+    input logic pcsel,
 
     output logic flush_o
 
@@ -15,7 +16,8 @@ for better readabilty and for clearer design
 always_comb begin
 
     // if branch was taken br_taken is set high and so is flush otherise it is low
-    flush_o = br_taken;
+    // or if its a jump and link
+    flush_o = (br_taken || pcsel);
 
 end
 

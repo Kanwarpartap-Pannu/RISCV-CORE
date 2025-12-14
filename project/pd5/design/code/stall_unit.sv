@@ -40,22 +40,22 @@ forwarding paths exist to bypass the register file
 always_comb begin
     // hazard detection logic stall is set high when hazard is detected 
 
+    
     // load-use hazard detection, note that if the newer instruction is a store writing to the same rd then no need to stall 
-    if ( (opcode_id_ex_i == OP_LOAD) && ( (rs1_if_id_i == rd_id_ex_i) || 
-    ( (rs2_if_id_i == rd_id_ex_i) && (opcode_if_id_i != OP_STORE) ) ) ) begin
+    if ( ((opcode_id_ex_i == OP_LOAD) )&& ( (rs1_if_id_i == rd_id_ex_i) || 
+    ( (rs2_if_id_i == rd_id_ex_i) && (opcode_if_id_i != OP_STORE) ) ) && (rd_id_ex_i != 0) ) begin
         stall_o = 1; 
     end
 
     // write-decode hazard detection, again no stall for store to same rd  
     else if ( ( (rs1_if_id_i == rd_mem_wb_i) || 
-    ( (rs2_if_id_i == rd_mem_wb_i) && (opcode_if_id_i != OP_STORE) ) ) )  begin 
+    ( (rs2_if_id_i == rd_mem_wb_i) && (opcode_if_id_i != OP_STORE) ) ) && (rd_mem_wb_i != 0) )  begin 
         stall_o = 1;
     end
 
     else begin
         stall_o = 0;
     end
-
 end
 
 
