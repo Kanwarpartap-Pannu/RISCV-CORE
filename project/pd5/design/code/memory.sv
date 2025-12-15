@@ -71,6 +71,8 @@ module memory #(
 		$display("IMEMORY: Loaded %0d 32-bit words from %s", `LINE_COUNT, `MEM_PATH);
 	end
 
+
+    // size encoded moved inside of memory 
       always_comb begin
                 case (funct3_i)
                     3'b000, 3'b100: size_encoded = 2'b00; // word 

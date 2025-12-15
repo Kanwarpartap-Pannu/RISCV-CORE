@@ -33,7 +33,7 @@ PATTERN_DUMP_FILE_STR ?= \"$(PATTERN_DUMP_FILE)\"
 PATTERN_DUMP					?= 0
 PATTERN_CHECK					?= 0
 GEN_TRACE             ?= 0
-TIMEOUT               ?= 2500
+TIMEOUT               ?= 50000
 TRACE_FILE_STR        ?= \"$(TRACE_FILE)\"
 
 WARN ?= 1

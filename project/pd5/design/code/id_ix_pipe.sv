@@ -6,8 +6,8 @@ module id_ix_pipe #(
     input  logic              rst,
 
     // hazard control
-    input  logic              stall_i,   // 1 = hold ID/EX
-    input  logic              flush_i,   // 1 = bubble this stage
+    input  logic              stall_i,   
+    input  logic              flush_i,   
 
     // data from ID
     input  logic [DWIDTH-1:0] ins_i,
@@ -109,8 +109,8 @@ module id_ix_pipe #(
             alusel_pipe   <= 4'b0;
 
         end else if (flush_i || stall_i) begin
-            // bubble: kill this instruction and its side effects
-            ins_pipe      <= 32'h00000013;  // ADDI x0,x0,0 (NOP) - optional
+            // bubble: kill this instruction 
+            ins_pipe      <= 32'h00000013;  // ADDI x0,x0,0 (NOP) 
             pc_pipe       <= '0;
             opcode_pipe   <= 7'b0;
             rd_pipe       <= 5'b0;
@@ -122,8 +122,8 @@ module id_ix_pipe #(
             funct3_pipe   <= '0;
             shamt_pipe    <= '0;
 
-            // **IMPORTANT**: disable all writes / mem ops
-            pcsel_pipe    <= 1'b0;   // depends on how you use pcsel in EX, but safe default
+            // disable all writes / mem ops
+            pcsel_pipe    <= 1'b0;   
             immsel_pipe   <= 1'b0;
             regwren_pipe  <= 1'b0;   // no writeback
             rs1sel_pipe   <= 1'b0;

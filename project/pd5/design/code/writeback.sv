@@ -28,10 +28,6 @@
      output logic [AWIDTH-1:0] next_pc_o
  );
 
-    /*
-     * Process definitions to be filled by
-     * student below...
-     */
 
     assign next_pc_o = brtaken_i ? alu_res_i : pc_i + 32'd4; // though we chose to implement this in fetch 
 

@@ -28,16 +28,13 @@ module fetch #(
 	output logic [AWIDTH - 1:0] pc_o,
     output logic [DWIDTH - 1:0] insn_o
 );
-    /*
-     * Process definitions to be filled by
-     * student below...
-     */
+   
 
-     // must be extended to include which pc to fetch from based on branch taken or not or jump instructions 
-    
     logic [AWIDTH - 1:0] pc;
     logic pcsel_o;
-    assign pcsel_o = (pcsel || br_taken);
+    assign pcsel_o = (pcsel || br_taken); 
+    // since branch asserts pcsel as low we can make internal pcsel high when either pcsel is
+    // high or branch is taken
       
     always_ff @(posedge clk) begin 
         if (rst) begin

@@ -41,7 +41,10 @@ module decode #(
     */
     end
 
-    // Immediate Generation (through the provided igen module)
+    /* Immediate Generation (through the provided igen module)
+     note that this is no longer used the immediate comes from a module 
+     inside pd5 this module was the one used in previous pd4 
+    */
     igen #(
         .DWIDTH(DWIDTH)
     ) u_igen (

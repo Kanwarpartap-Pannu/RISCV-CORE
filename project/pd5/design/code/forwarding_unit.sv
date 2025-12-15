@@ -44,7 +44,8 @@ always_comb begin
 
 // Writeback-Memory Bypass
 if ( (rd_mem_wb_i == rs2_ex_mem_i) && (rd_mem_wb_i != 0) && (wb_opcode_o != OP_STORE)) begin
-    WM_enable=1;
+    WM_enable=1; // important if opcode in writeback is store than the conditions for WM
+                 // might be met but no instruction should be dependant on a store
 end
 else begin
     WM_enable=0;

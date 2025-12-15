@@ -72,6 +72,8 @@ module alu #(
                 3'b111: brtaken_o = (!ltu || eq);      // BGEU
                 default: brtaken_o = 1'b0;
             endcase
+
+                
         end
     end
 

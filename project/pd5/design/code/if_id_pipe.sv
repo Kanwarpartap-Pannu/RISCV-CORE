@@ -4,15 +4,15 @@ module if_id_pipe #(
     input  logic             clk,
     input  logic             rst,
 
-    // Incoming from IF stage
+    // data from fetch
     input  logic [DWIDTH-1:0] ins_i,
     input  logic [DWIDTH-1:0] pc_i,
 
-    // Control signals (placeholder)
+    // Hazard signals 
     input  logic stall_i,
     input  logic flush_i,
 
-    // Outputs to ID stage
+    // Outputs to ID 
     output logic [DWIDTH-1:0] ins_o,
     output logic [DWIDTH-1:0] pc_o
 );
@@ -26,7 +26,7 @@ module if_id_pipe #(
             pc_pipe  <= '0;
 
         end else if (flush_i ) begin
-            // Flush pipeline → Insert NOP instruction
+            // bubble
             ins_pipe <= 32'h00000013; // ADDI x0, x0, 0   (NOP)
             pc_pipe  <= '0;
 
@@ -36,13 +36,14 @@ module if_id_pipe #(
             pc_pipe  <= pc_i;
 
         end 
-        else begin 
+        else begin // stall keep current instruction 
             ins_pipe <= ins_pipe;
             pc_pipe <= pc_pipe;
         end
 
     end
 
+    // combinational outputs
     assign ins_o = ins_pipe;
     assign pc_o  = pc_pipe;
 

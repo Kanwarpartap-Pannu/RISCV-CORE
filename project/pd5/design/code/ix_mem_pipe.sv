@@ -7,7 +7,6 @@ module ix_mem_pipe #(
 
 
     // Inputs FROM EX
-
     input  logic [DWIDTH-1:0] alu_res_i,     // ALU result
     input  logic              brtaken_i,     // branch decision (EX)
     input  logic [AWIDTH-1:0] pc_i,          // PC+4 or branch target
@@ -25,9 +24,7 @@ module ix_mem_pipe #(
     input  logic [1:0]        wbsel_i,       // ALU vs MEM vs PC+4
     input  logic [3:0]        alusel_i,
 
-    // ================
     // Outputs TO MEM
-    // ================
     output logic [DWIDTH-1:0] alu_res_o,
     output logic              brtaken_o,
     output logic [AWIDTH-1:0] pc_o,
@@ -46,9 +43,7 @@ module ix_mem_pipe #(
     output logic [3:0]        alusel_o
 );
 
-    // =======================
     // Internal pipeline regs
-    // =======================
     logic [DWIDTH-1:0] alu_res_pipe;
     logic              brtaken_pipe;
     logic [AWIDTH-1:0] pc_pipe;
@@ -64,9 +59,8 @@ module ix_mem_pipe #(
     logic [2:0]        funct3_pipe;
     logic [6:0]        opcode_pipe; 
 
-    // =======================
+
     // Pipeline register logic
-    // =======================
     always_ff @(posedge clk or posedge rst) begin
         if (rst) begin
             
@@ -105,12 +99,9 @@ module ix_mem_pipe #(
             alusel_pipe   <= alusel_i;
 
         end
-        // else stall_i == 1 → hold values
     end
 
-    // =======================
     // Outputs
-    // =======================
     always_comb begin
         alu_res_o  = alu_res_pipe;
         brtaken_o  = brtaken_pipe;

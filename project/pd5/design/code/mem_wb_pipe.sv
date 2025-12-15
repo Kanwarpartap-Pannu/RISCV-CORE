@@ -12,6 +12,7 @@ module mem_wb_pipe #(
     input  logic [AWIDTH-1:0] pc_i,          // PC+4 for JAL/JALR writeback
     input  logic [4:0]        rd_i,          // register destination
     input  logic [6:0]        opcode_i,
+    
     // Control signals
     input  logic              regwren_i,     // register write enable
     input  logic [1:0]        wbsel_i,       // writeback select
@@ -54,7 +55,7 @@ module mem_wb_pipe #(
         end 
         
         else begin
-            // Normal propagation
+            
             alu_res_pipe   <= alu_res_i;
             load_data_pipe <= load_data_i;
             pc_pipe        <= pc_i;
@@ -65,7 +66,6 @@ module mem_wb_pipe #(
             wbsel_pipe     <= wbsel_i;
 
         end
-        // else: stall → hold last values
     end
 
     // Outputs
