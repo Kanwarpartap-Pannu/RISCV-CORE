@@ -143,7 +143,9 @@ module pd5 #(
 
      // DECODE stage signals
     logic [AWIDTH-1:0] d_pc; 
+    logic [AWIDTH-1:0] d_pc_o; 
     logic [DWIDTH-1:0] d_insn;
+    logic [DWIDTH-1:0] d_insn_o;
     logic [6:0]        d_opcode;
     logic [4:0]        d_rd;
     logic [4:0]        d_rs1;
@@ -169,7 +171,7 @@ module pd5 #(
     );
 
 
- 
+    
 
 
     // Decode stage
@@ -181,8 +183,8 @@ module pd5 #(
         .rst(reset),
         .insn_i(d_insn),
         .pc_i(d_pc),
-        .pc_o(d_pc),
-        .insn_o(d_insn),
+        .pc_o(d_pc_o),
+        .insn_o(d_insn_o),
         .opcode_o(d_opcode),
         .rd_o(d_rd),
         .rs1_o(d_rs1),
@@ -217,7 +219,7 @@ module pd5 #(
     control #(
         .DWIDTH(DWIDTH)
     ) u_control (
-        .insn_i(d_insn),
+        .insn_i(d_insn_o),
         .opcode_i(d_opcode),
         .funct7_i(d_funct7),
         .funct3_i(d_funct3),
@@ -393,6 +395,8 @@ module pd5 #(
         .brtaken_o(br_taken)   
     );
     
+    logic [DWIDTH-1:0] rs2_val_topipe;
+    assign rs2_val_topipe = (WX_enable == 2'b10) ? writeback_data_o : ix_rs2_data_o;
 
     // Execute to Memory stage pipeline
     ix_mem_pipe #(
@@ -404,7 +408,7 @@ module pd5 #(
         .alu_res_i(alu_res),
         .brtaken_i(br_taken),
         .pc_i(ix_pc_o),
-        .rs2_val_i(ix_rs2_data_o),
+        .rs2_val_i(rs2_val_topipe),
         .rd_i(ix_rd_o),
         .rs1_i(ix_rs1_o),
         .rs2_i(ix_rs2_o),
@@ -509,6 +513,8 @@ module pd5 #(
         .rd_mem_wb_i(rd_wb_o),
         .rs1_if_id_i(d_rs1),
         .rs2_if_id_i(d_rs2),
+        .regwren_i(regwren_wb_o),
+        .flush_i(flush),
         .stall_o(stall)
     );
 

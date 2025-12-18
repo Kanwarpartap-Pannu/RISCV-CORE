@@ -7,6 +7,8 @@ module stall_unit #(
     input logic [4:0] rd_mem_wb_i,
     input logic [4:0] rs1_if_id_i,
     input logic [4:0] rs2_if_id_i,
+    input logic       regwren_i,
+    input logic       flush_i, 
 
     output logic stall_o
 );
@@ -48,8 +50,8 @@ always_comb begin
     end
 
     // write-decode hazard detection, again no stall for store to same rd  
-    else if ( ( (rs1_if_id_i == rd_mem_wb_i) || 
-    ( (rs2_if_id_i == rd_mem_wb_i) && (opcode_if_id_i != OP_STORE) ) ) && (rd_mem_wb_i != 0) )  begin 
+    else if ( (( (rs1_if_id_i == rd_mem_wb_i) || 
+    ( (rs2_if_id_i == rd_mem_wb_i) ) ) && (rd_mem_wb_i != 0) ) && (regwren_i) && (!flush_i) )  begin 
         stall_o = 1;
     end
 

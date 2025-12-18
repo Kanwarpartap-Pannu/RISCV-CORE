@@ -113,17 +113,17 @@ module memory #(
                 data_dat_o = 0;
             end else if (read_en_i) begin
                 case (size_encoded)
-          //2'b00: data_dat_o = {{24{main_memory[address_dat][7]}}, main_memory[address_dat]};
-        //   2'b01: data_dat_o = {{16{main_memory[address_dat + 1][7]}},
-        //                         main_memory[address_dat + 1],
-        //                         main_memory[address_dat]};
-          2'b10, 2'b11,2'b00,2'b01: data_dat_o = {             // above is memory access for different sizes but testbench wants full word always so combined all cases into one
+          2'b00: data_dat_o = {{24{1'b0}}, main_memory[address_dat]};
+          2'b01: data_dat_o = {{16{1'b0}},
+                                main_memory[address_dat + 1],
+                                main_memory[address_dat]};
+          2'b10, 2'b11: data_dat_o = {             // above is memory access for different sizes but testbench wants full word always so combined all cases into one
                                 main_memory[(address_dat + 3)% MEM_BYTES],
                                 main_memory[(address_dat + 2)% MEM_BYTES], // if the adress_dat points to last adress then adress_dat +1 will be out of bound so we use modulo to wrap around
                                 main_memory[(address_dat + 1)% MEM_BYTES],
                                 main_memory[address_dat]
                               };
-          default: data_dat_o = 32'h0;
+            default: data_dat_o = 32'h0;
         endcase
             end 
         end
@@ -142,6 +142,12 @@ module memory #(
                         main_memory[address_dat + 1] <= data_dat[15:8];
                         end
                     2'b10: begin // word
+                         main_memory[address_dat]     <= data_dat[7:0];
+                         main_memory[address_dat + 1] <= data_dat[15:8];
+                         main_memory[address_dat + 2] <= data_dat[23:16];
+                         main_memory[address_dat + 3] <= data_dat[31:24];
+                        end
+                    default: begin // word
                          main_memory[address_dat]     <= data_dat[7:0];
                          main_memory[address_dat + 1] <= data_dat[15:8];
                          main_memory[address_dat + 2] <= data_dat[23:16];

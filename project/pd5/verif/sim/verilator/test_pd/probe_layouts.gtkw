@@ -1,0 +1,68 @@
+[*]
+[*] GTKWave Analyzer v3.4.0 (w)1999-2022 BSI
+[*] Thu Dec 18 21:18:26 2025
+[*]
+[dumpfile] "/Users/kanwarpannu/Desktop/RISC-V_Core/RISCV-CORE/project/pd5/verif/sim/verilator/test_pd/Fibonacci.vcd"
+[dumpfile_mtime] "Thu Dec 18 21:15:37 2025"
+[dumpfile_size] 163679
+[savefile] "/Users/kanwarpannu/Desktop/RISC-V_Core/RISCV-CORE/project/pd5/verif/sim/verilator/test_pd/probe_layouts.gtkw"
+[timestart] 190
+[size] 1333 600
+[pos] -1 -1
+*-1.000000 193 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+[treeopen] TOP.
+[treeopen] TOP.top.
+[treeopen] TOP.top.dut.
+[treeopen] TOP.top.dut.core.
+[sst_width] 255
+[signals_width] 210
+[sst_expanded] 1
+[sst_vpaned_height] 159
+@22
+TOP.top.dut.core.fetch1.pc_o[31:0]
+[color] 1
+TOP.top.dut.core.u_if_id_pipe.pc_o[31:0]
+[color] 1
+TOP.top.dut.core.u_decode.rs1_o[4:0]
+[color] 1
+TOP.top.dut.core.u_decode.rs2_o[4:0]
+[color] 1
+TOP.top.dut.core.u_decode.rd_o[4:0]
+[color] 3
+TOP.top.dut.core.u_id_ix_pipe.pc_o[31:0]
+[color] 3
+TOP.top.dut.core.u_alu.rs1_i[31:0]
+[color] 3
+TOP.top.dut.core.u_alu.rs2_i[31:0]
+[color] 3
+TOP.top.dut.core.u_alu.res_o[31:0]
+[color] 5
+TOP.top.dut.core.u_ix_mem_pipe.pc_o[31:0]
+[color] 5
+TOP.top.dut.core.memory1.address_dat[31:0]
+[color] 5
+TOP.top.dut.core.memory1.data_dat_o[31:0]
+[color] 5
+TOP.top.dut.core.store_data[31:0]
+[color] 2
+TOP.top.dut.core.u_mem_wb_pipe.pc_o[31:0]
+[color] 2
+TOP.top.dut.core.u_mem_wb_pipe.rd_o[4:0]
+[color] 2
+TOP.top.dut.core.u_writeback.writeback_data_o[31:0]
+TOP.top.dut.core.u_register_file.regs[1][31:0]
+@28
+TOP.top.dut.core.MX_enable[1:0]
+TOP.top.dut.core.WM_enable
+TOP.top.dut.core.WX_enable[1:0]
+TOP.top.dut.core.stall
+@22
+TOP.top.dut.core.u_stall_unit.rd_id_ex_i[4:0]
+TOP.top.dut.core.u_stall_unit.rd_mem_wb_i[4:0]
+TOP.top.dut.core.u_stall_unit.rs1_if_id_i[4:0]
+@23
+TOP.top.dut.core.u_stall_unit.rs2_if_id_i[4:0]
+@28
+TOP.top.dut.core.flush
+[pattern_trace] 1
+[pattern_trace] 0

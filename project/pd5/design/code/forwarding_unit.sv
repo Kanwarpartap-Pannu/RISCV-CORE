@@ -71,7 +71,7 @@ if ( (rd_mem_wb_i == rs1_id_ex_i) && (rd_mem_wb_i != 0)) begin
 end
 
 // Writeback-Execute Bypass RS2
-else if ( (rd_mem_wb_i == rs2_id_ex_i) && (rd_mem_wb_i != 0) && (ix_opcode_o != OP_STORE) ) begin
+else if ( (rd_mem_wb_i == rs2_id_ex_i) && (rd_mem_wb_i != 0) ) begin
     WX_enable=2'b10;
 end
 else begin

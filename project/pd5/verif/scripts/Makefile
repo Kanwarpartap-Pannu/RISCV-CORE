@@ -13,7 +13,7 @@ export SIM_DIR     = $(SIM_ROOT)/test_pd
 all: make_sim_dir compile run
 
 # define parameters
-MEM_PATH              ?= $(CL_ROOT)/verif/${TEST}.x
+MEM_PATH              ?= $(CL_ROOT)/verif/rv32-bmarks/full-bmarks/${TEST}.x
 MEM_PATH_NOT_DIR			:= $(notdir $(MEM_PATH))
 LINE_COUNT            ?= $(shell echo `wc -l < $(MEM_PATH)`)
 MEM_PATH_STR          ?= \"$(abspath $(MEM_PATH))\"
@@ -32,7 +32,7 @@ PATTERN_DUMP_FILE			?= $(MEM_PATH_NOT_DIR:x=dump)# Replace MEM_PATH .x with .pat
 PATTERN_DUMP_FILE_STR ?= \"$(PATTERN_DUMP_FILE)\"
 PATTERN_DUMP					?= 0
 PATTERN_CHECK					?= 0
-GEN_TRACE             ?= 0
+GEN_TRACE             ?= 1
 TIMEOUT               ?= 50000
 TRACE_FILE_STR        ?= \"$(TRACE_FILE)\"
 

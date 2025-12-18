@@ -70,10 +70,10 @@ always_comb begin
     // note: not changing for submission because I do not want to break it but 
     // instead of checking opcode we can also check rs2 sel to see if it needs rs2 or not
 
-    if ((MX_enable == 2'b10) && ((opcode_i != OP_BRANCH) && (opcode_i != OP_JAL) && (opcode_i != OP_JALR) && (opcode_i != OP_LOAD) )) begin
+    if ((MX_enable == 2'b10) && ((opcode_i != OP_BRANCH) && (opcode_i != OP_JAL) && (opcode_i != OP_JALR) && (opcode_i != OP_LOAD) && (opcode_i != OP_I) )) begin
         rs2_o = ex_mem_alures;
     end
-    else if ((WX_enable == 2'b10) && ((opcode_i != OP_BRANCH) && (opcode_i != OP_JAL) && (opcode_i != OP_JALR) && (opcode_i != OP_LOAD) )) begin
+    else if ((WX_enable == 2'b10) && ((opcode_i != OP_BRANCH) && (opcode_i != OP_JAL) && (opcode_i != OP_JALR) && (opcode_i != OP_LOAD) && (opcode_i != OP_STORE) && (opcode_i != OP_I))) begin
         rs2_o = writeback;
     end
     else begin 
