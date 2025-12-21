@@ -1,3 +1,9 @@
+
+/*
+This module sets flush_o if branch was taken, this module is a simple assign but it was made into a module
+for better readabilty and for clearer design 
+*/
+
 module flush_unit #(
     parameter int DWIDTH=32
 )(
@@ -8,15 +14,8 @@ module flush_unit #(
 
 );
 
-/*
-This module sets flush_o if branch was taken, this module is a simple assign but it was made into a module
-for better readabilty and for clearer design 
-*/
-
 always_comb begin
 
-    // if branch was taken br_taken is set high and so is flush otherise it is low
-    // or if its a jump and link
     flush_o = (br_taken || pcsel);
 
 end

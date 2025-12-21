@@ -46,33 +46,7 @@ module control #(
     output logic [3:0]        alusel_o
 );
 
-    // Opcode group definitions (RV32I base ISA)
-    // Constants.svh not working here, so redefining
-    localparam [6:0]
-        OP_R      = 7'b0110011, // R-type
-        OP_I      = 7'b0010011, // I-type arithmetic
-        OP_LOAD   = 7'b0000011, // Load
-        OP_STORE  = 7'b0100011, // Store
-        OP_BRANCH = 7'b1100011, // Branch
-        OP_JALR   = 7'b1100111, // Jump register
-        OP_JAL    = 7'b1101111, // Jump and link
-        OP_LUI    = 7'b0110111, // Load upper immediate
-        OP_AUIPC  = 7'b0010111; // Add upper immediate to PC
 
-    // ALU operation encodings
-    localparam [3:0]
-        ALU_ADD = 4'd0,
-        ALU_SUB = 4'd1,
-        ALU_AND = 4'd2,
-        ALU_OR  = 4'd3,
-        ALU_XOR = 4'd4,
-        ALU_SLT = 4'd5,
-        ALU_SLL = 4'd6,
-        ALU_SRL = 4'd7,
-        ALU_SRA = 4'd8,
-        ALU_LUI = 4'd9,
-        ALU_BRANCH = 4'd10,
-        ALU_NOP = 4'd15;
 
     // Control signal generation
     always_comb begin
@@ -91,11 +65,11 @@ module control #(
 
             // -------------------- R-TYPE --------------------
             OP_R: begin
-                regwren_o  = 1'b1;   // Write to rd
+                regwren_o  = 1'b1;   
                 rs1sel_o   = 1'b1;
                 rs2sel_o   = 1'b1;
                 immsel_o   = 1'b0;
-                wbsel_o    = 2'b00;  // Writeback from ALU
+                wbsel_o    = 2'b00;  
                 memren_o   = 1'b0;
                 memwren_o  = 1'b0;
                 pcsel_o    = 1'b0;
@@ -122,12 +96,12 @@ module control #(
                 wbsel_o   = 2'b00;
                 pcsel_o   = 1'b0;
                 unique case (funct3_i)
-                    3'b000: alusel_o = ALU_ADD; // ADDI
-                    3'b111: alusel_o = ALU_AND; // ANDI
-                    3'b110: alusel_o = ALU_OR;  // ORI
-                    3'b100: alusel_o = ALU_XOR; // XORI
-                    3'b010: alusel_o = ALU_SLT; // SLTI
-                    3'b001: alusel_o = ALU_SLL; // SLLI
+                    3'b000: alusel_o = ALU_ADD; 
+                    3'b111: alusel_o = ALU_AND; 
+                    3'b110: alusel_o = ALU_OR;  
+                    3'b100: alusel_o = ALU_XOR; 
+                    3'b010: alusel_o = ALU_SLT; 
+                    3'b001: alusel_o = ALU_SLL; 
                     3'b101: alusel_o = (funct7_i == 7'b0000000) ? ALU_SRL : ALU_SRA;
                     default: alusel_o = ALU_ADD;
                 endcase
@@ -140,8 +114,8 @@ module control #(
                 rs1sel_o  = 1'b1;
                 rs2sel_o  = 1'b0;
                 memren_o  = 1'b1;
-                wbsel_o   = 2'b01; // Writeback from memory
-                alusel_o  = ALU_ADD; // address = rs1 + imm
+                wbsel_o   = 2'b01; 
+                alusel_o  = ALU_ADD; 
             end
 
             // -------------------- STORE --------------------
@@ -160,8 +134,8 @@ module control #(
                 immsel_o  = 1'b1;
                 rs1sel_o  = 1'b0;
                 rs2sel_o  = 1'b0;
-                pcsel_o   = 1'b0;  // branch might not be taken so use br taken as additonal pcsel in fetch
-                alusel_o  = ALU_BRANCH; // for compare
+                pcsel_o   = 1'b0; 
+                alusel_o  = ALU_BRANCH; 
             end
 
             // -------------------- JAL --------------------
@@ -171,7 +145,7 @@ module control #(
                 immsel_o  = 1'b1;
                 rs1sel_o  = 1'b0;
                 rs2sel_o  = 1'b0;
-                wbsel_o   = 2'b10; // write PC+4
+                wbsel_o   = 2'b10; 
                 alusel_o  = ALU_ADD;
             end
 

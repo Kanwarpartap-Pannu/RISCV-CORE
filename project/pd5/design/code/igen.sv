@@ -1,3 +1,5 @@
+`include "constants.svh"
+
 /*
  * Module: igen
  *
@@ -17,18 +19,6 @@ module igen #(
     input  logic [DWIDTH-1:0] insn_i,
     output logic [31:0]       imm_o
 );
-
-    // Opcode group definitions (RV32I base)
-    localparam [6:0]
-        OP_R      = 7'b0110011, // Register type
-        OP_I      = 7'b0010011, // Immediate ALU
-        OP_LOAD   = 7'b0000011, // Load
-        OP_STORE  = 7'b0100011, // Store
-        OP_BRANCH = 7'b1100011, // Branch
-        OP_JALR   = 7'b1100111, // Jump register
-        OP_JAL    = 7'b1101111, // Jump and link
-        OP_LUI    = 7'b0110111, // Load upper imm
-        OP_AUIPC  = 7'b0010111; // Add upper imm to PC
 
     // Intermediate wires for different immediate types
     logic [31:0] imm_i, imm_s, imm_b, imm_u, imm_j;
@@ -52,6 +42,7 @@ module igen #(
 
     // Select correct immediate based on opcode
     always_comb begin
+
         unique case (opcode_i)
             OP_I, OP_LOAD, OP_JALR: imm_o = imm_i;
             OP_STORE:               imm_o = imm_s;
@@ -60,6 +51,7 @@ module igen #(
             OP_JAL:                 imm_o = imm_j;
             default:                imm_o = 32'b0;
         endcase
+        
     end
 
 endmodule : igen

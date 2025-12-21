@@ -29,10 +29,11 @@
  );
 
 
-    assign next_pc_o = brtaken_i ? alu_res_i : pc_i + 32'd4; // though we chose to implement this in fetch 
+    assign next_pc_o = brtaken_i ? alu_res_i : pc_i + 32'd4; 
 
     // Mux for write-back data selection
     always_comb begin
+
         unique case(wbsel_i)
             2'd0: writeback_data_o = alu_res_i;        // ALU result
             2'd1: writeback_data_o = memory_data_i;    // Memory data
@@ -40,6 +41,6 @@
             default: writeback_data_o = 0;
         endcase
 
-
     end
+    
 endmodule : writeback

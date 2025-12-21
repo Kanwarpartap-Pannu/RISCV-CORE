@@ -37,7 +37,7 @@ VM_PREFIX = Vtop
 VM_MODPREFIX = Vtop
 # User CFLAGS (from -CFLAGS on Verilator command line)
 VM_USER_CFLAGS = \
-  -DMEM_DEPTH=1048576 -DMEM_PATH="/Users/kanwarpannu/Desktop/RISC-V_Core/RISCV-CORE/project/pd5/verif/rv32-bmarks/full-bmarks/SwapShift.x" -DVCD -DVCD_FILE=SwapShift.vcd \
+  -DMEM_DEPTH=1048576 -DMEM_PATH="/Users/kanwarpannu/Desktop/RISC-V_Core/RISCV-CORE/project/pd5/verif/rv32-bmarks/full-bmarks/BubbleSort.x" -DVCD -DVCD_FILE=BubbleSort.vcd \
 
 # User LDLIBS (from -LDFLAGS on Verilator command line)
 VM_USER_LDLIBS = \

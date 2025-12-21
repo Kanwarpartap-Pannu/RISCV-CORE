@@ -33,34 +33,29 @@
      output logic [DWIDTH-1:0] rs2data_o
  );
 
-    /*
-     * Process definitions to be filled by
-     * student below...
-     */
+// 32 registers, 32 bits each
+logic [DWIDTH-1:0] regs [31:0];
 
-     // 32 registers, 32 bits each
-    logic [DWIDTH-1:0] regs [31:0];
-
-    // RESET: clear all registers, initialize stack pointer
-    always_ff @(posedge clk or posedge rst) begin
-        if (rst) begin
-            for (int i = 0; i < 32; i++)
-                regs[i] <= '0;
-
-            // Initialize stack pointer (x2)
-            // Stack "grows downward" in memory, so we start high
-            regs[2] <= 32'h01100000;  // top of stack
+always_ff @(posedge clk or posedge rst) begin
+    if (rst) begin
+        for (int i = 0; i < 32; i++) begin
+            regs[i] <= '0;
         end
-        else begin
+
+        regs[2] <= 32'h01100000;  // top of stack
+    end
+
+    else begin
             // Write-back stage: write to rd
-            if (regwren_i && (rd_i != 5'd0)) begin
-                regs[rd_i] <= datawb_i;
-            end
+        if (regwren_i && (rd_i != 5'd0)) begin
+            regs[rd_i] <= datawb_i;
         end
     end
 
-    // Combinational reads for rs1 and rs2  
-    assign rs1data_o = (rs1_i == 5'd0) ? '0 : regs[rs1_i];
-    assign rs2data_o = (rs2_i == 5'd0) ? '0 : regs[rs2_i];
+end
+
+// Combinational reads for rs1 and rs2  
+assign rs1data_o = (rs1_i == 5'd0) ? '0 : regs[rs1_i];
+assign rs2data_o = (rs2_i == 5'd0) ? '0 : regs[rs2_i];
 
 endmodule : register_file

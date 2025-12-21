@@ -1,5 +1,12 @@
 `include "constants.svh"
 
+/*
+The Decode module is responsible for extracting the fields such as 
+opcode and funct3, this module extracts the raw fields and leaves
+interpretation of the raw fields up to other modules based on opcode
+funct3 and funct7. 
+*/
+
 module decode #(
     parameter int DWIDTH = 32,
     parameter int AWIDTH = 32
@@ -34,24 +41,6 @@ module decode #(
 
     assign pc_o   = pc_i;
     assign insn_o = insn_i;
-    always_comb begin
-    /*
-    $display("[%0t] DECODE DEBUG: INS=%h Funct3=%b", 
-                 $time, insn_i, funct3_o);
-    */
-    end
-
-    /* Immediate Generation (through the provided igen module)
-     note that this is no longer used the immediate comes from a module 
-     inside pd5 this module was the one used in previous pd4 
-    */
-    igen #(
-        .DWIDTH(DWIDTH)
-    ) u_igen (
-        .opcode_i(opcode_o),
-        .insn_i(insn_o),
-        .imm_o(imm_o)
-    );
     
 
 endmodule : decode

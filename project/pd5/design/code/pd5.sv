@@ -338,37 +338,25 @@ module pd5 #(
     logic brltu_o;
     logic [DWIDTH-1:0] rs1_branch;
     logic [DWIDTH-1:0] rs2_branch;
-    //rs1 source for branch 
-    always_comb begin
-    if (MX_enable == 2'b01) begin
-        rs1_branch = alu_res_mem_o;
-    end
-    else if (WX_enable == 2'b01) begin
-        rs1_branch = writeback_data_o;
-    end
-    else begin 
-        rs1_branch = ix_rs1_data_o ;
-    end
-    end
-    // rs2 source for brach 
-    always_comb begin
-    if (MX_enable == 2'b10) begin
-        rs2_branch = alu_res_mem_o;
-    end
-    else if (WX_enable == 2'b10) begin
-        rs2_branch = writeback_data_o;
-    end
-    else begin 
-        rs2_branch = ix_rs2_data_o;
-    end
-    end
+
+    branch_control_mux # (
+    .DWIDTH(DWIDTH)
+    ) u_branch_control_mux (
+        .rs1_val_i(ix_rs1_data_o),
+        .rs2_val_i(ix_rs2_data_o),
+        .alu_res_i(alu_res_mem_o),
+        .writeback_data_i(writeback_data_o),
+        .MX_enable(MX_enable),
+        .WX_enable(WX_enable),
+        .rs1_branch_o(rs1_branch),
+        .rs2_branch_o(rs2_branch)
+    );
+
 
     // Branch control unit
     branch_control #(
         .DWIDTH(DWIDTH)
     ) u_branch_control (
-        .opcode_i(ix_opcode_o),
-        .funct3_i(ix_funct3_o),
         .rs1_i(rs1_branch), 
         .rs2_i(rs2_branch), 
         .breq_o(breq_o),

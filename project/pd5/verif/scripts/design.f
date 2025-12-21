@@ -2,6 +2,7 @@ constants.svh
 memory.sv
 fetch.sv
 control.sv
+branch_control_mux.sv
 branch_control.sv
 decode.sv
 execute.sv
