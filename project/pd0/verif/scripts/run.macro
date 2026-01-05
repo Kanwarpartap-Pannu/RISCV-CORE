@@ -1,3 +1,0 @@
-vcd file "/eecs/home/kanwarp/EECS-4201-project/project/pd0/test_pd.vcd"
-vcd add -r /top/* 
-run -all

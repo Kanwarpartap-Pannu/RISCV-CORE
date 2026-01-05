@@ -1,19 +1,14 @@
-# EECS-4201-project
+# 32 Bit RISC-V CPU Core 
 
-This is the main repository for YorkU's EECS 4201 course project that progressively builds a fully-pipelined 5-staged in-order RISC-V core that supports the RV32I instruction set.
-SystemVerilog is the hardware descriptive language (HDL) used to implement the core.
+A 5-stage pipelined 32-bit RISC-V (RV32I) CPU core written in SystemVerilog, featuring hazard detection, forwarding, branch handling, and full instruction-level simulation. Simulated and Verified using both Modelsim and Verilator on multiple Risc-V 32 benchmark programs. 
 
-## Project structure
+## Overview
+This project implements a custom RV32I CPU core as part of an academic design project.
+The goal was to understand modern CPU microarchitecture by designing, simulating,
+and verifying a pipelined processor from scratch.
 
-The project is divided into *6 project deliverables* (PDs). Each PD focuses on building a portion of the core culminating into the final pipelined implementation delivered in PD5.
-Please refer the READMEs for each PD below for a detailed description of the implementation expected in the deliverable.
-
-- [PD0](project/pd0/docs/README.md)
-- [PD1](project/pd1/docs/README.md)
-- [PD2](project/pd2/docs/README.md)
-- [PD3](project/pd3/docs/README.md)
-- [PD4](project/pd4/docs/README.md)
-- [PD5](project/pd5/docs/README.md)
+The core follows a classic 5-stage pipeline:
+IF → ID → EX → MEM → WB
 
 ## Getting started
 Note that the below steps assume a linux environment with ModelSim or Verilator installed. 

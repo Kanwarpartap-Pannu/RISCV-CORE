@@ -7,21 +7,21 @@ module ix_mem_pipe #(
 
 
     // Inputs FROM EX
-    input  logic [DWIDTH-1:0] alu_res_i,     // ALU result
-    input  logic              brtaken_i,     // branch decision (EX)
-    input  logic [AWIDTH-1:0] pc_i,          // PC+4 or branch target
-    input  logic [DWIDTH-1:0] rs2_val_i,     // for store instructions
-    input  logic [4:0]        rd_i,          // destination register number
+    input  logic [DWIDTH-1:0] alu_res_i,     
+    input  logic              brtaken_i,     
+    input  logic [AWIDTH-1:0] pc_i,          
+    input  logic [DWIDTH-1:0] rs2_val_i,     
+    input  logic [4:0]        rd_i,          
     input  logic [4:0]        rs1_i,
     input  logic [4:0]        rs2_i,
-    input  logic [2:0]        funct3_i,     // funct3 from EX stage
+    input  logic [2:0]        funct3_i,     
     input  logic [6:0]        opcode_i,
     
     // Control signals from ID/EX
     input  logic              memren_i,
     input  logic              memwren_i,
     input  logic              regwren_i,
-    input  logic [1:0]        wbsel_i,       // ALU vs MEM vs PC+4
+    input  logic [1:0]        wbsel_i,       
     input  logic [3:0]        alusel_i,
 
     // Outputs TO MEM
@@ -43,7 +43,7 @@ module ix_mem_pipe #(
     output logic [3:0]        alusel_o
 );
 
-    // Internal pipeline regs
+    // Internal Pipeline Registers
     logic [DWIDTH-1:0] alu_res_pipe;
     logic              brtaken_pipe;
     logic [AWIDTH-1:0] pc_pipe;
@@ -60,7 +60,6 @@ module ix_mem_pipe #(
     logic [6:0]        opcode_pipe; 
 
 
-    // Pipeline register logic
     always_ff @(posedge clk or posedge rst) begin
         if (rst) begin
             
@@ -80,7 +79,7 @@ module ix_mem_pipe #(
             wbsel_pipe    <= 2'b0;
             alusel_pipe   <= 4'b0;
         end
-            else begin
+        else begin
             
             // Normal update from EX stage
             alu_res_pipe  <= alu_res_i;

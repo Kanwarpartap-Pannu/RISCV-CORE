@@ -1,7 +1,0 @@
-# vsim -c design.pd3_tb -do "run" 
-# Start time: 12:29:41 on Oct 26,2025
-# ** Error (suppressible): (vsim-19) Failed to access library 'design' at "design".
-# No such file or directory. (errno = ENOENT)
-# Error loading design
-# End time: 12:29:41 on Oct 26,2025, Elapsed time: 0:00:00
-# Errors: 1, Warnings: 0

@@ -1,7 +1,7 @@
 /*
- * Module: pd5
+ * Module: Risc-V Core
  *
- * Description: Top level module that will contain sub-module instantiations.
+ * Description: Core module that will contain sub-module instantiations.
  *
  * Inputs:
  * 1) clk
@@ -14,70 +14,56 @@ module pd5 #(
     input logic clk,
     input logic reset
 );
-    // stall signals 
+    // Hazard signals 
     logic stall;
-
-    //flush signals
     logic flush;
 
-    //forwarding signals
+    // Forwarding signals
     logic       WM_enable;
     logic [1:0] WX_enable;
     logic [1:0] MX_enable;  
 
-    //Excute stage Signals
-    logic [DWIDTH - 1:0] rs1_i;  
-    logic [DWIDTH - 1:0] rs2_i; 
-    logic [DWIDTH - 1:0] alu_res; 
-    logic                br_taken; 
+    // Fetch signals
+    logic [DWIDTH - 1:0] f_pc; 
+    logic [DWIDTH - 1:0] f_insn; 
 
-     // CONTROL Signals (Decode Stage)
-    logic              ctrl_pcsel; 
-    logic              ctrl_immsel; 
-    logic              ctrl_regwren; 
-    logic              ctrl_rs1sel; 
-    logic              ctrl_rs2sel; 
-    logic              ctrl_memren;  
-    logic              ctrl_memwren; 
-    logic [1:0]        ctrl_wbsel; 
-    logic [3:0]        ctrl_alusel; 
+    // Control Signals (Decode Stage)
+    logic       ctrl_pcsel; 
+    logic       ctrl_immsel; 
+    logic       ctrl_regwren; 
+    logic       ctrl_rs1sel; 
+    logic       ctrl_rs2sel; 
+    logic       ctrl_memren;  
+    logic       ctrl_memwren; 
+    logic [1:0] ctrl_wbsel; 
+    logic [3:0] ctrl_alusel; 
    
-
-   
-    //register file signals
+    // Register file signals
     logic [DWIDTH - 1:0] datawb_i; // **UNUSED** use diiferent signal to feed writeback
     logic [DWIDTH - 1:0] rs1data_o; 
     logic [DWIDTH - 1:0] rs2data_o; 
 
-
-    // imemory signals
+    // Instruction Memory signals
     logic [DWIDTH - 1:0] addr_i; // instruction memory address input
     logic [DWIDTH - 1:0] data_i; // *** Unused *** data input 
-    logic write_en; // ** UNUSED ** instruction memory never writes or has acess to write enable data
-    logic read_en; 
+    logic                write_en; // ** UNUSED ** instruction memory never writes or has access to write enable data
+    logic                read_en; 
 
-     // Writeback stage signals
-    logic [DWIDTH - 1:0] alu_res_wb_o; 
-    logic [DWIDTH - 1:0] load_data_wb_o; 
-    logic [AWIDTH - 1:0] pc_wb_o; 
-    logic [4:0]          rd_wb_o; 
-    logic [6:0]          opcode_wb_o;
+    // DECODE stage signals
+    logic [AWIDTH-1:0] d_pc; 
+    logic [AWIDTH-1:0] d_pc_o; 
+    logic [DWIDTH-1:0] d_insn;
+    logic [DWIDTH-1:0] d_insn_o;
+    logic [6:0]        d_opcode;
+    logic [4:0]        d_rd;
+    logic [4:0]        d_rs1;
+    logic [4:0]        d_rs2;
+    logic [6:0]        d_funct7;
+    logic [2:0]        d_funct3;
+    logic [4:0]        d_shamt;
+    logic [DWIDTH-1:0] d_imm;
 
-    logic              regwren_wb_o; 
-    logic [1:0]        wbsel_wb_o; 
-
-    // memory stage signals
-    logic [1:0] size_encoded_o; 
-
-    // writeback signals
-    logic [DWIDTH - 1:0] writeback_data_o; // data to write back to register file
-    logic [DWIDTH - 1:0] next_pc_o; 
-    logic [DWIDTH - 1:0] memory_data_i; 
-
- 
-    logic [2:0]        funct3_mem_o; // funct3 from ix_mem pipe to memory for size encoding
-    
-    // pipe signals for ID/EX
+    // ID/EX Pipeline Signals
     logic [AWIDTH-1:0] ix_pc_o;
     logic [DWIDTH-1:0] ix_ins_o;
     logic [6:0]        ix_opcode_o;
@@ -89,16 +75,39 @@ module pd5 #(
     logic [6:0]        ix_funct7_o;
     logic [2:0]        ix_funct3_o;
     logic [4:0]        ix_shamt_o;
-    logic             ix_pcsel_o;
-    logic             ix_immsel_o;
-    logic             ix_regwren_o;
-    logic             ix_rs1sel_o;
-    logic             ix_rs2sel_o;
-    logic             ix_memren_o;
-    logic             ix_memwren_o;
-    logic [1:0]       ix_wbsel_o;
-    logic [3:0]       ix_alusel_o;
+    logic              ix_pcsel_o;
+    logic              ix_immsel_o;
+    logic              ix_regwren_o;
+    logic              ix_rs1sel_o;
+    logic              ix_rs2sel_o;
+    logic              ix_memren_o;
+    logic              ix_memwren_o;
+    logic [1:0]        ix_wbsel_o;
+    logic [3:0]        ix_alusel_o;
 
+    // Execute stage Signals
+    logic [DWIDTH - 1:0] rs1_i;  
+    logic [DWIDTH - 1:0] rs2_i; 
+    logic [DWIDTH - 1:0] alu_res; 
+    logic                br_taken; 
+
+    //Branch control signals
+    logic breq_o;
+    logic brlt_o;
+    logic brltu_o;
+    logic [DWIDTH-1:0] rs1_branch;
+    logic [DWIDTH-1:0] rs2_branch;
+
+    // Memory stage signals
+    logic [1:0] size_encoded_o; // is this really needed 
+
+    // Writeback Module signals
+    logic [DWIDTH - 1:0] writeback_data_o; // data to write back to register file
+    logic [DWIDTH - 1:0] next_pc_o; // unused data 
+    logic [DWIDTH - 1:0] memory_data_i; 
+
+    // Memory Stage Pipeline Signals
+    logic [2:0]        funct3_mem_o; // funct3 from ix_mem pipe to memory for size encoding
 
     // EX/MEM pipe signals
     logic [DWIDTH-1:0] alu_res_mem_o;
@@ -120,9 +129,14 @@ module pd5 #(
     assign read_en = 1'b1;
     assign write_en = 1'b0; // ** UNUSED ** instruction memory is read only in this design
 
-    // Fetch signals
-    logic [DWIDTH - 1:0] f_pc; 
-    logic [DWIDTH - 1:0] f_insn; 
+    // MEM/WB Pipeline signals
+    logic [DWIDTH - 1:0] alu_res_wb_o; 
+    logic [DWIDTH - 1:0] load_data_wb_o; 
+    logic [AWIDTH - 1:0] pc_wb_o; 
+    logic [4:0]          rd_wb_o; 
+    logic [6:0]          opcode_wb_o;
+    logic                regwren_wb_o; 
+    logic [1:0]          wbsel_wb_o; 
 
     // Fetch 
     fetch #(
@@ -140,22 +154,6 @@ module pd5 #(
         .insn_o(f_insn)         
     );
 
-
-     // DECODE stage signals
-    logic [AWIDTH-1:0] d_pc; 
-    logic [AWIDTH-1:0] d_pc_o; 
-    logic [DWIDTH-1:0] d_insn;
-    logic [DWIDTH-1:0] d_insn_o;
-    logic [6:0]        d_opcode;
-    logic [4:0]        d_rd;
-    logic [4:0]        d_rs1;
-    logic [4:0]        d_rs2;
-    logic [6:0]        d_funct7;
-    logic [2:0]        d_funct3;
-    logic [4:0]        d_shamt;
-    logic [DWIDTH-1:0] d_imm;
-
-
     // Fetch to Decode pipeline
     if_id_pipe #(
         .DWIDTH(DWIDTH)
@@ -169,10 +167,6 @@ module pd5 #(
         .ins_i(f_insn),
         .ins_o(d_insn)
     );
-
-
-    
-
 
     // Decode stage
     decode #(
@@ -195,8 +189,6 @@ module pd5 #(
         .imm_o(d_imm)
     );
 
-
-
     // Register File
     register_file #(
         .DWIDTH(DWIDTH)
@@ -211,9 +203,6 @@ module pd5 #(
         .rs1data_o(rs1data_o),     
         .rs2data_o(rs2data_o)      
     );   
-
-
-   
 
     // Control unit
     control #(
@@ -233,13 +222,8 @@ module pd5 #(
         .wbsel_o(ctrl_wbsel),
         .alusel_o(ctrl_alusel)
     );
-
-
     
     // Decode to Execute Pipeline
-    // note ix = ex modules were labelled ix early on by mistake
-    // note many pipelines propgate values that may not be needed 
-    // due to time constraints we did not slim down the registers but they can be reduced
     id_ix_pipe #(
         .AWIDTH(AWIDTH),
         .DWIDTH(DWIDTH)
@@ -290,13 +274,9 @@ module pd5 #(
         .alusel_o(ix_alusel_o)
     );
 
-
-    
-    
-
+    // Immediate Generation 
     logic [31:0] imm_o;
 
-    // Immediate Generation now outside of decode and in execute stage 
     igen #(
         .DWIDTH(DWIDTH)
     ) u_igen (
@@ -305,12 +285,8 @@ module pd5 #(
         .imm_o(imm_o)
     );
 
-
-    // mux feeding execute source operands 
-    // forwards values if needed otherwise chose based
-    // on source operand select control signals
+    // MUX to select operands for ALU
     execute_mux # (
-
     ) u_execute_mux (
         .rs1(ix_rs1_data_o),
         .rs2(ix_rs2_data_o),
@@ -327,18 +303,7 @@ module pd5 #(
         .rs2_o(rs2_i)
     );
 
-
-
-    //branch control signals, while branch compares the register data for many operations
-    // execute uses imm or pc so different muxes are needed but still take advantage 
-    // of bypass paths 
-    // for now its in top module but should probably be in seperate file
-    logic breq_o;
-    logic brlt_o;
-    logic brltu_o;
-    logic [DWIDTH-1:0] rs1_branch;
-    logic [DWIDTH-1:0] rs2_branch;
-
+    // MUX to select operands for branch comparison 
     branch_control_mux # (
     .DWIDTH(DWIDTH)
     ) u_branch_control_mux (
@@ -351,7 +316,6 @@ module pd5 #(
         .rs1_branch_o(rs1_branch),
         .rs2_branch_o(rs2_branch)
     );
-
 
     // Branch control unit
     branch_control #(
@@ -383,6 +347,7 @@ module pd5 #(
         .brtaken_o(br_taken)   
     );
     
+    // Bypass for rs2 values for store insturctions avoid a WD Stall
     logic [DWIDTH-1:0] rs2_val_topipe;
     assign rs2_val_topipe = (WX_enable == 2'b10) ? writeback_data_o : ix_rs2_data_o;
 
@@ -487,7 +452,7 @@ module pd5 #(
         .wbsel_i(wbsel_wb_o), // control signal to select what to write back
         .brtaken_i(br_taken), // to drive next pc logic
         .writeback_data_o(writeback_data_o), // data to write back to register file
-        .next_pc_o(next_pc_o)
+        .next_pc_o( next_pc_o )
     );
 
 

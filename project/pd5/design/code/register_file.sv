@@ -37,12 +37,15 @@
 logic [DWIDTH-1:0] regs [31:0];
 
 always_ff @(posedge clk or posedge rst) begin
+
     if (rst) begin
+
         for (int i = 0; i < 32; i++) begin
             regs[i] <= '0;
         end
 
         regs[2] <= 32'h01100000;  // top of stack
+        
     end
 
     else begin

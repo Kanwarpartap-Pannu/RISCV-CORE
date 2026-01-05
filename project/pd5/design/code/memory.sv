@@ -22,6 +22,7 @@ module memory #(
   parameter int DWIDTH = 32,
   parameter logic [31:0] BASE_ADDR = 32'h01000000
 ) (
+
   // inputs
   input logic clk,
   input logic rst,
@@ -34,13 +35,14 @@ module memory #(
   input logic read_en_dat,
   input logic write_en_dat,
   input logic [2:0] funct3_i,
+
   // outputs
   output logic [DWIDTH-1:0] data_o,
   output logic [DWIDTH-1:0] data_dat_o,
   output logic [1:0] size_encoded_o
 );
 
-    // note since all modulo operations are with power of 2 we can optimize it to bit masking if needed in future but I think verilog does it automatically
+    
     logic [1:0] size_encoded;
     localparam int MEM_BYTES = (`MEM_DEPTH )* (DWIDTH/8);  // Total memory size in bytes
 
@@ -131,10 +133,12 @@ module memory #(
 
 
     // Sequential write logic for data memory 
-
     always_ff @(posedge clk) begin
+
         if (write_en_dat) begin
+
             if (write_en_dat) begin
+
                 case (size_encoded)
                     2'b00: main_memory[address_dat] <= data_dat[7:0]; // byte
                     2'b01: begin // halfword
@@ -155,27 +159,15 @@ module memory #(
                         end
                 endcase
                 $display("[%0t] IMEMORY: Wrote 0x%08h to 0x%08h",$time, data_dat, addr_dat);
+
             end 
+
         end
+        
  	end
 
     assign size_encoded_o = size_encoded;
 	
-    /* this is old code which is kept for reference
-    // Sequential write logic for instruction memory this won't conflict since its always driven low
-	always_ff @(posedge clk) begin
-        if (write_en_i) begin
-            if ((addr_i >= BASE_ADDR) && (addr_i + 32'd3 < BASE_ADDR + MEM_BYTES)) begin
-                main_memory[address] <= data_i[7:0];
-                main_memory[address + 1] <= data_i[15:8];
-                main_memory[address + 2] <= data_i[23:16];
-                main_memory[address + 3] <= data_i[31:24];
-                //$display("IMEMORY: Wrote 0x%08h to 0x%08h", data_i, addr_i);
-            end else begin
-                //$display("IMEMORY: OOB write @0x%08h", addr_i);
-            end
-        end
- 	end
-    */
+   
  
 endmodule : memory

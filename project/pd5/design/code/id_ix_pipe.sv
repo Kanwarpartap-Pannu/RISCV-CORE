@@ -38,8 +38,8 @@ module id_ix_pipe #(
     output logic [DWIDTH-1:0] ins_o,
     output logic [6:0]        opcode_o,
     output logic [4:0]        rd_o,
-    output  logic [4:0]        rs1_o,
-    output  logic [4:0]        rs2_o,
+    output  logic [4:0]       rs1_o,
+    output  logic [4:0]       rs2_o,
     output logic [DWIDTH-1:0] rs1_data_o,
     output logic [DWIDTH-1:0] rs2_data_o,
     output logic [6:0]        funct7_o,
@@ -58,7 +58,8 @@ module id_ix_pipe #(
     output logic [3:0]        alusel_o
 );
 
-    // data pipes
+    // Internal Register Pipes 
+    // Data pipes
     logic [DWIDTH-1:0] ins_pipe;
     logic [AWIDTH-1:0] pc_pipe;
     logic [6:0]        opcode_pipe;
@@ -71,7 +72,7 @@ module id_ix_pipe #(
     logic [2:0]        funct3_pipe;
     logic [4:0]        shamt_pipe;
 
-    // control pipes
+    // Control pipes
     logic              pcsel_pipe;
     logic              immsel_pipe;
     logic              regwren_pipe;
@@ -82,7 +83,7 @@ module id_ix_pipe #(
     logic [1:0]        wbsel_pipe;
     logic [3:0]        alusel_pipe;
 
-    // ID/EX pipeline register
+
     always_ff @(posedge clk or posedge rst) begin
         if (rst) begin
             // clear everything on reset
@@ -125,7 +126,7 @@ module id_ix_pipe #(
             // disable all writes / mem ops
             pcsel_pipe    <= 1'b0;   
             immsel_pipe   <= 1'b0;
-            regwren_pipe  <= 1'b0;   // no writeback
+            regwren_pipe  <= 1'b0;   
             rs1sel_pipe   <= 1'b0;
             rs2sel_pipe   <= 1'b0;
             memren_pipe   <= 1'b0;
@@ -134,7 +135,7 @@ module id_ix_pipe #(
             alusel_pipe   <= 4'b0;
 
         end else if (!stall_i) begin
-            // normal operation: latch ID outputs into ID/EX
+            // Normal operation
             ins_pipe      <= ins_i;
             pc_pipe       <= pc_i;
 
@@ -162,7 +163,7 @@ module id_ix_pipe #(
 
     end
 
-    // combinational outputs
+    // Outputs
     always_comb begin
         ins_o      = ins_pipe;
         pc_o       = pc_pipe;
@@ -170,8 +171,8 @@ module id_ix_pipe #(
         rd_o       = rd_pipe;
         rs1_o      = rs1_pipe;
         rs2_o      = rs2_pipe;
-        rs1_data_o      = rs1_data_pipe;
-        rs2_data_o      = rs2_data_pipe;
+        rs1_data_o = rs1_data_pipe;
+        rs2_data_o = rs2_data_pipe;
         funct7_o   = funct7_pipe;
         funct3_o   = funct3_pipe;
         shamt_o    = shamt_pipe;

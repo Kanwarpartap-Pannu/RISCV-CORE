@@ -5,21 +5,19 @@ module mem_wb_pipe #(
     input  logic clk,
     input  logic rst,
   
-    // Inputs FROM MEM stage
-
-    input  logic [DWIDTH-1:0] alu_res_i,     // ALU result
-    input  logic [DWIDTH-1:0] load_data_i,   // data read from memory
-    input  logic [AWIDTH-1:0] pc_i,          // PC+4 for JAL/JALR writeback
-    input  logic [4:0]        rd_i,          // register destination
+    // Inputs from mem stage
+    input  logic [DWIDTH-1:0] alu_res_i,     
+    input  logic [DWIDTH-1:0] load_data_i,   
+    input  logic [AWIDTH-1:0] pc_i,          
+    input  logic [4:0]        rd_i,          
     input  logic [6:0]        opcode_i,
     
     // Control signals
-    input  logic              regwren_i,     // register write enable
-    input  logic [1:0]        wbsel_i,       // writeback select
+    input  logic              regwren_i,     
+    input  logic [1:0]        wbsel_i,       
 
    
     // Outputs TO WB stage
-
     output logic [DWIDTH-1:0] alu_res_o,
     output logic [DWIDTH-1:0] load_data_o,
     output logic [AWIDTH-1:0] pc_o,
@@ -30,7 +28,7 @@ module mem_wb_pipe #(
     output logic [1:0]        wbsel_o
 );
 
-    // Internal pipeline regs
+    // Internal Pipeline Registers
     logic [DWIDTH-1:0] alu_res_pipe;
     logic [DWIDTH-1:0] load_data_pipe;
     logic [AWIDTH-1:0] pc_pipe;
@@ -40,7 +38,6 @@ module mem_wb_pipe #(
     logic              regwren_pipe;
     logic [1:0]        wbsel_pipe;
 
-    // Pipeline register
     always_ff @(posedge clk or posedge rst) begin
         if (rst) begin
             alu_res_pipe   <= '0;

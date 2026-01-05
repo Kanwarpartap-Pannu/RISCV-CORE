@@ -1,8 +1,8 @@
 module if_id_pipe #(
     parameter int DWIDTH = 32
 )(
-    input  logic             clk,
-    input  logic             rst,
+    input  logic clk,
+    input  logic rst,
 
     // data from fetch
     input  logic [DWIDTH-1:0] ins_i,
@@ -12,11 +12,12 @@ module if_id_pipe #(
     input  logic stall_i,
     input  logic flush_i,
 
-    // Outputs to ID 
+    // Outputs to Decode Stage 
     output logic [DWIDTH-1:0] ins_o,
     output logic [DWIDTH-1:0] pc_o
 );
 
+    // Internal Pipeline Registers
     logic [DWIDTH-1:0] ins_pipe;
     logic [DWIDTH-1:0] pc_pipe;
 
@@ -43,7 +44,7 @@ module if_id_pipe #(
 
     end
 
-    // combinational outputs
+    // Outputs
     assign ins_o = ins_pipe;
     assign pc_o  = pc_pipe;
 
