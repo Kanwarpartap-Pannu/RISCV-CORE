@@ -10,6 +10,10 @@ and verifying a pipelined processor from scratch.
 The core follows a classic 5-stage pipeline:
 IF → ID → EX → MEM → WB
 
+## Architecture
+
+![Pipeline Diagram](core_datapath.pdf)
+
 ## Getting started
 Note that the below steps assume a linux environment with ModelSim or Verilator installed. 
 

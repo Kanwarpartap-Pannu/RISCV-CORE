@@ -185,8 +185,7 @@ module pd5 #(
         .rs2_o(d_rs2),
         .funct7_o(d_funct7),
         .funct3_o(d_funct3),
-        .shamt_o(d_shamt),
-        .imm_o(d_imm)
+        .shamt_o(d_shamt)
     );
 
     // Register File
@@ -347,7 +346,7 @@ module pd5 #(
         .brtaken_o(br_taken)   
     );
     
-    // Bypass for rs2 values for store insturctions avoid a WD Stall
+    // WX Bypass for rs2 values to the pipeline for store insturctions avoid a WD Stall
     logic [DWIDTH-1:0] rs2_val_topipe;
     assign rs2_val_topipe = (WX_enable == 2'b10) ? writeback_data_o : ix_rs2_data_o;
 
@@ -388,11 +387,9 @@ module pd5 #(
         .alusel_o(alusel_mem_o)
     );
 
-
-    // select correct store data depending on the bypass    
+    // Writeback-Memory Bypass Path   
     logic [DWIDTH-1:0] store_data;
     assign store_data = (WM_enable) ? writeback_data_o : rs2_val_mem_o;
-    
     
     // Memory
     memory #(
@@ -457,7 +454,7 @@ module pd5 #(
 
 
 
-    //hazard units 
+    //Hazard units 
     stall_unit #()
     u_stall_unit (
         .opcode_id_ex_i(ix_opcode_o),
