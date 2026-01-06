@@ -12,7 +12,7 @@ IF → ID → EX → MEM → WB
 
 ## Architecture
 
-![Pipeline Diagram](core_datapath.pdf)
+![Pipeline Diagram](core_datapath.png)
 
 ## Getting started
 Note that the below steps assume a linux environment with ModelSim or Verilator installed. 
