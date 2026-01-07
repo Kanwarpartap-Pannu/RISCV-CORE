@@ -38,7 +38,7 @@ VL_ATTR_COLD void Vtop___024root___eval_initial__TOP(Vtop___024root* vlSelf) {
     top__DOT__dut__DOT__core__DOT__memory1__DOT__i = 0;
     // Body
     vlSelfRef.top__DOT__genblk1__DOT_____05Ftrace_fd 
-        = VL_FOPEN_NN("BubbleSort.trace"s, "w"s);
+        = VL_FOPEN_NN("CheckVowel.trace"s, "w"s);
     ;
     vlSelfRef.top__DOT__reset = 1U;
     top__DOT__dut__DOT__core__DOT__memory1__DOT__i = 0U;
@@ -48,47 +48,47 @@ VL_ATTR_COLD void Vtop___024root___eval_initial__TOP(Vtop___024root* vlSelf) {
         top__DOT__dut__DOT__core__DOT__memory1__DOT__i 
             = ((IData)(1U) + top__DOT__dut__DOT__core__DOT__memory1__DOT__i);
     }
-    VL_READMEM_N(true, 32, 154, 0, "/Users/kanwarpannu/Desktop/RISC-V_Core/RISCV-CORE/project/pd5/verif/rv32-bmarks/full-bmarks/BubbleSort.x"s
+    VL_READMEM_N(true, 32, 127, 0, "/Users/kanwarpannu/Desktop/RISC-V_Core/RISCV-CORE/project/pd5/verif/rv32-bmarks/full-bmarks/CheckVowel.x"s
                  ,  &(vlSelfRef.top__DOT__dut__DOT__core__DOT__memory1__DOT__temp_memory)
                  , 0, ~0ULL);
     top__DOT__dut__DOT__core__DOT__memory1__DOT__i = 0U;
-    while (VL_GTS_III(32, 0x0000009aU, top__DOT__dut__DOT__core__DOT__memory1__DOT__i)) {
+    while (VL_GTS_III(32, 0x0000007fU, top__DOT__dut__DOT__core__DOT__memory1__DOT__i)) {
         vlSelfRef.top__DOT__dut__DOT__core__DOT__memory1__DOT__main_memory[(0x003fffffU 
                                                                             & VL_MULS_III(32, (IData)(4U), top__DOT__dut__DOT__core__DOT__memory1__DOT__i))] 
-            = ((0x99U >= (0x000000ffU & top__DOT__dut__DOT__core__DOT__memory1__DOT__i))
+            = ((0x7eU >= (0x0000007fU & top__DOT__dut__DOT__core__DOT__memory1__DOT__i))
                 ? (0x000000ffU & vlSelfRef.top__DOT__dut__DOT__core__DOT__memory1__DOT__temp_memory
-                   [(0x000000ffU & top__DOT__dut__DOT__core__DOT__memory1__DOT__i)])
+                   [(0x0000007fU & top__DOT__dut__DOT__core__DOT__memory1__DOT__i)])
                 : 0U);
         vlSelfRef.top__DOT__dut__DOT__core__DOT__memory1__DOT__main_memory[(0x003fffffU 
                                                                             & ((IData)(1U) 
                                                                                + 
                                                                                VL_MULS_III(32, (IData)(4U), top__DOT__dut__DOT__core__DOT__memory1__DOT__i)))] 
-            = (0x000000ffU & (((0x99U >= (0x000000ffU 
+            = (0x000000ffU & (((0x7eU >= (0x0000007fU 
                                           & top__DOT__dut__DOT__core__DOT__memory1__DOT__i))
                                 ? vlSelfRef.top__DOT__dut__DOT__core__DOT__memory1__DOT__temp_memory
-                               [(0x000000ffU & top__DOT__dut__DOT__core__DOT__memory1__DOT__i)]
+                               [(0x0000007fU & top__DOT__dut__DOT__core__DOT__memory1__DOT__i)]
                                 : 0U) >> 8U));
         vlSelfRef.top__DOT__dut__DOT__core__DOT__memory1__DOT__main_memory[(0x003fffffU 
                                                                             & ((IData)(2U) 
                                                                                + 
                                                                                VL_MULS_III(32, (IData)(4U), top__DOT__dut__DOT__core__DOT__memory1__DOT__i)))] 
-            = (0x000000ffU & (((0x99U >= (0x000000ffU 
+            = (0x000000ffU & (((0x7eU >= (0x0000007fU 
                                           & top__DOT__dut__DOT__core__DOT__memory1__DOT__i))
                                 ? vlSelfRef.top__DOT__dut__DOT__core__DOT__memory1__DOT__temp_memory
-                               [(0x000000ffU & top__DOT__dut__DOT__core__DOT__memory1__DOT__i)]
+                               [(0x0000007fU & top__DOT__dut__DOT__core__DOT__memory1__DOT__i)]
                                 : 0U) >> 0x10U));
         vlSelfRef.top__DOT__dut__DOT__core__DOT__memory1__DOT__main_memory[(0x003fffffU 
                                                                             & ((IData)(3U) 
                                                                                + 
                                                                                VL_MULS_III(32, (IData)(4U), top__DOT__dut__DOT__core__DOT__memory1__DOT__i)))] 
-            = (((0x99U >= (0x000000ffU & top__DOT__dut__DOT__core__DOT__memory1__DOT__i))
+            = (((0x7eU >= (0x0000007fU & top__DOT__dut__DOT__core__DOT__memory1__DOT__i))
                  ? vlSelfRef.top__DOT__dut__DOT__core__DOT__memory1__DOT__temp_memory
-                [(0x000000ffU & top__DOT__dut__DOT__core__DOT__memory1__DOT__i)]
+                [(0x0000007fU & top__DOT__dut__DOT__core__DOT__memory1__DOT__i)]
                  : 0U) >> 0x18U);
         top__DOT__dut__DOT__core__DOT__memory1__DOT__i 
             = ((IData)(1U) + top__DOT__dut__DOT__core__DOT__memory1__DOT__i);
     }
-    VL_WRITEF_NX("IMEMORY: Loaded 154 32-bit words from /Users/kanwarpannu/Desktop/RISC-V_Core/RISCV-CORE/project/pd5/verif/rv32-bmarks/full-bmarks/BubbleSort.x\n",0);
+    VL_WRITEF_NX("IMEMORY: Loaded 127 32-bit words from /Users/kanwarpannu/Desktop/RISC-V_Core/RISCV-CORE/project/pd5/verif/rv32-bmarks/full-bmarks/CheckVowel.x\n",0);
 }
 
 VL_ATTR_COLD void Vtop___024root___eval_final(Vtop___024root* vlSelf) {
@@ -1001,8 +1001,8 @@ VL_ATTR_COLD void Vtop___024root___ctor_var_reset(Vtop___024root* vlSelf) {
     vlSelf->top__DOT__genblk1__DOT_____05Ftrace_fd = VL_SCOPED_RAND_RESET_I(32, __VscopeHash, 14329879011005447780ull);
     vlSelf->top__DOT__clkg__DOT__counter = VL_SCOPED_RAND_RESET_I(32, __VscopeHash, 7673510899991897937ull);
     vlSelf->top__DOT__dut__DOT__core__DOT__stall = VL_SCOPED_RAND_RESET_I(1, __VscopeHash, 8058744004537542797ull);
-    vlSelf->top__DOT__dut__DOT__core__DOT__alu_res = VL_SCOPED_RAND_RESET_I(32, __VscopeHash, 4788283692538775256ull);
-    vlSelf->top__DOT__dut__DOT__core__DOT__br_taken = VL_SCOPED_RAND_RESET_I(1, __VscopeHash, 8980076183680390469ull);
+    vlSelf->top__DOT__dut__DOT__core__DOT__f_pc = VL_SCOPED_RAND_RESET_I(32, __VscopeHash, 12048714892135156921ull);
+    vlSelf->top__DOT__dut__DOT__core__DOT__f_insn = VL_SCOPED_RAND_RESET_I(32, __VscopeHash, 7374491624312029756ull);
     vlSelf->top__DOT__dut__DOT__core__DOT__ctrl_pcsel = VL_SCOPED_RAND_RESET_I(1, __VscopeHash, 10686638355514389766ull);
     vlSelf->top__DOT__dut__DOT__core__DOT__ctrl_regwren = VL_SCOPED_RAND_RESET_I(1, __VscopeHash, 15262114789201477911ull);
     vlSelf->top__DOT__dut__DOT__core__DOT__ctrl_rs1sel = VL_SCOPED_RAND_RESET_I(1, __VscopeHash, 10240656596297212566ull);
@@ -1010,11 +1010,11 @@ VL_ATTR_COLD void Vtop___024root___ctor_var_reset(Vtop___024root* vlSelf) {
     vlSelf->top__DOT__dut__DOT__core__DOT__ctrl_memwren = VL_SCOPED_RAND_RESET_I(1, __VscopeHash, 3500837860527987176ull);
     vlSelf->top__DOT__dut__DOT__core__DOT__ctrl_wbsel = VL_SCOPED_RAND_RESET_I(2, __VscopeHash, 1623172971839010771ull);
     vlSelf->top__DOT__dut__DOT__core__DOT__ctrl_alusel = VL_SCOPED_RAND_RESET_I(4, __VscopeHash, 13751281761010357945ull);
+    vlSelf->top__DOT__dut__DOT__core__DOT__d_imm = VL_SCOPED_RAND_RESET_I(32, __VscopeHash, 5636778193619115238ull);
+    vlSelf->top__DOT__dut__DOT__core__DOT__alu_res = VL_SCOPED_RAND_RESET_I(32, __VscopeHash, 4788283692538775256ull);
+    vlSelf->top__DOT__dut__DOT__core__DOT__br_taken = VL_SCOPED_RAND_RESET_I(1, __VscopeHash, 8980076183680390469ull);
     vlSelf->top__DOT__dut__DOT__core__DOT__writeback_data_o = VL_SCOPED_RAND_RESET_I(32, __VscopeHash, 1616369428167990070ull);
     vlSelf->top__DOT__dut__DOT__core__DOT__alu_res_mem_o = VL_SCOPED_RAND_RESET_I(32, __VscopeHash, 1548765175618114972ull);
-    vlSelf->top__DOT__dut__DOT__core__DOT__f_pc = VL_SCOPED_RAND_RESET_I(32, __VscopeHash, 12048714892135156921ull);
-    vlSelf->top__DOT__dut__DOT__core__DOT__f_insn = VL_SCOPED_RAND_RESET_I(32, __VscopeHash, 7374491624312029756ull);
-    vlSelf->top__DOT__dut__DOT__core__DOT__d_imm = VL_SCOPED_RAND_RESET_I(32, __VscopeHash, 5636778193619115238ull);
     vlSelf->top__DOT__dut__DOT__core__DOT__rs2_val_topipe = VL_SCOPED_RAND_RESET_I(32, __VscopeHash, 7503168904509333645ull);
     vlSelf->top__DOT__dut__DOT__core__DOT__store_data = VL_SCOPED_RAND_RESET_I(32, __VscopeHash, 6995810224342112901ull);
     vlSelf->top__DOT__dut__DOT__core__DOT__is_program = VL_SCOPED_RAND_RESET_I(1, __VscopeHash, 3526790071870633143ull);
@@ -1052,7 +1052,7 @@ VL_ATTR_COLD void Vtop___024root___ctor_var_reset(Vtop___024root* vlSelf) {
     vlSelf->top__DOT__dut__DOT__core__DOT__u_ix_mem_pipe__DOT__funct3_pipe = VL_SCOPED_RAND_RESET_I(3, __VscopeHash, 1278721823227477555ull);
     vlSelf->top__DOT__dut__DOT__core__DOT__u_ix_mem_pipe__DOT__opcode_pipe = VL_SCOPED_RAND_RESET_I(7, __VscopeHash, 4522668384722921166ull);
     vlSelf->top__DOT__dut__DOT__core__DOT__memory1__DOT__size_encoded = VL_SCOPED_RAND_RESET_I(2, __VscopeHash, 12353522417987407201ull);
-    for (int __Vi0 = 0; __Vi0 < 154; ++__Vi0) {
+    for (int __Vi0 = 0; __Vi0 < 127; ++__Vi0) {
         vlSelf->top__DOT__dut__DOT__core__DOT__memory1__DOT__temp_memory[__Vi0] = VL_SCOPED_RAND_RESET_I(32, __VscopeHash, 1463922315813575142ull);
     }
     for (int __Vi0 = 0; __Vi0 < 4194304; ++__Vi0) {
