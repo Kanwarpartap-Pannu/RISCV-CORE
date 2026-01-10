@@ -101,7 +101,7 @@ Once you have finished the compilation, you can run the simulation by executing 
 make run -C verif/scripts/ VERILATOR=1
 ```
 
-The above command will re-compile and run the simulation. By default the program will loaded into instruction memory will be Bubble Sort. 
+The above command will re-compile and run the simulation. By default the program loaded into instruction memory will be Bubble Sort. 
 
 Note that the build command takes an additional command line switch `TEST=` which specifies the RISC-V test program to load in memory. These tests can be found in `pd5/verif/rv-32-bmarks/`.
 For example, if you want to load the `pd5/verif/rv-32/CheckVowel.x` program in memory and simulate its execution, then execute the following command:
@@ -112,7 +112,7 @@ Note the VCD flag ensures waveform can be viewed through GTKWave later on.
 
 ### Step 3: Debugging utilities 
 ------------------------------------
-If using modelsim vcd files to be opened in GTKWave are generated into the scripts directory, for Verilator they will be found in `sim/verilaator/test_pd`
+If using modelsim vcd files to be opened in GTKWave are generated into the scripts directory, for Verilator they will be found in `sim/verilator/test_pd`
 
 ### Testing the Core: 
 ------------------------------------
